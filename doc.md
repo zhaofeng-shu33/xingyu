@@ -1,5 +1,5 @@
 # 接口文档
-返回值格式是 {code:0, msg:'', result: Object}，0为没有错误，非0有msg详细信息。
+返回值格式是 {err:0, msg:'', result: Object}，0为没有错误，非0有msg详细信息。
 
 1. 添加1个学生到流动组
 POST 方法到 /xingyu/add_student_flow.php
