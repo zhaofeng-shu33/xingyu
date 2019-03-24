@@ -74,7 +74,7 @@ Page({
    */
   onLoad: function (options) {
     if(app.group_list){
-      that.setData({group_list: app.group_list})
+      this.setData({group_list: app.group_list})
       return
     }
     var that = this;
