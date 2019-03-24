@@ -30,7 +30,8 @@ else{
 $date=date_create("2019-3-4");
 $interval_int = 7 * ($week - 1);
 date_add($date, date_interval_create_from_date_string($interval_int." days"));
-$sql = 'insert into '.getTablePrefix()."_activity (name, location, time) values ('$name', '$location', $date)";
+$date_str = date_format($date, 'Y-m-d');
+$sql = 'insert into '.getTablePrefix()."_activity (name, location, time) values ('$name', '$location', $date_str)";
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
 $activity_id = mysqli_insert_id($db);
 foreach($list as $student){
