@@ -10,6 +10,8 @@ if($name == null || $name == ''){
 if($week == null || intval($week) == 0){
     exitJson(2, 'invalid week');
 }
+if($name == '流动')
+    exitJson(0, 'no result for flow',[]);
 if(strpos($name, '金色') == FALSE && $name != '周二下午'){
     $location = '童伴时光';
 }

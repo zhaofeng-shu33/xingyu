@@ -1,5 +1,5 @@
 # 接口文档
-返回值格式是 {err:0, msg:'', result: Object}，0为没有错误，非0有msg详细信息。
+返回值格式是JSON {err:0, msg:'', result: Object}，0为没有错误，非0有msg详细信息。
 
 1. 添加1个学生到流动组
 POST 方法到 /xingyu/add_student_flow.php
@@ -7,9 +7,11 @@ POST 方法到 /xingyu/add_student_flow.php
 
 2. 根据姓名的前几个汉字获取流动组学生列表不分页
 GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]
+返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
 3. 获取某个活动的固定志愿者
 GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]
+返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
 4. 批量添加某个活动参与的流动学生
 POST 方法到 /xingyu/add_activity.php
@@ -18,7 +20,8 @@ POST 方法到 /xingyu/add_activity.php
 5. 获取小组列表
 GET 方法到 /xingyu/get_group_list.php
 无参数
+返回结果 ： result['group_list'] = [[group_name_1],[group_name_2]]
 
 6. 获取某个活动的全部志愿者（用于提交成功后查看结果）
 GET 方法到 /xingyu/get_all_student.php?student_group=[group_name]&week=[week_num]
-
+返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
