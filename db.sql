@@ -14,7 +14,7 @@ create table xingyu_student(
     name varchar(4) not null,
     school enum('thu', 'pku','hit','sust','szu') not null,
     group_id int not null default 1,
-    constraint group_constraint foreign key (group_id) REFERENCES xingyu_group(id)
+    constraint group_constraint foreign key (group_id) REFERENCES xingyu_group(id) on delete cascade
 );
 create table xingyu_activity(
     id int primary key auto_increment,
@@ -26,6 +26,6 @@ create table xingyu_student_activity(
     id int primary key auto_increment,
     student_id int not null,
     activity_id int not null,
-    constraint student_constraint foreign key (student_id) REFERENCES xingyu_student (id),
-    constraint activity_constraint foreign key (activity_id) REFERENCES xingyu_activity (id)
+    constraint student_constraint foreign key (student_id) REFERENCES xingyu_student (id) on delete cascade,
+    constraint activity_constraint foreign key (activity_id) REFERENCES xingyu_activity (id) on delete cascade
 )
