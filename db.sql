@@ -6,7 +6,7 @@ flush privileges;
 use xingyu;
 create table xingyu_group(
     id int primary key auto_increment,
-    semester varchar(10),
+    'semester' varchar(10),
     name varchar(12) not null default '流动'
 );
 create table xingyu_student(
