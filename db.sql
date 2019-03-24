@@ -13,7 +13,7 @@ create table xingyu_student(
     id int primary key auto_increment,
     name varchar(4) not null,
     school enum('thu', 'pku','hit','sust','szu') not null,
-    group_id int not null default 0,
+    group_id int not null default 1,
     constraint group_constraint foreign key (group_id) REFERENCES xingyu_group(id)
 );
 create table xingyu_activity(
