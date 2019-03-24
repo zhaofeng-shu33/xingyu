@@ -7,7 +7,7 @@ $week = $_GET['week'];
 if($name == null || $name == ''){
     exitJson(1, 'null group');
 }
-if($week == null || gettype($week)!='integer'){
+if($week == null || intval($week) == 0){
     exitJson(2, 'invalid week');
 }
 if(strpos($name, '金色') == FALSE && $name != '周二下午'){
@@ -16,13 +16,12 @@ if(strpos($name, '金色') == FALSE && $name != '周二下午'){
 else{
     $location = '金色年华';
 }
-
 $db = getDb();
 
 // convert szu calendar to 阳历
 // 2019-3-4 ~ week 1
 $date=date_create("2019-3-4");
-$interval_int = 7 * ($week - 1);
+$interval_int = 7 * (intval($week) - 1);
 date_add($date, date_interval_create_from_date_string($interval_int." days"));
 $date_str = date_format($date, 'Y-m-d');
 $sql = 'select id from '.getTablePrefix()."_activity where location = '$location' and time = '$date_str'";
