@@ -19,3 +19,6 @@ POST 方法到 /xingyu/add_activity.php
 GET 方法到 /xingyu/get_group_list.php
 无参数
 
+6. 获取某个活动的全部志愿者（用于提交成功后查看结果）
+GET 方法到 /xingyu/get_all_student.php?student_group=[group_name]&week=[week_num]
+
