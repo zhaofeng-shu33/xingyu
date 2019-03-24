@@ -51,7 +51,7 @@ Page({
           }
           var student_list = res.data.result.student_list
           for (var i = 0; i < student_list.length; i++) {
-            group_data.push({ name: student_list[i][0], school: student_list[i][1]})
+            group_data.push({ name: student_list[i][0], school: app.SchoolReverseMapping[student_list[i][1]]})
           }
           that.setData({ group_data: group_data })
         }
