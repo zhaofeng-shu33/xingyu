@@ -9,7 +9,7 @@ POST 方法到 /xingyu/add_student_flow.php
 GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]
 
 3. 获取某个活动的固定志愿者
-
+GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]
 4. 批量添加某个活动参与的流动学生
 
 5. 标注某个固定组的学生本次活动没有参加
