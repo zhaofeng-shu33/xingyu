@@ -19,7 +19,7 @@ if($list == null || gettype($list)!='array'){
 }
 $db = getDb();
 // create the activity
-if($strpos($name, '金色') == FALSE && $name != '周二下午'){
+if(strpos($name, '金色') == FALSE && $name != '周二下午'){
     $location = '童伴时光';
 }
 else{
