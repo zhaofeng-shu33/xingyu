@@ -3,7 +3,7 @@
 
 1. 添加1个学生到流动组
 POST 方法到 /xingyu/add_student_flow.php
-必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
+(JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
 
 2. 根据姓名的前几个汉字获取流动组学生列表不分页
 GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]
@@ -12,7 +12,7 @@ GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]
 GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]
 
 4. 批量添加某个活动参与的流动学生
-
-5. 标注某个固定组的学生本次活动没有参加
+POST 方法到 /xingyu/add_activity.php
+(JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
 
 
