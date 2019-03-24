@@ -1,13 +1,14 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/create/index"
+    "pages/create/index",
+    "pages/result/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [
@@ -18,7 +19,11 @@
       {
         "pagePath": "pages/create/index",
         "text": "添加流动志愿者"
+      },
+      {
+        "pagePath": "pages/result/index",
+        "text": "查询"
       }
     ]
-  }  
+  }
 }

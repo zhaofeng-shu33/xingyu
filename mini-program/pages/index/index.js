@@ -4,7 +4,6 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     group_list: ['1', '2'],
     groupIndex: 0,
     group_name: '未选择小组',
@@ -16,7 +15,7 @@ Page({
   submit: function(){
     // client data check
     var error_msg = '';
-    if (this.data.group_data == []) {
+    if (this.data.group_data.length == 0) {
       error_msg = '请选择小组'
     }
     else if (this.data.week == '') {
@@ -62,10 +61,10 @@ Page({
     if(this.data.flow_student.indexOf(student_name) == -1){
       var flow_student = this.data.flow_student
       flow_student.push(student_name)
-      this.setData({flow_student: flow_student});
+      this.setData({ flow_student: flow_student, inputVal: ''});
       wx.showToast({
         title: '已添加'+ student_name,
-      })
+      })      
     }
   },
   setweek: function(e){
@@ -93,7 +92,7 @@ Page({
             var group_data = []
             var student_list = res.data.result.student_list
             for (var i = 0; i < student_list.length; i++){
-              group_data.push({name: student_list[i][0], school: student_list[i][1], value: i})
+              group_data.push({ name: student_list[i][0], school: app.SchoolReverseMapping[student_list[i][1]], value: i})
             }
             that.setData({ group_data: group_data})
           }
@@ -146,8 +145,14 @@ Page({
       url: app.ServerUrl + '/get_student_list.php',
       data: { student_name_prefix: e.detail.value},
       success(res) {
-        if (res.data.err == 0)
-          that.setData({ search_student_list: res.data.result.student_list })
+        if (res.data.err == 0){
+          var search_student_list = []
+          var student_list = res.data.result.student_list
+          for (var i = 0; i < student_list.length; i++) {
+            search_student_list.push({ name: student_list[i][0], school: app.SchoolReverseMapping[student_list[i][1]]})
+          }
+          that.setData({ search_student_list: search_student_list })
+        }
       }
     })  
   },  
@@ -159,8 +164,10 @@ Page({
       success(res){
         if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
-        else
+        else{
           that.setData({ group_list: res.data.result.group_list})
+          app.group_list = res.data.result.group_list
+        }
       },
       fail(res){
         wx.showToast({icon: 'none',title:'network error'})
