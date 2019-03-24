@@ -15,4 +15,7 @@ GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]
 POST 方法到 /xingyu/add_activity.php
 (JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
 
+5. 获取小组列表
+GET 方法到 /xingyu/get_group_list.php
+无参数
 
