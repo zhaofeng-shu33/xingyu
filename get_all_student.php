@@ -34,5 +34,5 @@ $activity_id = $row['id'];
 $sql_s = 'select s.name, s.school from '.getTablePrefix().'_student as s, '.getTablePrefix()."_student_activity as sa where s.id = sa.student_id and sa.activity_id = '$activity_id'";
 $res_s=mysqli_query($db, $sql_s) or die(mysqli_error($db));
 $row_s = mysqli_fetch_all($res_s);
-exitJson(0, '', $row_s);
+exitJson(0, '', array('student_list'=>$row_s));
 ?>
