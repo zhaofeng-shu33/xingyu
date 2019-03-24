@@ -37,14 +37,14 @@ $activity_id = mysqli_insert_id($db);
 foreach($list as $student){
     // first get student id
     $sql_s = 'select id from '.getTablePrefix()."_student where name = '$student'";
-    $res_s=mysqli_query($db, $sql) or die(mysqli_error($db));
+    $res_s=mysqli_query($db, $sql_s) or die(mysqli_error($db));
     $row_s = mysqli_fetch_assoc($res_s);
     if($row_s['id'] == null){
         exitJson(4, 'student '. $student. ' not exists in db');
     }    
     $student_id = $row_s['id'];
     $sql_r = 'insert into '.getTablePrefix()."_student_activity (student_id, activity_id) values ('$student_id', '$activity_id')";
-    $res_r=mysqli_query($db, $sql) or die(mysqli_error($db));
+    $res_r=mysqli_query($db, $sql_r) or die(mysqli_error($db));
 }
 exitJson(0, '');
 ?>
