@@ -1,0 +1,26 @@
+<!--pages/create/index.wxml-->
+<view class="container">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+        </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="流动志愿者姓名" value="{{student_name}}" bindinput="inputTyping"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">学校</view>
+        </view>
+        <view class="weui-cell__bd">
+        <picker bindchange="bindPickerChange" value="{{schoolIndex}}" range="{{school_list}}">
+          <button type="default">{{student_school}}</button>                
+        </picker>
+        </view>
+    </view>            
+  </view>
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="submit">确定</button>
+    </view>  
+</view>
