@@ -9,7 +9,10 @@ $week=$jsondata->week;
 $name=$jsondata->name;
 $list=$jsondata->student_list;
 if($week == null || gettype($week)!='integer'){
-    exitJson(1, 'invalid week');
+    if($week == null)
+        exitJson(1, 'null week');
+    else
+        exitJson(1, 'invalid week, type '.gettype($week));
 }
 if($name == null || $name == ''){
     exitJson(2, 'null name');

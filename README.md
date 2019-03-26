@@ -12,3 +12,6 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 ## 后端配置
 可使用本地的后端进行开发。
+
+## 接口文档
+见 [doc](doc.md)
