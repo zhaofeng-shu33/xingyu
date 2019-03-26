@@ -31,13 +31,20 @@ $date=date_create("2019-3-4");
 $interval_int = 7 * ($week - 1);
 date_add($date, date_interval_create_from_date_string($interval_int." days"));
 $date_str = date_format($date, 'Y-m-d');
+// first check whether the activity exists
+$sql_check = 'select id from '.getTablePrefix()."_activity where name = '$name' and location = '$location' and time = '$date_str'";
+$res = mysqli_query($db, $sql_check) or die(mysqli_error($db));
+$row = mysqli_fetch_assoc($res);
+if($row['id'] != null){
+    exitJson(5, 'activity already exists');
+}
 $sql = 'insert into '.getTablePrefix()."_activity (name, location, time) values ('$name', '$location', '$date_str')";
-$res=mysqli_query($db, $sql) or die(mysqli_error($db));
+$res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $activity_id = mysqli_insert_id($db);
 foreach($list as $student){
     // first get student id
     $sql_s = 'select id from '.getTablePrefix()."_student where name = '$student'";
-    $res_s=mysqli_query($db, $sql_s) or die(mysqli_error($db));
+    $res_s = mysqli_query($db, $sql_s) or die(mysqli_error($db));
     $row_s = mysqli_fetch_assoc($res_s);
     if($row_s['id'] == null){
         exitJson(4, 'student '. $student. ' not exists in db');
