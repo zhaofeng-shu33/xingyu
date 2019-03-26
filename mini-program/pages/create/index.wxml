@@ -21,6 +21,7 @@
     </view>            
   </view>
     <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" bindtap="submit">确定</button>
+        <button class="weui-btn" type="primary" bindtap="submit">添加</button>
+        <button class="weui-btn" type="primary" bindtap="modify">更改学校</button>
     </view>  
 </view>

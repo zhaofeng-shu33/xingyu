@@ -63,6 +63,7 @@
       <view class="weui-cell__ft"> <view class="weui-label">周</view></view>
       </view>
     <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" bindtap="submit">确定</button>
+        <button class="weui-btn" type="primary" bindtap="submit">添加活动</button>
+        <button class="weui-btn" type="primary" bindtap="append">补录学生</button>
     </view>  
 </view>
