@@ -39,7 +39,7 @@ $sql_check = 'select id from '.getTablePrefix()."_activity where name = '$name' 
 $res = mysqli_query($db, $sql_check) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
 if($row['id'] == null){
-    exitJson(5, 'activity not exists');
+    exitJson(5, 'activity not exists, with location = '.$location ' and time = '.$date_str);
 }
 $activity_id = $row['id'];
 foreach($list as $student){
