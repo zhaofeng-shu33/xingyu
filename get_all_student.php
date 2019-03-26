@@ -26,7 +26,7 @@ $date=date_create("2019-3-4");
 $interval_int = 7 * (intval($week) - 1);
 date_add($date, date_interval_create_from_date_string($interval_int." days"));
 $date_str = date_format($date, 'Y-m-d');
-$sql = 'select id from '.getTablePrefix()."_activity where location = '$location' and time = '$date_str'";
+$sql = 'select id from '.getTablePrefix()."_activity where location = '$location' and time = '$date_str' and name= '$name'";
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
 if($row['id'] == null){
