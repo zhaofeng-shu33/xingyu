@@ -14,7 +14,7 @@ GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]
 GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]
 返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
-4. 批量添加某个活动参与的流动学生
+4. 批量添加某个活动参与的全部学生
 POST 方法到 /xingyu/add_activity.php
 (JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
 返回结果 err = 5 时表示该活动已经存在。
@@ -27,3 +27,9 @@ GET 方法到 /xingyu/get_group_list.php
 6. 获取某个活动的全部志愿者（用于提交成功后查看结果）
 GET 方法到 /xingyu/get_all_student.php?student_group=[group_name]&week=[week_num]
 返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
+
+7. 补录某个活动参与的学生
+
+8. 更改1个流动组学生的学校信息
+POST 方法到 /xingyu/modify_student_flow.php
+(JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
