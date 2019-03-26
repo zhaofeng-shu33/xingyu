@@ -53,7 +53,10 @@ Page({
         student_school: app.SchoolMapping[that.data.student_school]
       },
       success(res) {
-        if (res.data.err != 0)
+        if (res.data.err == 3) {
+          wx.showToast({ title: that.data.student_name + '已存在' })
+        }        
+        else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else{
           wx.showToast({title: that.data.student_name + ' 添加成功'})
