@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 include_once 'mysql.php';
 include_once 'functions.php';
 $postdata=file_get_contents("php://input");
@@ -22,13 +22,13 @@ if($list == null || gettype($list)!='array'){
 }
 $db = getDb();
 // create the activity
-if(strpos($name, '½ðÉ«') == FALSE && $name != 'ÖÜ¶þÏÂÎç'){
-    $location = 'Í¯°éÊ±¹â';
+if(strpos($name, 'é‡‘è‰²') == FALSE && $name != 'å‘¨äºŒä¸‹åˆ'){
+    $location = 'ç«¥ä¼´æ—¶å…‰';
 }
 else{
-    $location = '½ðÉ«Äê»ª';
+    $location = 'é‡‘è‰²å¹´åŽ';
 }
-// convert szu calendar to ÑôÀú
+// convert szu calendar to ï¿½ï¿½ï¿½ï¿½
 // 2019-3-4 ~ week 1
 $date=date_create("2019-3-4");
 $interval_int = 7 * ($week - 1);
