@@ -21,13 +21,7 @@ Page({
     else if (this.data.week == '') {
       error_msg = '请填写日期'
     }
-    if (error_msg != '') {
-      wx.showToast({
-        title: error_msg,
-        icon: 'none'
-      })
-      return
-    }
+
     // collect selected student
     var submit_student = this.data.flow_student.slice(0)
     var group_data = this.data.group_data;
@@ -35,6 +29,16 @@ Page({
       if(group_data[i].checked)
         submit_student.push(group_data[i].name)
     }
+    if (submit_student.length == 0 && error_msg == '') {
+      error_msg = '请选择参加活动的同学'
+    }    
+    if (error_msg != '') {
+      wx.showToast({
+        title: error_msg,
+        icon: 'none'
+      })
+      return
+    }    
     wx.request({
       url: app.ServerUrl + '/add_activity.php',
       method: 'POST',
@@ -59,6 +63,57 @@ Page({
       }
     })
   },
+  append: function () {
+    // client data check
+    var error_msg = '';
+    if (this.data.group_data.length == 0) {
+      error_msg = '请选择小组'
+    }
+    else if (this.data.week == '') {
+      error_msg = '请填写日期'
+    }
+    // collect selected student
+    var submit_student = this.data.flow_student.slice(0)
+    var group_data = this.data.group_data;
+    for (var i = 0; i < group_data.length; i++) {
+      if (group_data[i].checked)
+        submit_student.push(group_data[i].name)
+    }
+    if (submit_student.length == 0 && error_msg == ''){
+      error_msg = '请选择要补录的同学'
+    }
+    if (error_msg != '') {
+      wx.showToast({
+        title: error_msg,
+        icon: 'none'
+      })
+      return
+    }
+
+    wx.request({
+      url: app.ServerUrl + '/append_activity.php',
+      method: 'POST',
+      data: {
+        week: parseInt(this.data.week),
+        name: this.data.group_name,
+        student_list: submit_student
+      },
+      success(res) {
+        if (res.data.err == 5) {
+          wx.showToast({ title: '活动不存在' })
+        }
+        else if (res.data.err != 0)
+          wx.showToast({ icon: 'none', title: 'server error' })
+        else
+          wx.showToast({
+            title: '补录成功',
+          })
+      },
+      fail(res) {
+        wx.showToast({ icon: 'none', title: 'network error' })
+      }
+    })
+  },  
   add: function(e){
     var student_name = e.target.id;
     if(this.data.flow_student.indexOf(student_name) == -1){
