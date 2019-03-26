@@ -20,7 +20,7 @@ $row = mysqli_fetch_assoc($res);
 if($row['id'] == null){
     exitJson(3, 'student not exists');
 }
-$sql = 'update '.getTablePrefix()."_student set school = '$school' where $name = '$name'";
+$sql = 'update '.getTablePrefix()."_student set school = '$school' where name = '$name'";
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
 exitJson(0, '');
 ?>
