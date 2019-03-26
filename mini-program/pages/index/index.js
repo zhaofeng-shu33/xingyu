@@ -44,7 +44,10 @@ Page({
         student_list: submit_student
       },
       success(res) {
-        if (res.data.err != 0)
+        if(res.data.err == 5){
+          wx.showToast({title:'活动已存在'})
+        }
+        else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else
           wx.showToast({
