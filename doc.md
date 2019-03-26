@@ -29,6 +29,11 @@ GET 方法到 /xingyu/get_all_student.php?student_group=[group_name]&week=[week_
 返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
 7. 补录某个活动参与的学生
+POST 方法到 /xingyu/append_activity.php
+(JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])，其中学生名字的列表为要
+补录的同学，允许同学之前已经存在。
+返回结果 err = 5 时表示该活动不存在。
+
 
 8. 更改1个流动组学生的学校信息
 POST 方法到 /xingyu/modify_student_flow.php
