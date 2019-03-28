@@ -20,7 +20,8 @@ create table xingyu_activity(
     id int primary key auto_increment,
     name varchar(20),
     location varchar(10) not null,
-    time date not null
+    time date not null,
+	special boolean default false
 );
 create table xingyu_student_activity(
     id int primary key auto_increment,
