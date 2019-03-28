@@ -35,8 +35,7 @@ else{
     else{
         $location = '金色年华';
     }
-    $db = getDb();
-
+    
     // convert szu calendar to 阳历
     // 2019-3-4 ~ week 1
     $date=date_create("2019-3-4");
@@ -45,6 +44,7 @@ else{
     $date_str = date_format($date, 'Y-m-d');
     $sql = 'select id from '.getTablePrefix()."_activity where location = '$location' and time = '$date_str' and name= '$name'";
 }
+$db = getDb();
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
 if($row['id'] == null){
