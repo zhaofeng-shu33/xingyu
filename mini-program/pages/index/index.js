@@ -53,10 +53,12 @@ Page({
         }
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
-        else
+        else{
           wx.showToast({
             title: '提交成功',
           })
+          this.setData({flow_student:[]})
+        }
       },
       fail(res) {
         wx.showToast({ icon: 'none', title: 'network error' })
@@ -104,10 +106,12 @@ Page({
         }
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
-        else
+        else {
           wx.showToast({
             title: '补录成功',
           })
+          this.setData({ flow_student: [] })
+        }
       },
       fail(res) {
         wx.showToast({ icon: 'none', title: 'network error' })

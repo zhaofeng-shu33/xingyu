@@ -26,6 +26,7 @@ GET 方法到 /xingyu/get_group_list.php
 
 6. 获取某个活动的全部志愿者（用于提交成功后查看结果）
 GET 方法到 /xingyu/get_all_student.php?student_group=[group_name]&week=[week_num]
+如果student_group 和 week参数不提供，需提供 name, location 和time 三个参数，用于查询特色活动，name 和 location 都是字符串，其中 time 的格式是 '2019-03-05'这种。
 返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
 7. 补录某个活动参与的学生
