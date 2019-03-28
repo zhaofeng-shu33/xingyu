@@ -39,3 +39,8 @@ POST 方法到 /xingyu/append_activity.php
 8. 更改1个流动组学生的学校信息
 POST 方法到 /xingyu/modify_student_flow.php
 (JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
+
+9. 获取所有的特色活动的信息
+GET 方法到 /xingyu/get_special_activity.php
+没有参数
+返回的结果 result['special_activity_list'] 是一个array, 每个array的 item 长度为3,依次为 name, location, time。
