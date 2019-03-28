@@ -12,10 +12,10 @@ if($name == null && $week == null){
     if($activity_name == null || $activity_name == ''){
         exitJson(3, 'null name');
     }
-    if($activity_location == null || intval($activity_location) == 0){
+    if($activity_location == null || $activity_location == ''){
         exitJson(4, 'invalid location');
     }
-    if($activity_time == null || intval($activity_time) == 0){
+    if($activity_time == null || $activity_time == ''){
         exitJson(5, 'invalid time');
     }
     $sql = 'select id from '.getTablePrefix()."_activity where location = '$activity_location' and time = '$activity_time' and name= '$activity_name'";
