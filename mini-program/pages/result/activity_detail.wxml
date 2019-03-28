@@ -1,0 +1,17 @@
+<!--某个activity结果展示页面-->
+<view class="container">
+
+  <view>{{activity_location}}{{activity_name}}</view>
+  <view>{{activity_time}}</view>
+   <!--列表展示全部志愿者 -->
+   全部志愿者
+  <view class="weui-cells weui-cells_after-title">
+    <view wx:for="{{student_list}}" wx:key="value">
+    <label  class="weui-cell weui-check__label">
+        <view class="weui-cell__bd"> {{item.name}}</view>
+        <view class="weui-cell__ft">{{item.school}}</view>
+    </label>
+    </view>
+  </view>
+
+</view>

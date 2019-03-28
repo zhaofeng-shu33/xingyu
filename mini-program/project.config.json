@@ -39,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -52,7 +52,13 @@
 					"id": -1,
 					"name": "search",
 					"pathName": "pages/result/index",
+					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "special_activity",
+					"pathName": "pages/result/special_activity"
 				}
 			]
 		}

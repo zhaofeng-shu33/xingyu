@@ -15,8 +15,11 @@
                 <button type="default">{{group_name}}</button>                
             </picker>
   </view>
-    <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" bindtap="search">查询</button>
+    <view class="weui-btn-area weui-flex">
+        <button class="weui-btn" type="primary" bindtap="search">常规活动查询</button>
+        <navigator url="/pages/result/special_activity">
+          <button class="weui-btn" type="secondary">特色活动查询</button>
+        </navigator>
     </view>  
 
 

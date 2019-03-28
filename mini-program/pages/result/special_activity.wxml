@@ -1,0 +1,15 @@
+<!--pages/result/special_activity.wxml-->
+<view class="container">
+    <view class="page__bd">
+      <view class="weui-cells weui-cells_after-title">
+        <navigator url="/pages/result/activity_detail?activity_name={{item.name}}&activity_location={{item.location}}&activity_time={{item.time}}" wx:for="{{special_activity_list}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd"> {{item.location}}{{item.name}}</view>
+            <view class="weui-cell__ft"> {{item.time}}</view>
+        </navigator>
+      </view>
+    </view>
+</view>
+<text>
+
+</text>
+
