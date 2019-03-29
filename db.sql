@@ -4,10 +4,15 @@ create user if not exists 'xingyu'@'localhost' identified by 'xingyu';
 grant all privileges on xingyu.* to 'xingyu'@'localhost';
 flush privileges;
 use xingyu;
+create table xingyu_semester(
+    id int primary key auto_increment,
+    name varchar(10)
+);
 create table xingyu_group(
     id int primary key auto_increment,
     semester varchar(10),
-    name varchar(12) not null default '流动'
+    name varchar(12) not null default '流动',
+    semester_id int,
 );
 create table xingyu_student(
     id int primary key auto_increment,
@@ -30,3 +35,4 @@ create table xingyu_student_activity(
     constraint student_constraint foreign key (student_id) REFERENCES xingyu_student (id) on delete cascade,
     constraint activity_constraint foreign key (activity_id) REFERENCES xingyu_activity (id) on delete cascade
 )
+
