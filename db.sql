@@ -10,9 +10,9 @@ create table xingyu_semester(
 );
 create table xingyu_group(
     id int primary key auto_increment,
-    semester varchar(10),
     name varchar(12) not null default '流动',
     semester_id int,
+    constraint semester_constraint foreign key (semester_id) REFERENCES xingyu_semester(id) on delete cascade
 );
 create table xingyu_student(
     id int primary key auto_increment,
