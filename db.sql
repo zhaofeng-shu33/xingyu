@@ -17,9 +17,7 @@ create table xingyu_group(
 create table xingyu_student(
     id int primary key auto_increment,
     name varchar(5) not null,
-    school enum('thu', 'pku','hit','sust','szu') not null,
-    group_id int not null default 1,
-    constraint group_constraint foreign key (group_id) REFERENCES xingyu_group(id) on delete cascade
+    school enum('thu', 'pku','hit','sust','szu') not null
 );
 create table xingyu_activity(
     id int primary key auto_increment,
