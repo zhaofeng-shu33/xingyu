@@ -57,7 +57,7 @@ foreach($list as $student){
     if($row_s_a['id'] == null){ // student has already joined this activity
         continue;
     }    
-    $sql_r = 'delete from '.getTablePrefix()."_student_activity (student_id, activity_id) values ('$student_id', '$activity_id')";
+    $sql_r = 'delete from '.getTablePrefix()."_student_activity where student_id = $student_id and activity_id = $activity_id";
     $res_r=mysqli_query($db, $sql_r) or die(mysqli_error($db));
 }
 exitJson(0, '');
