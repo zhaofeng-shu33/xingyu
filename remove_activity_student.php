@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'mysql.php';
 include_once 'functions.php';
 $postdata=file_get_contents("php://input");
@@ -54,10 +54,10 @@ foreach($list as $student){
     $sql_s_a = 'select id from '.getTablePrefix()."_student_activity where student_id = $student_id and activity_id = $activity_id";
     $res_s_a = mysqli_query($db, $sql_s_a) or die(mysqli_error($db));
     $row_s_a = mysqli_fetch_assoc($res_s_a);
-    if($row_s_a['id'] != null){ // student has already joined this activity
+    if($row_s_a['id'] == null){ // student has already joined this activity
         continue;
     }    
-    $sql_r = 'insert into '.getTablePrefix()."_student_activity (student_id, activity_id) values ('$student_id', '$activity_id')";
+    $sql_r = 'delete from '.getTablePrefix()."_student_activity (student_id, activity_id) values ('$student_id', '$activity_id')";
     $res_r=mysqli_query($db, $sql_r) or die(mysqli_error($db));
 }
 exitJson(0, '');
