@@ -17,6 +17,9 @@ if($week == null || gettype($week)!='integer'){
 if($name == null || $name == ''){
     exitJson(2, 'null name');
 }
+if($name == '流动'){
+    exitJson(4, 'cannot add activity for flow group');
+}
 if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
