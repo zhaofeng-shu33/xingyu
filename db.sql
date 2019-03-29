@@ -11,7 +11,7 @@ create table xingyu_semester(
 create table xingyu_group(
     id int primary key auto_increment,
     name varchar(12) not null default '流动',
-    semester_id int,
+    semester_id int not null,
     constraint semester_constraint foreign key (semester_id) REFERENCES xingyu_semester(id) on delete cascade
 );
 create table xingyu_student(
@@ -34,5 +34,11 @@ create table xingyu_student_activity(
     activity_id int not null,
     constraint student_constraint foreign key (student_id) REFERENCES xingyu_student (id) on delete cascade,
     constraint activity_constraint foreign key (activity_id) REFERENCES xingyu_activity (id) on delete cascade
-)
-
+);
+create table xingyu_semester_group(
+    id int primary key auto_increment,
+    group_id int not null,
+    student_id int not null,
+    constraint semester_group_constraint foreign key (group_id) REFERENCES xingyu_group (id) on delete cascade,
+    constraint semester_student_constraint foreign key (student_id) REFERENCES xingyu_student (id) on delete cascade
+);

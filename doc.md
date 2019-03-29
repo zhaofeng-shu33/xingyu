@@ -11,7 +11,8 @@ GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]
 返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
 3. 获取某个活动的固定志愿者
-GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]
+GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]&semester=2
+semester=1表示2018年秋季学期，=2表示2019年春季学期
 返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
 4. 批量添加某个活动参与的全部学生
