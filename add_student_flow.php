@@ -24,14 +24,14 @@ if($row['id'] == null){ // student not exist
 }
 else{// if student exists, don't trigger any error
     $student_id = $row['id'];
-    $sql_sg = 'select id from '.getTablePrefix()."_semester_group where student_id = $student_id";
+    $sql_sg = 'select id from '.getTablePrefix()."_student_group where student_id = $student_id";
     $res_sg=mysqli_query($db, $sql_sg) or die(mysqli_error($db));    
     $row_sg = mysqli_fetch_assoc($res_sg);
     if($row_sg['id'] != null){
         exitJson(3, 'student already exists in current semester flow group');
     }
 }
-$sql_ig = 'insert into '.getTablePrefix()."_semester_group (group_id, student_id) values (1, $student_id)";
+$sql_ig = 'insert into '.getTablePrefix()."_student_group (group_id, student_id) values (1, $student_id)";
 $res_ig=mysqli_query($db, $sql_ig) or die(mysqli_error($db));    
 
 exitJson(0, '',array('student_id'=>$student_id));
