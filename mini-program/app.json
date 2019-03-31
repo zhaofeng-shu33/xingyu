@@ -4,7 +4,8 @@
     "pages/create/index",
     "pages/result/index",
     "pages/result/special_activity",
-    "pages/result/activity_detail"
+    "pages/result/activity_detail",
+    "pages/create/group_change"
   ],
   "window": {
     "backgroundTextStyle": "light",

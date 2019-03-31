@@ -1,0 +1,28 @@
+<!--pages/create/group_change.wxml-->
+<view class="container">
+ <text>更改组别</text>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+        </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="志愿者姓名" value="{{student_name}}" bindinput="inputTyping"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">新组别</view>
+        </view>
+        <view class="weui-cell__bd">
+        <picker bindchange="bindPickerChange" value="{{groupIndex}}" range="{{group_list}}">
+          <button type="default">{{group_list[groupIndex]}}</button>                
+        </picker>
+        </view>
+    </view>            
+  </view>
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="modify">更改</button>
+    </view>  
+</view>
+
