@@ -6,8 +6,9 @@ POST 方法到 /xingyu/add_student_flow.php
 (JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
 返回结果 err = 3 时表示该学生已经存在。
 
-2. 根据姓名的前几个汉字获取2019年春季学期流动组学生列表不分页
-GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]
+2. 根据姓名的前几个汉字获取流动组学生列表不分页
+GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]&semester=2
+semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
 返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
 
 3. 获取某个活动的固定志愿者
