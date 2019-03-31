@@ -19,6 +19,9 @@ else{
 $sql_s = 'select id from '.getTablePrefix()."_group where name = '流动' and semester_id = $semester_id";
 $res_s = mysqli_query($sql_s) or die(mysqli_error($db));
 $row_s = mysqli_fetch_assoc($res_s);
+if($row_s['id'] == null){
+    exitJson(2, 'null id for flow group');
+}
 $flow_group_id = $row_s['id'];
 
 $db = getDb();
