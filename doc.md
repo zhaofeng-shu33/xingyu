@@ -36,6 +36,8 @@ GET 方法到 /xingyu/get_all_student.php?student_group=[group_name]&week=[week_
 POST 方法到 /xingyu/append_activity.php
 (JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])，其中学生名字的列表为要
 补录的同学，允许同学之前已经存在。
+可选参数为semester, semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
+
 返回结果 err = 5 时表示该活动不存在。
 
 
