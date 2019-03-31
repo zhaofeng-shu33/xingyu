@@ -12,7 +12,7 @@ $semester_id = $jsondata->semester;
 if($semester_id == null){
     $semester_id = 2;
 }
-elseif(type($semester_id) != 'integer'){
+elseif(gettype($semester_id) != 'integer'){
     exitJson(6, 'invalid semester');    
 }
 
