@@ -21,8 +21,8 @@ POST 方法到 /xingyu/add_activity.php
 返回结果 err = 5 时表示该活动已经存在。
 
 5. 获取小组列表
-GET 方法到 /xingyu/get_group_list.php
-无参数
+GET 方法到 /xingyu/get_group_list.php&semester=2
+semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
 返回结果 ： result['group_list'] = [[group_name_1],[group_name_2]]
 
 6. 获取某个活动的全部志愿者（用于提交成功后查看结果）
