@@ -9,13 +9,14 @@ $semester_id = $_GET['semester'];
 if($semester_id == null){
     $semester_id = 2;
 }
-if(intval($semester_id) == 0){
-    exitJson(1, 'invalid semester');
-}
 else{
-    $semester_id = intval($semester_id);
+    if(intval($semester_id) == 0){
+        exitJson(1, 'invalid semester');
+    }
+    else{
+        $semester_id = intval($semester_id);
+    }
 }
-
 $sql_s = 'select id from '.getTablePrefix()."_group where name = '流动' and semester_id = $semester_id";
 $res_s = mysqli_query($sql_s) or die(mysqli_error($db));
 $row_s = mysqli_fetch_assoc($res_s);
