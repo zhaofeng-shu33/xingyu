@@ -8,6 +8,14 @@ $jsondata=json_decode($postdata);
 $week=$jsondata->week;
 $name=$jsondata->name;
 $list=$jsondata->student_list;
+$semester_id = $jsondata->semester;
+if($semester_id == null){
+    $semester_id = 2;
+}
+elseif(type($semester_id) != 'integer'){
+    exitJson(6, 'invalid semester');    
+}
+
 if($week == null || gettype($week)!='integer'){
     if($week == null)
         exitJson(1, 'null week');
@@ -25,7 +33,7 @@ if($list == null || gettype($list)!='array'){
 }
 $db = getDb();
 // create the activity
-if(strpos($name, '金色') == FALSE && $name != '周二下午'){
+if(strpos($name, '金色') == FALSE && $name != '周二下午' && $semester_id > 1){
     $location = '童伴时光';
 }
 else{
@@ -33,7 +41,15 @@ else{
 }
 // convert szu calendar to 阳历
 // 2019-3-4 ~ week 1
-$date=date_create("2019-3-4");
+if($semester_id == 2){
+    $date=date_create("2019-3-4");
+}
+elseif($semester_id == 1){
+    $date=date_create("2018-9-3");
+}
+else{
+    exitJson(8, 'not support semester_id larger than 3');
+}
 $interval_int = 7 * ($week - 1);
 date_add($date, date_interval_create_from_date_string($interval_int." days"));
 $date_str = date_format($date, 'Y-m-d');
@@ -53,7 +69,7 @@ foreach($list as $student){
     $res_s = mysqli_query($db, $sql_s) or die(mysqli_error($db));
     $row_s = mysqli_fetch_assoc($res_s);
     if($row_s['id'] == null){
-        exitJson(4, 'student '. $student. ' not exists in db');
+        exitJson(7, 'student '. $student. ' not exists in db');
     }    
     $student_id = $row_s['id'];
     $sql_r = 'insert into '.getTablePrefix()."_student_activity (student_id, activity_id) values ($student_id, $activity_id)";
