@@ -51,3 +51,8 @@ POST 方法到 /xingyu/remote_activity_student.php
 (JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])，其中学生名字的列表为要
 删除的同学，允许同学之前没参加过该活动，此时也不会报错。
 返回结果 err = 5 时表示该活动不存在。
+
+11 更改志愿者的组别信息
+POST 方法到 /xingyu/modify_student_group.php
+(JSON格式数据）必有参数为 student_name(string), group_id(int)，group_id > 0.
+
