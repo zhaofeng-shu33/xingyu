@@ -1,5 +1,8 @@
 <!--结果展示页面-->
 <view class="container">
+      <navigator url="/pages/result/statistics">
+        <button class="weui-btn" type="secondary">统计数据查看</button>
+      </navigator>
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
             <view class="weui-label">第</view>

@@ -1,0 +1,4 @@
+/* pages/result/statistics.wxss */
+.statistic-cell{
+  width: 33%;
+}
