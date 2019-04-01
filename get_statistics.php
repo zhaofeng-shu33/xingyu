@@ -1,6 +1,7 @@
 <?php
 include_once 'mysql.php';
 include_once 'functions.php';
+$db = getDb();
 $data = [array('school'=>'hit'), array('school'=>'sust'), array('school'=>'thu'), array('school'=>'pku'), array('school'=>'szu')];
 foreach($data as &$info){
     $school = $info['school'];
