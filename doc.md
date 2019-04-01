@@ -60,3 +60,7 @@ POST 方法到 /xingyu/remote_activity_student.php
 POST 方法到 /xingyu/modify_student_group.php
 (JSON格式数据）必有参数为 student_name(string), group_id(int)，group_id > 0.
 
+12 获取五校统计信息
+POST 方法到 /xingyu/get_statistics.php
+返回 JSON格式数据 [{'school':'hit','total_student':23,'total_count':45}, ...]
+其中 total_student 表示该校人数信息， total_count 表示该校人次信息。
