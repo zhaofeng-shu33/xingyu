@@ -34,7 +34,7 @@ Page({
     if(this.data.student_name == ''){
       error_msg = '请填写姓名'
     }
-    else if(this.data.school_name == '未选择'){
+    else if (this.data.student_school == '未选择'){
       error_msg = '请选择学校'
     }
     if(error_msg != ''){
@@ -68,13 +68,56 @@ Page({
       }
     })
   },
+  delete: function () {
+    // client data check
+    var error_msg = '';
+    if (this.data.student_name == '') {
+      error_msg = '请填写姓名'
+    }
+    else if (this.data.student_school == '未选择') {
+      error_msg = '请选择学校'
+    }
+    if (error_msg != '') {
+      wx.showToast({
+        title: error_msg,
+        icon: 'none'
+      })
+      return
+    }
+    var that = this;
+    wx.request({
+      url: app.ServerUrl + '/delete_student_flow.php',
+      method: 'POST',
+      data: {
+        student_name: that.data.student_name,
+        student_school: app.SchoolMapping[that.data.student_school]
+      },
+      success(res) {
+        if (res.data.err == 3) {
+          wx.showToast({ icon: 'none', title: that.data.student_name + '不存在' })
+        }
+        else if (res.data.err == 4) {
+          wx.showToast({ icon: 'none', title: '请先取消' + that.data.student_name + '参加的活动再删除' })
+        }
+        else if (res.data.err != 0)
+          wx.showToast({ icon: 'none', title: 'server error' })
+        else {
+          wx.showToast({ title: that.data.student_name + ' 删除成功' })
+          that.setData({ student_name: '' })
+        }
+      },
+      fail(res) {
+        wx.showToast({ icon: 'none', title: 'network error' })
+      }
+    })
+  },  
   modify: function () {
     // client data check
     var error_msg = '';
     if (this.data.student_name == '') {
       error_msg = '请填写姓名'
     }
-    else if (this.data.school_name == '未选择') {
+    else if (this.data.student_school == '未选择') {
       error_msg = '请选择学校'
     }
     if (error_msg != '') {
