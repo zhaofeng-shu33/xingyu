@@ -64,3 +64,8 @@ POST 方法到 /xingyu/modify_student_group.php
 POST 方法到 /xingyu/get_statistics.php
 返回 JSON格式数据 [{'school':'hit','total_student':23,'total_count':45}, ...]
 其中 total_student 表示该校人数信息， total_count 表示该校人次信息。
+
+13 删除流动志愿者
+POST 方法到 /xingyu/delete_student_flow.php
+(JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
+注意：如果这个志愿者有参加过活动，则必须先通过其他的接口取消他参加的活动才能删除。
