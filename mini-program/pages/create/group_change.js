@@ -41,19 +41,16 @@ Page({
     })
   },
   add: function(){
-    modify('add');
+    this.modify('add');
   },
   delete: function(){
-    modify('delete');
+    this.modify('delete');
   },
   modify: function (action) {
     // client data check
     var error_msg = '';
     if (this.data.student_name == '') {
       error_msg = '请填写姓名'
-    }
-    else if (this.data.groupName == '流动') {
-      error_msg = '不允许更改到流动组'
     }
     if (error_msg != '') {
       wx.showToast({
@@ -80,7 +77,12 @@ Page({
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else {
-          wx.showToast({ title: that.data.student_name + ' 更改成功' })
+          if (action == 'add'){
+            wx.showToast({ title: '添加' + that.data.student_name + '到' + that.data.groupName + '小组' +'成功' })
+          }
+          else{ //delete
+            wx.showToast({ title: '从' + that.data.groupName + '小组' + '删除' + that.data.student_name + ' 成功' })
+          }
           that.setData({ student_name: '' })
         }
       },

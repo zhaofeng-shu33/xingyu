@@ -12,7 +12,7 @@
     </view>
     <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-            <view class="weui-label">新组别</view>
+            <view class="weui-label">组别</view>
         </view>
         <view class="weui-cell__bd">
         <picker bindchange="bindPickerChange" value="{{groupIndex}}" range="{{group_list}}">
