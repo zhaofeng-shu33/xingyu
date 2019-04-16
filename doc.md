@@ -57,7 +57,8 @@ POST 方法到 /xingyu/remote_activity_student.php
 返回结果 err = 5 时表示该活动不存在。
 
 11 更改志愿者的组别信息
-POST 方法到 /xingyu/modify_student_group.php
+POST 方法到 /xingyu/modify_student_group.php?action=add
+如果action=add 是添加一个新的组别，如果action=delete 是删除这个组别（目前没有约束）。
 (JSON格式数据）必有参数为 student_name(string), group_id(int)，group_id > 0.
 
 12 获取五校统计信息
