@@ -14,7 +14,7 @@ if($group_id == null || gettype($group_id) != 'integer' || $group_id <= 0){
     exitJson(2, 'invalid group id');
 }
 $action=$_GET['action'];
-if($action != 'add' || $action != 'delete'){
+if($action != 'add' && $action != 'delete'){
     exitJson(4, 'invalid action');
 }
 $db = getDb();
