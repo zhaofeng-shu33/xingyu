@@ -28,6 +28,7 @@ $student_id = $row['id'];
 // for delete action, first check if the student belongs to the specified group exists
 $sql = 'select id from '.getTablePrefix()."_student_group where group_id = $group_id and student_id = $student_id";
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
+$row['id'] = mysqli_fetch_assoc($res);
 if($action =='delete' && $row['id'] == null){
     exitJson(5, 'student does not belong to the group.');
 }
