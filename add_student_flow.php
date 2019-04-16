@@ -28,7 +28,7 @@ else{// if student exists, don't trigger any error
     $res_sg=mysqli_query($db, $sql_sg) or die(mysqli_error($db));    
     $row_sg = mysqli_fetch_assoc($res_sg);
     if($row_sg['id'] != null){
-        exitJson(3, 'student already exists in current semester flow group');
+        exitJson(3, 'student already has a group');
     }
 }
 $sql_ig = 'insert into '.getTablePrefix()."_student_group (group_id, student_id) values (1, $student_id)";
