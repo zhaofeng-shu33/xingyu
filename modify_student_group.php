@@ -39,7 +39,13 @@ else if($action == 'add' && $row['id'] != null){
 if($action == 'delete'){
     $sql_a = 'delete from '.getTablePrefix()."_student_group where group_id = $group_id and student_id = $student_id";
 }
-else{ // add
+else{ // for add, we further check that the group_id is valid
+    $sql = 'select id from '.getTablePrefix()."_group where id = $group_id";
+    $res = mysqli_query($db, $sql) or die(mysqli_error($db));
+    $row['id'] = mysqli_fetch_assoc($res);
+    if($row['id'] == null){
+        exitJson(6, 'group_id not exits');
+    }
     $sql_a = 'insert into '.getTablePrefix()."_student_group (group_id, student_id) values ($group_id, $student_id)";
 }
 mysqli_query($db, $sql_a) or die(mysqli_error($db));
