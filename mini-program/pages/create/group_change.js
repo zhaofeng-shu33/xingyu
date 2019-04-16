@@ -40,7 +40,13 @@ Page({
       }
     })
   },
-  modify: function () {
+  add: function(){
+    modify('add');
+  },
+  delete: function(){
+    modify('delete');
+  },
+  modify: function (action) {
     // client data check
     var error_msg = '';
     if (this.data.student_name == '') {
@@ -58,7 +64,7 @@ Page({
     }
     var that = this;
     wx.request({
-      url: app.ServerUrl + '/modify_student_group.php',
+      url: app.ServerUrl + '/modify_student_group.php?action=' + action,
       method: 'POST',
       data: {
         student_name: that.data.student_name,
@@ -66,7 +72,10 @@ Page({
       },
       success(res) {
         if (res.data.err == 3) {
-          wx.showToast({ title: that.data.student_name + '不存在' })
+          wx.showToast({ icon: 'none',title: that.data.student_name + '不存在' })
+        }
+        else if(res.data.err == 5){
+          wx.showToast({ icon: 'none', title: that.data.student_name + '不属于' + that.data.groupName + '小组'})
         }
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })

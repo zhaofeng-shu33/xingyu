@@ -29,5 +29,6 @@
         "text": "查询"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
