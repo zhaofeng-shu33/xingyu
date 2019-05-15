@@ -2,7 +2,7 @@
 require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 include_once 'mysql.php';
 $school=$_GET['student_school'];
@@ -39,6 +39,6 @@ for($i=0; $i<count($rows); $i++){
 	$sheet->setCellValue('C' . ($i+2), $rows[$i][2]);
 	$sheet->setCellValue('D' . ($i+2), $rows[$i][3]);
 }
-$writer = new Xlsx($spreadsheet);
+$writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 ?>
