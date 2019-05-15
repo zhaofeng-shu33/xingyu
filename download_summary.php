@@ -16,8 +16,7 @@ $date_str = date('Y-m-d-');
 header('Content-Disposition: attachment; filename="' . $date_str . $school .'.xlsx"');
 
 $spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
-$sheet->setActiveSheetIndex(0)
+$spreadsheet->setActiveSheetIndex(0)
 	->setCellValue('A1', '姓名');
 	->setCellValue('B1', '活动名称');
 	->setCellValue('C1', '活动时间');
@@ -28,7 +27,7 @@ $db = getDb();
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
 $rows = mysqli_fetch_all($res);
 for($i=0; $i<count($rows); $i++){
-	$sheet->setActiveSheetIndex(0)
+	$spreadsheet->setActiveSheetIndex(0)
 	->setCellValue('A' . strval($i+2), $rows[$i][0]);
 	->setCellValue('B' . strval($i+2), $rows[$i][1]);
 	->setCellValue('C' . strval($i+2), $rows[$i][2]);
