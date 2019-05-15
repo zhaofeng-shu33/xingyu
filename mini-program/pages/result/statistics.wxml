@@ -3,12 +3,16 @@
 <view class="weui-cells__title">统计</view>
         <view class="weui-cells weui-cells_after-title" style="width:100%;">
             <view class="weui-cell">
-                <view class="statistic-cell">学校</view>
+                <view class="statistic-cell">
+                  学校
+                  </view>
                   <view class="statistic-cell">总人数</view>
                   <view class="statistic-cell">总人次</view>
             </view>
            <view wx:for="{{statistics}}" wx:key="school" class="weui-cell">
-                    <view class="statistic-cell">{{item.school}}</view>                  
+                    <view class="statistic-cell">
+                      <button bindtap="get_excel" data-school="{{item.school}}">{{item.school}}</button>
+                    </view>                  
                     <view class="statistic-cell">{{item.total_student}}</view>
                     <view class="statistic-cell">{{item.total_count}}</view>                 
         </view>        
