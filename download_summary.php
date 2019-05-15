@@ -27,10 +27,10 @@ $db = getDb();
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
 $rows = mysqli_fetch_all($res);
 for($i=0; $i<count($rows); $i++){
-	$sheet->setCellValue('A' . ($i+2), $rows[$i][0]);
-	$sheet->setCellValue('B' . ($i+2), $rows[$i][1]);
-	$sheet->setCellValue('C' . ($i+2), $rows[$i][2]);
-	$sheet->setCellValue('D' . ($i+2), $rows[$i][3]);
+	$sheet->setCellValue('A' . strval($i+2), $rows[$i][0]);
+	$sheet->setCellValue('B' . strval($i+2), $rows[$i][1]);
+	$sheet->setCellValue('C' . strval($i+2), $rows[$i][2]);
+	$sheet->setCellValue('D' . strval($i+2), $rows[$i][3]);
 }
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
