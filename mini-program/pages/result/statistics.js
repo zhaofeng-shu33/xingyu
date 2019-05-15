@@ -5,6 +5,22 @@ Page({
   data: {
      statistics: []
   },
+  get_excel: function(event){
+  	  var school_chinese_name = event.currentTarget.dataset.school;
+	  var school_name = app.SchoolMapping[school_chinese_name];
+	  wx.downloadFile({
+	  	  url: app.ServerUrl + '/download_summary.php?student_school=' + school_name,
+		  success(res){
+		  	  if(res.statusCode == 200){
+				const filePath = res.tempFilePath;
+				wx.openDocument({
+					filePath,
+					fileType: 'xlsx',
+				})
+			  }
+		  }
+	  })
+  },
   onLoad: function (options) {
     var that = this;
     // request group name list
