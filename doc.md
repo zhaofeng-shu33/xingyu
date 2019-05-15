@@ -70,3 +70,7 @@ POST 方法到 /xingyu/get_statistics.php
 POST 方法到 /xingyu/delete_student_flow.php
 (JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
 注意：如果这个志愿者有参加过活动，则必须先通过其他的接口取消他参加的活动才能删除。
+
+14 获取各校志愿者本学期的统计信息
+GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个学校的代号里选取
+返回 CSV格式数据，如果学校未识别，返回 CSV 数据为空。
