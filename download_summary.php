@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 include_once 'mysql.php';
 $school=$_GET['student_school'];
 header('Content-Type: text/csv');
@@ -8,7 +8,7 @@ if($school == null || array_search($school, $valid_school_list) === false){
 }
 $date_str = date('Y-m-d-');
 header('Content-Disposition: attachment; filename="' . $date_str . $school .'.csv"');
-echo("ÐÕÃû\t»î¶¯Ãû³Æ\t»î¶¯Ê±¼ä\t»î¶¯µØµã\n");
+echo("å§“å\tæ´»åŠ¨åç§°\tæ´»åŠ¨æ—¶é—´\tæ´»åŠ¨åœ°ç‚¹\n");
 $sql = "SELECT s.name, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and s.school = '" . $school . "'";
 $db = getDb();
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
