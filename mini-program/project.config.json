@@ -1,0 +1,80 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.2",
+	"appid": "wxd0bc65d07e3eb540",
+	"projectname": "xingyu-mini-program-frontend",
+	"cloudfunctionTemplateRoot": "",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "create",
+					"pathName": "pages/create/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/result/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "special_activity",
+					"pathName": "pages/result/special_activity",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "group_change",
+					"pathName": "pages/create/group_change",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "statistics",
+					"pathName": "pages/result/statistics",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
