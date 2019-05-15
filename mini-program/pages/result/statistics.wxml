@@ -10,9 +10,12 @@
                   <view class="statistic-cell">总人次</view>
             </view>
            <view wx:for="{{statistics}}" wx:key="school" class="weui-cell">
-                    <view class="statistic-cell">
+                    <view class="statistic-cell" wx:if="{{item.school == '总计'}}">
+                      {{item.school}}
+                    </view>
+                    <view class="statistic-cell" wx:else>
                       <button bindtap="get_excel" data-school="{{item.school}}">{{item.school}}</button>
-                    </view>                  
+                    </view>
                     <view class="statistic-cell">{{item.total_student}}</view>
                     <view class="statistic-cell">{{item.total_count}}</view>                 
         </view>        

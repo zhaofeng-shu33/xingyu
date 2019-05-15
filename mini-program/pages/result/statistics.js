@@ -16,9 +16,24 @@ Page({
 				wx.openDocument({
 					filePath,
 					fileType: 'xlsx',
+				success(res) {					
+				},
+				fail(res) {
+					wx.showToast({
+					title: 'error',
+					icon: 'none'
+				  })
+				},
+
 				})
 			  }
-		  }
+		  },
+		  fail(res) {
+				wx.showToast({
+				title: res.errMsg + school_name,
+				icon: 'none'
+				})
+		  },
 	  })
   },
   onLoad: function (options) {
