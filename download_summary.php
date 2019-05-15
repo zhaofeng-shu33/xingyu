@@ -12,9 +12,9 @@ echo("姓名\t活动名称\t活动时间\t活动地点\n");
 $sql = "SELECT s.name, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and s.school = '" . $school . "'";
 $db = getDb();
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
-$row = mysqli_fetch_all($res);
-for($i=0; $i<count($row); $i++){
-	echo ($row[i]['s.name'] . '\t' . $row[i]['a.name'] . '\t' . $row[i]['a.time'] . '\t' . $row[i]['a.location'] . '\n');
+$rows = mysqli_fetch_all($res);
+for($i=0; $i<count($rows); $i++){
+	echo ($rows[$i][0] . '\t' . $rows[$i][1] . '\t' . $rows[$i][2] . '\t' . $rows[$i][3] . '\n');
 }
 
 ?>
