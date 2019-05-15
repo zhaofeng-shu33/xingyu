@@ -14,7 +14,7 @@ $db = getDb();
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
 $rows = mysqli_fetch_all($res);
 for($i=0; $i<count($rows); $i++){
-	echo ($rows[$i][0] . '\t' . $rows[$i][1] . '\t' . $rows[$i][2] . '\t' . $rows[$i][3] . '\n');
+	echo ($rows[$i][0] . "\t" . $rows[$i][1] . "\t" . $rows[$i][2] . "\t" . $rows[$i][3] . "\n");
 }
 
 ?>
