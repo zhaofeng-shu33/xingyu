@@ -1,7 +1,7 @@
 # 介绍
 
 ## 前端配置
-目前本项目未使用 appsecret 及微信登录功能。
+出于安全性考虑本项目使用了 appsecret 及微信登录的功能，只有授权的志愿者才能发起 POST 请求成功。
 
 使用了 [weui-wxss](https://github.com/Tencent/weui-wxss) 库，但未包含在项目里，需从 GitHub 上下载。
 工作目录切到 `mini-program`后使用：
@@ -12,6 +12,8 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 ## 后端配置
 可使用本地的后端进行开发。
+
+将 `mysql-sample.php` 改为 `mysql.php`
 
 ## 接口文档
 见 [doc](doc.md)
