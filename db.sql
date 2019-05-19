@@ -17,6 +17,8 @@ create table xingyu_group(
 create table xingyu_student(
     id int primary key auto_increment,
     name varchar(5) not null,
+	wechat_nickname varchar(20),
+	wechat_openid varchar(30)
     school enum('thu', 'pku','hit','sust','szu') not null
 );
 create table xingyu_activity(
