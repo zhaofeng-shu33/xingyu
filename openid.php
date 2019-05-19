@@ -2,7 +2,8 @@
 include_once 'mysql.php';
 include_once 'functions.php';
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
-	if($code != null && $code != ''){
+    $code = $_GET['code'];
+    if($code != null && $code != ''){
 		$contents = file_get_contents('https://api.weixin.qq.com/sns/jscode2session?appid='.getAppId().'&secret='.getAppSecret().'&js_code='.$code.'&grant_type=authorization_code');
 		$jsondecode = json_decode($contents);
 		$openid = $jsondecode->openid;
