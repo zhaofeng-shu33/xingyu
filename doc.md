@@ -73,4 +73,11 @@ POST 方法到 /xingyu/delete_student_flow.php
 
 14 获取各校志愿者本学期的统计信息
 GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个学校的代号里选取
-返回 CSV格式数据，如果学校未识别，返回 CSV 数据为空。
+返回 excel 格式数据，如果学校未识别，返回的 body 为空。
+
+## 登录相关
+
+POST 方法到 /xingyu/getopenid.php
+提交JSON格式数据 '{"code":"abc"}'，其中 code 是从微信开发者服务器上获得的；
+返回 JSON 格式的数据，有 {"err":1,"msg":"invalid code","result":""} 或者
+{"err":0,"msg":"","result":{"openid":"id","session_key":"key"}} 。
