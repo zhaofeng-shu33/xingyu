@@ -77,7 +77,7 @@ GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个
 
 ## 登录相关
 
-第一次登录相关：需同时完成1和2两步，假如只完成一步，
+第一次登录相关：需同时完成1和2两步，假如只完成一步也算第一次登录失败。
 1. 凭证校验 GET 方法到 /xingyu/openid.php?code=abc
 其中 code 是从微信开发者服务器上获得的；
 返回 JSON 格式的数据，有 {"err":1,"msg":"invalid code","result":""} 或者
@@ -85,4 +85,6 @@ GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个
 
 2. 关联志愿者信息与openid POST 方法到 /xingyu/openid.php
 提交JSON格式的数据 {"openid":"id", "nickname":"nickname"}
+返回 JSON 格式的数据，{"err":0,"msg":"","result":""}，其中 err 为 0 表示操作成功。
+
 
