@@ -71,7 +71,7 @@ $row = mysqli_fetch_assoc($res);
 if($row['id'] != null){
     exitJson(5, 'activity already exists');
 }
-$sql = 'insert into '.getTablePrefix()."_activity (name, location, time) values ('$name', '$location', '$date_str')";
+$sql = 'insert into '.getTablePrefix()."_activity (name, location, time, institution) values ('$name', '$location', '$date_str', '$location')";
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $activity_id = mysqli_insert_id($db);
 foreach($list as $student){
