@@ -9,6 +9,16 @@ $week=$jsondata->week;
 $name=$jsondata->name;
 $list=$jsondata->student_list;
 $semester_id = $jsondata->semester;
+$openid = $jsondata->openid;
+if($openid != null){
+    $not_admin = !is_admin($db, $openid);
+}
+else{
+    $not_admin = True;
+}
+if($not_admin){
+    exitJson(44, 'you do not have the privilege');
+}
 if($semester_id == null){
     $semester_id = 2;
 }

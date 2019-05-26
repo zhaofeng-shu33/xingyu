@@ -7,6 +7,16 @@ $jsondata=json_decode($postdata);
 
 $group_id=$jsondata->group_id;
 $name=$jsondata->student_name;
+$openid = $jsondata->openid;
+if($openid != null){
+    $not_admin = !is_admin($db, $openid);
+}
+else{
+    $not_admin = True;
+}
+if($not_admin){
+    exitJson(44, 'you do not have the privilege');
+}
 if($name == null || $name == ''){
     exitJson(1, 'null name');
 }
