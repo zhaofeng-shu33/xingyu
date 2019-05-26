@@ -4,7 +4,6 @@
 1. 添加1个学生到2019年春季学期的流动组
 POST 方法到 /xingyu/add_student_flow.php
 (JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
-可选参数是 openid。
 返回结果 err = 3 时表示该学生已经存在。
 
 2. 根据姓名的前几个汉字获取流动组学生列表不分页
@@ -21,6 +20,7 @@ semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这
 POST 方法到 /xingyu/add_activity.php
 (JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
 可选参数为semester, semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
+
 返回结果 err = 5 时表示该活动已经存在。
 
 5. 获取小组列表
@@ -90,3 +90,5 @@ GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个
 
 ## 权限相关
 数据库中 student 表 里面 openid 非空者为管理员。
+所有 POST 请求 openid 是必有参数，可以置空或不填，但这种情况下肯定无法进行数据库的写操作。
+如果在POST请求中返回的错误码 err = 44，说明当前用户没有权限执行这个操作。
