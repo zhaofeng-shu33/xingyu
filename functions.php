@@ -12,6 +12,6 @@ function is_admin($db, $openid)
 	$sql_p = 'select id from '.getTablePrefix()."_student where wechat_openid = '$openid'";
     $res_p = mysqli_query($db, $sql_p);
     $row_p = mysqli_fetch_assoc($res_p);
-    return ($row['id'] != null);
+    return ($row_p['id'] != null);
 }
 ?>
