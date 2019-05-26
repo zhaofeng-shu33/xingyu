@@ -9,7 +9,7 @@ function exitJson($err, $msg , $result='')
 //! check the user with $openid is admin
 function is_admin($db, $openid)
 {
-	$sql_p = 'select id from '.getTablePrefix()."_student where openid = '$openid'";
+	$sql_p = 'select id from '.getTablePrefix()."_student where wechat_openid = '$openid'";
     $res_p = mysqli_query($db, $sql_p);
     $row_p = mysqli_fetch_assoc($res_p);
     return ($row['id'] != null);
