@@ -7,6 +7,8 @@ $jsondata=json_decode($postdata);
 
 $school=$jsondata->student_school;
 $name=$jsondata->student_name;
+$openid = $jsondata->openid;
+
 if($name == null || $name == ''){
     exitJson(1, 'null name');
 }
@@ -14,6 +16,12 @@ if($school == null || $school == ''){
     exitJson(2, 'null school');
 }
 $db = getDb();
+if($openid != null){
+    $is_admin_result = is_admin($db, $openid);
+}
+else{
+    $is_admin_result = False;
+}
 $sql_s = 'select id from '.getTablePrefix()."_student where name = '$name'";
 $res=mysqli_query($db, $sql_s) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
@@ -34,5 +42,5 @@ else{// if student exists, don't trigger any error
 $sql_ig = 'insert into '.getTablePrefix()."_student_group (group_id, student_id) values (1, $student_id)";
 $res_ig=mysqli_query($db, $sql_ig) or die(mysqli_error($db));    
 
-exitJson(0, '',array('student_id'=>$student_id));
+exitJson(0, '',array('student_id'=>$student_id, 'is_admin'=>$is_admin_result));
 ?>

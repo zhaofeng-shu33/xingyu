@@ -4,6 +4,7 @@
 1. 添加1个学生到2019年春季学期的流动组
 POST 方法到 /xingyu/add_student_flow.php
 (JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
+可选参数是 openid。
 返回结果 err = 3 时表示该学生已经存在。
 
 2. 根据姓名的前几个汉字获取流动组学生列表不分页
@@ -77,14 +78,15 @@ GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个
 
 ## 登录相关
 
-第一次登录相关：需同时完成1和2两步，假如只完成一步也算第一次登录失败。
+登录相关：第一次登录需同时完成1和2两步，假如只完成一步也算第一次登录失败。后面登录只需完成第1步。
 1. 凭证校验 GET 方法到 /xingyu/openid.php?code=abc
 其中 code 是从微信开发者服务器上获得的；
 返回 JSON 格式的数据，有 {"err":1,"msg":"invalid code","result":""} 或者
 {"err":0,"msg":"","result":{"openid":"id","session_key":"key"}} 。
 
-2. 关联志愿者信息与openid POST 方法到 /xingyu/openid.php
+2. 关联志愿者信息与openid。POST 方法到 /xingyu/openid.php
 提交JSON格式的数据 {"openid":"id", "nickname":"nickname"}
 返回 JSON 格式的数据，{"err":0,"msg":"","result":""}，其中 err 为 0 表示操作成功。
 
-
+## 权限相关
+数据库中 student 表 里面 openid 非空者为管理员。
