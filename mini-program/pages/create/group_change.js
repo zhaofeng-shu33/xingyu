@@ -5,7 +5,8 @@ Page({
     student_name: '',
     group_list:[1,2],
     groupIndex:0,
-    groupName: '流动'
+    groupName: '流动',
+    openid:''
   },
   inputTyping: function (e) {
     this.setData({
@@ -49,6 +50,7 @@ Page({
   modify: function (action) {
     // client data check
     var error_msg = '';
+    var openid = app.globalData.action.result.openid;
     if (this.data.student_name == '') {
       error_msg = '请填写姓名'
     }
@@ -65,12 +67,16 @@ Page({
       method: 'POST',
       data: {
         student_name: that.data.student_name,
-        group_id: parseInt(that.data.groupIndex) + 1
+        group_id: parseInt(that.data.groupIndex) + 1,
+        openid :openid
       },
       success(res) {
         if (res.data.err == 3) {
           wx.showToast({ icon: 'none',title: that.data.student_name + '不存在' })
         }
+        else if (res.data.err == 44) {
+          wx.showToast({ icon: 'none', title: '不具备删除权限' })
+        }  
         else if(res.data.err == 5){
           wx.showToast({ icon: 'none', title: that.data.student_name + '不属于' + that.data.groupName + '小组'})
         }

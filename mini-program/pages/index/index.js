@@ -10,10 +10,22 @@ Page({
     group_data: [],
     flow_student: [],
     search_student_list: [],
-    week:''
+    week:'',
+    userInfo: {},
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    openid : ''
   },
-  submit: function(){
+
+
+
+  submit: function (){
     // client data check
+
+    var userInfo = app.globalData.userInfo
+    var openid = app.globalData.action.result.openid
+    console.log('user',openid)
+
+    
     var error_msg = '';
     if (this.data.group_data.length == 0) {
       error_msg = '请选择小组'
@@ -45,12 +57,16 @@ Page({
       data:{
         week: parseInt(this.data.week),
         name: this.data.group_name,
-        student_list: submit_student
+        student_list: submit_student,
+        openid:openid
       },
       success(res) {
         if(res.data.err == 5){
           wx.showToast({title:'活动已存在'})
         }
+        else if (res.data.err == 44) {
+          wx.showToast({ icon: 'none', title: '不具备添加权限' })
+        }  
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else{
@@ -68,6 +84,7 @@ Page({
   append: function () {
     // client data check
     var error_msg = '';
+    var openid = app.globalData.action.result.openid;
     if (this.data.group_data.length == 0) {
       error_msg = '请选择小组'
     }
@@ -98,12 +115,16 @@ Page({
       data: {
         week: parseInt(this.data.week),
         name: this.data.group_name,
-        student_list: submit_student
+        student_list: submit_student,
+        openid:openid
       },
       success(res) {
         if (res.data.err == 5) {
           wx.showToast({ title: '活动不存在' })
         }
+        else if (res.data.err == 44) {
+          wx.showToast({ icon: 'none', title: '不具备修改权限' })
+        }  
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else {
@@ -121,6 +142,7 @@ Page({
   delete: function () {
     // client data check
     var error_msg = '';
+    var openid = app.globalData.action.result.openid;
     if (this.data.group_data.length == 0) {
       error_msg = '请选择小组'
     }
@@ -151,12 +173,16 @@ Page({
       data: {
         week: parseInt(this.data.week),
         name: this.data.group_name,
-        student_list: submit_student
+        student_list: submit_student,
+        openid:openid
       },
       success(res) {
         if (res.data.err == 5) {
           wx.showToast({ title: '活动不存在' })
         }
+        else if (res.data.err == 44) {
+          wx.showToast({ icon: 'none', title: '不具备删除权限' })
+        }  
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else {
@@ -271,6 +297,9 @@ Page({
       }
     })  
   },  
+
+
+
   onLoad: function () {
     var that = this;
     // request group name list
@@ -287,6 +316,17 @@ Page({
       fail(res){
         wx.showToast({icon: 'none',title:'network error'})
       }
+    }),
+
+    console.log('onLoad')
+    var that = this
+    //调用应用实例的方法获取全局数据
+    wx.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        userInfo: userInfo
+      })
+
     })
   },
   addNew: function(){
@@ -294,5 +334,7 @@ Page({
    wx.switchTab({
      url: '/pages/create/index',
    })
-  }
+  },
+
+
 })

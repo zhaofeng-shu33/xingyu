@@ -13,7 +13,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
+	"libVersion": "2.0.4",
 	"appid": "wxd0bc65d07e3eb540",
 	"projectname": "xingyu-mini-program-frontend",
 	"cloudfunctionTemplateRoot": "",

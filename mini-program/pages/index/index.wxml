@@ -66,5 +66,8 @@
         <button class="weui-btn" type="primary" bindtap="submit">添加活动</button>
         <button class="weui-btn" type="primary" bindtap="append">补录学生</button>
     </view>  
+    
+
+
     <button class="weui-btn" type="primary" bindtap="delete">从活动中删除选定学生</button>
 </view>
