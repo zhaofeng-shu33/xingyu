@@ -8,8 +8,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 		$jsondecode = json_decode($contents);
 		$openid = $jsondecode->openid;
 		// session cache openid
-		session_start();
-		$_SESSION["openid"] = $openid;
 		$session_key = $jsondecode->session_key;
 		exitJson(0,'',array('openid'=>$openid, 'session_key'=>$session_key));
 	}
@@ -30,8 +28,6 @@ if($nickname == null || $nickname == ''){
     exitJson(3, 'null nickname');
 }
 
-session_start();
-if(isset($_SESSION["openid"]) && $_SESSION["openid"] == $openid){
 	//save the openid to the database, where nickname matches database nickname
 	$db = getDb();
 	$sql = 'select id from ' . getTablePrefix() . "_student where wechat_nickname = '$nickname'";	
@@ -44,9 +40,4 @@ if(isset($_SESSION["openid"]) && $_SESSION["openid"] == $openid){
 	$sql_u = 'update '. getTablePrefix() . "_student set wechat_openid = '$openid' where id = $id";
 	mysqli_query($db, $sql_u) or die(mysqli_error($db));
 	exitJson(0, 'succ');
-}
-else{
-	exitJson(4, 'invalid openid');
-}
-// save the user and start the session
 ?>
