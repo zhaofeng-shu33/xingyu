@@ -1,7 +1,7 @@
 # 介绍
 
 ## 前端配置
-出于安全性考虑本项目使用了 appsecret 及微信登录的功能，只有授权的志愿者才能发起 POST 请求成功，GET 请求则不受此限制。
+出于安全性考虑本项目使用了 appsecret 及微信登录的功能，只有授权的志愿者（小组长）才能发起 POST 请求成功，GET 请求则不受此限制。
 
 使用了 [weui-wxss](https://github.com/Tencent/weui-wxss) 库，但未包含在项目里，需从 GitHub 上下载。
 工作目录切到 `mini-program`后使用：
