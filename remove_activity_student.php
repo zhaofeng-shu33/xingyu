@@ -9,6 +9,7 @@ $week=$jsondata->week;
 $name=$jsondata->name;
 $list=$jsondata->student_list;
 $openid = $jsondata->openid;
+$db = getDb();
 if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
@@ -31,7 +32,6 @@ if($name == null || $name == ''){
 if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
-$db = getDb();
 // create the activity
 if(strpos($name, '金色') == FALSE && $name != '周二下午'){
     $location = '童伴时光';

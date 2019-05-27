@@ -10,6 +10,7 @@ $name=$jsondata->name;
 $list=$jsondata->student_list;
 $semester_id = $jsondata->semester;
 $openid = $jsondata->openid;
+$db = getDb();
 if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
@@ -42,7 +43,7 @@ if($name == '流动'){
 if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
-$db = getDb();
+
 // create the activity
 if(strpos($name, '金色') == FALSE && $name != '周二下午' && $semester_id > 1){
     $location = '童伴时光';

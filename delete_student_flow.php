@@ -8,6 +8,7 @@ $jsondata=json_decode($postdata);
 $school=$jsondata->student_school;
 $name=$jsondata->student_name;
 $openid = $jsondata->openid;
+$db = getDb();
 if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
@@ -23,7 +24,7 @@ if($name == null || $name == ''){
 if($school == null || $school == ''){
     exitJson(2, 'null school');
 }
-$db = getDb();
+
 $sql_s = 'select id from '.getTablePrefix()."_student where name = '$name' and school = '$school'";
 $res=mysqli_query($db, $sql_s) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);

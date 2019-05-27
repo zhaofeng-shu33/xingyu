@@ -8,6 +8,7 @@ $jsondata=json_decode($postdata);
 $group_id=$jsondata->group_id;
 $name=$jsondata->student_name;
 $openid = $jsondata->openid;
+$db = getDb();
 if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
@@ -27,7 +28,7 @@ $action=$_GET['action'];
 if($action != 'add' && $action != 'delete'){
     exitJson(4, 'invalid action');
 }
-$db = getDb();
+
 $sql_s = 'select id from '.getTablePrefix()."_student where name = '$name'";
 $res=mysqli_query($db, $sql_s) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
