@@ -35,11 +35,11 @@ App({
         console.log(res);
         if(res.data.err == 0){
           that.globalData.nickname = nickname; 
-          wx.showToast({ title: '授权成功，请再次点击完成操作' })         
+          wx.showToast({ icon: 'none', title: '授权成功，请再次点击完成操作' })         
         }
         else if(res.data.err == 5){
           that.globalData.openid = 'invalid';
-          wx.showToast({ title: '非小组长无法授权该操作' })         
+          wx.showToast({ icon: 'none', title: '非小组长无法授权该操作' })         
         }
         else{
           wx.showToast({ title: 'server error' });
