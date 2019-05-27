@@ -89,6 +89,6 @@ GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个
 返回 JSON 格式的数据，{"err":0,"msg":"","result":""}，其中 err 为 0 表示操作成功。
 
 ## 权限相关
-数据库中 student 表 里面 openid 非空者为管理员。
+数据库中 student 表 里面 openid 非空者为管理员，有相应POST接口的权限。
 所有 POST 请求 openid 是必有参数，可以置空或不填，但这种情况下肯定无法进行数据库的写操作。
 如果在POST请求中返回的错误码 err = 44，说明当前用户没有权限执行这个操作。

@@ -9,7 +9,7 @@ $week=$jsondata->week;
 $name=$jsondata->name;
 $list=$jsondata->student_list;
 $openid = $jsondata->openid;
-if($openid != null){
+if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
 else{

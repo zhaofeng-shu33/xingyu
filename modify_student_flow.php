@@ -9,7 +9,7 @@ $school=$jsondata->student_school;
 $name=$jsondata->student_name;
 $openid = $jsondata->openid;
 
-if($openid != null){
+if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
 else{

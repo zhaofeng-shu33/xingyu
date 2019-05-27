@@ -8,7 +8,7 @@ $jsondata=json_decode($postdata);
 $group_id=$jsondata->group_id;
 $name=$jsondata->student_name;
 $openid = $jsondata->openid;
-if($openid != null){
+if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
 else{
