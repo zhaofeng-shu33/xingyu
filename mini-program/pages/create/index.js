@@ -18,33 +18,33 @@ Page({
     });
   },    
   submit_wrapper: function(res){
-    if(app.globalData.openid == 'invalid'){
-      wx.showToast({ icon: 'none', title: '不具备添加权限' });
-    }
-    else if (app.globalData.nickname == null){
+    if (app.globalData.nickname == null){
         app.get_user_info_from_res(res);
+    }
+    else if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备添加权限' });
     }
     else{
         this.submit();
     }
   },
   delete_wrapper: function(res){
-    if (app.globalData.openid == 'invalid') {
-      wx.showToast({ icon: 'none', title: '不具备删除权限' });
-    }
-    else if (app.globalData.nickname == null) {
+    if (app.globalData.nickname == null) {
       app.get_user_info_from_res(res);
+    }
+    else if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备删除权限' });
     }
     else {
       this.delete();
     }
   },
   modify_wrapper: function(res){
-    if (app.globalData.openid == 'invalid') {
-      wx.showToast({ icon: 'none', title: '不具备修改权限' });
-    }
-    else if (app.globalData.nickname == null) {
+    if (app.globalData.nickname == null) {
       app.get_user_info_from_res(res);
+    }
+    else if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备修改权限' });
     }
     else {
       this.modify();
