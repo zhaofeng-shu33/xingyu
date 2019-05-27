@@ -16,13 +16,44 @@ Page({
     openid : ''
   },
 
-
-
+  submit_wrapper: function (res) {
+    if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备添加权限' });
+    }
+    else if (app.globalData.nickname == null) {
+      app.get_user_info_from_res(res);
+    }
+    else {
+      this.submit();
+    }
+  },
+  append_wrapper: function (res) {
+    if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备修改权限' });
+    }
+    else if (app.globalData.nickname == null) {
+      app.get_user_info_from_res(res);
+    }
+    else {
+      this.append();
+    }
+  },
+  delete_wrapper: function (res) {
+    if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备删除权限' });
+    }
+    else if (app.globalData.nickname == null) {
+      app.get_user_info_from_res(res);
+    }
+    else {
+      this.delete();
+    }
+  },
   submit: function (){
     // client data check
 
     var userInfo = app.globalData.userInfo
-    var openid = app.globalData.action.result.openid
+    var openid = app.globalData.openid
     console.log('user',openid)
 
     
@@ -84,7 +115,7 @@ Page({
   append: function () {
     // client data check
     var error_msg = '';
-    var openid = app.globalData.action.result.openid;
+    var openid = app.globalData.openid;
     if (this.data.group_data.length == 0) {
       error_msg = '请选择小组'
     }
@@ -142,7 +173,7 @@ Page({
   delete: function () {
     // client data check
     var error_msg = '';
-    var openid = app.globalData.action.result.openid;
+    var openid = app.globalData.openid;
     if (this.data.group_data.length == 0) {
       error_msg = '请选择小组'
     }

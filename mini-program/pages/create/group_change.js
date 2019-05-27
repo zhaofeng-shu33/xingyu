@@ -41,16 +41,32 @@ Page({
       }
     })
   },
-  add: function(){
-    this.modify('add');
-  },
-  delete: function(){
-    this.modify('delete');
-  },
+  add_wrapper: function (res) {
+    if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备添加权限' });
+    }
+    else if (app.globalData.nickname == null) {
+      app.get_user_info_from_res(res);
+    }
+    else {
+      this.modify('add');
+    }
+  },  
+  delete_wrapper: function (res) {
+    if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备删除权限' });
+    }
+    else if (app.globalData.nickname == null) {
+      app.get_user_info_from_res(res);
+    }
+    else {
+      this.modify('delete');
+    }
+  },    
   modify: function (action) {
     // client data check
     var error_msg = '';
-    var openid = app.globalData.action.result.openid;
+    var openid = app.globalData.openid;
     if (this.data.student_name == '') {
       error_msg = '请填写姓名'
     }
@@ -75,7 +91,7 @@ Page({
           wx.showToast({ icon: 'none',title: that.data.student_name + '不存在' })
         }
         else if (res.data.err == 44) {
-          wx.showToast({ icon: 'none', title: '不具备删除权限' })
+          wx.showToast({ icon: 'none', title: '无权限' })
         }  
         else if(res.data.err == 5){
           wx.showToast({ icon: 'none', title: that.data.student_name + '不属于' + that.data.groupName + '小组'})

@@ -17,6 +17,39 @@ Page({
       student_name: e.detail.value
     });
   },    
+  submit_wrapper: function(res){
+    if(app.globalData.openid == 'invalid'){
+      wx.showToast({ icon: 'none', title: '不具备添加权限' });
+    }
+    else if (app.globalData.nickname == null){
+        app.get_user_info_from_res(res);
+    }
+    else{
+        this.submit();
+    }
+  },
+  delete_wrapper: function(res){
+    if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备删除权限' });
+    }
+    else if (app.globalData.nickname == null) {
+      app.get_user_info_from_res(res);
+    }
+    else {
+      this.delete();
+    }
+  },
+  modify_wrapper: function(res){
+    if (app.globalData.openid == 'invalid') {
+      wx.showToast({ icon: 'none', title: '不具备修改权限' });
+    }
+    else if (app.globalData.nickname == null) {
+      app.get_user_info_from_res(res);
+    }
+    else {
+      this.modify();
+    }    
+  },
   bindPickerChange: function (e) {
     this.setData({
       schoolIndex: e.detail.value,
@@ -32,7 +65,7 @@ Page({
   submit: function (){
     // client data check
     var error_msg = '';
-    var openid = app.globalData.action.result.openid
+    var openid = app.globalData.openid
     if(this.data.student_name == ''){
       error_msg = '请填写姓名'
     }
@@ -78,7 +111,7 @@ Page({
   delete: function () {
     // client data check
     var error_msg = '';
-    var openid = app.globalData.action.result.openid
+    var openid = app.globalData.openid
     if (this.data.student_name == '') {
       error_msg = '请填写姓名'
     }
@@ -126,7 +159,7 @@ Page({
   modify: function () {
     // client data check
     var error_msg = '';
-    var openid = app.globalData.action.result.openid;
+    var openid = app.globalData.openid;
     if (this.data.student_name == '') {
       error_msg = '请填写姓名'
     }

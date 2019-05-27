@@ -22,14 +22,14 @@
   </view>
     <view class="weui-btn-area weui-flex">
       <view>
-          <button class="weui-btn" type="primary" bindtap="submit">添加</button>
+          <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="submit_wrapper">添加</button>
       </view>
       <view>
-          <button class="weui-btn" type="secondary" bindtap="delete">删除</button>
+          <button class="weui-btn" type="secondary" open-type="getUserInfo" bindgetuserinfo="delete_wrapper">删除</button>
       </view>
     </view>          
     <view class="weui-btn-area weui-flex">
-        <button class="weui-btn" type="primary" bindtap="modify">更改学校</button>
+        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="modify_wrapper">更改学校</button>
         <navigator url="/pages/create/group_change">
           <button class="weui-btn" type="secondary">增删组别</button>
         </navigator>

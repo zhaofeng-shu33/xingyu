@@ -63,11 +63,11 @@
       <view class="weui-cell__ft"> <view class="weui-label">周</view></view>
       </view>
     <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" bindtap="submit">添加活动</button>
-        <button class="weui-btn" type="primary" bindtap="append">补录学生</button>
+        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="submit_wrapper">添加活动</button>
+        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="append_wrapper">补录学生</button>
     </view>  
     
 
 
-    <button class="weui-btn" type="primary" bindtap="delete">从活动中删除选定学生</button>
+    <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="delete_wrapper">从活动中删除选定学生</button>
 </view>

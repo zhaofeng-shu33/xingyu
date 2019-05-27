@@ -4,128 +4,92 @@ App({
   ServerUrl: 'https://www.leidenschaft.cn/xingyu',
   SchoolMapping: { '深大':'szu', '南科大':'sust', '哈工大':'hit', '北大':'pku', '清华':'thu'},
   SchoolReverseMapping: { 'szu':'深大', 'sust':'南科大', 'hit':'哈工大', 'pku':'北大', 'thu':'清华' },
-
-
-  onLaunch: function () {
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+  get_user_info_from_res: function(user_info_auth_result){
+    var userInfoData = user_info_auth_result.detail.userInfo;
+    if (userInfoData) {
+      this.associate_nickname_with_openid_on_server(userInfoData.nickName);
+      return;
+    }
+    wx.showToast({ title: '未授权无法操作' })
+  },
+  //! associate user nickname with openid on the server
+  associate_nickname_with_openid_on_server: function(nickname){
+    if(this.globalData.nickname != null){
+      return;
+    }
+    if (this.globalData.openid == null){
+      this.get_openid_of_anonymous_user();
+    }
+    var that = this;
+    wx.request({
+      url: config.service.host + "/openid.php",
+      method: 'POST',
+      data: {
+        nickname: nickname,
+        openid: that.globalData.openid,
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log(res);
+        if(res.data.err == 0){
+          that.globalData.nickname = nickname; 
+          wx.showToast({ title: '授权成功，请再次点击完成操作' })         
+        }
+        else if(res.data.err == 5){
+          that.globalData.openid = 'invalid';
+          wx.showToast({ title: '非小组长无法授权该操作' })         
+        }
+        else{
+          wx.showToast({ title: 'server error' });
+        }
+      },
+      fail(error) {
+        wx.showToast({ title: 'network error' })
       }
     })
-
-
+  },
+  get_openid_of_anonymous_user: function(){
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log('res', res);
 
-        wx.getSetting({
-          success: res => {
-            if (res.authSetting['scope.userInfo']) {
-              // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-              wx.getUserInfo({
-                success: res => {
-                  // 可以将 res 发送给后台解码出 unionId
-                  this.globalData.userInfo = res.userInfo
-                  // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                  // 所以此处加入 callback 以防止这种情况
-                  if (this.userInfoReadyCallback) {
-                    this.userInfoReadyCallback(res)
-                  }
-                }
-              })
-            }
-          }
-        })
         wx.request({
           url: config.service.host + "/openid.php?code=" + res.code,
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
           method: 'GET',
-          success: action => {
-            // 返回成功后action.openId可以获取到这个用户的openId
-            // 如果openId为空，表示后台不能获取到openId，前端应以匿名调查的方式进行处理
-            console.log('act', action);//openid = .data.result.openid
-            this.globalData.action = action.data;
-            this.globalData.openid = action.data.result.openid;
-            console.log('openid', action.data.result.openid)
-
-            wx.getUserInfo({
-              success: res => {
-                // 可以将 res 发送给后台解码出 unionId
-                console.log('user', res)
-                this.globalData.userInfo = res.userInfo
-                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                // 所以此处加入 callback 以防止这种情况
-                if (this.userInfoReadyCallback) {
-                  this.userInfoReadyCallback(res)
-                }
-
-                console.log('usrname', res.userInfo.nickName)
-                wx.request({
-
-                  url: config.service.host + "/openid.php",
-                  method: 'POST',
-
-                  data: {
-
-                    nickname: res.userInfo.nickName,
-                    openid: action.data.result.openid,
-
-                  },
-                  header: {
-                    'Accept': 'application/json; charset=utf8mb4_bin'
-                    //"Content-Type": "application/x-www-form-urlencoded"
-                  },
-
-                  //login: false,
-                  success: function (res) {
-                    //that.setData({
-                    //requestResult: JSON.stringify(result.data)
-                    //});
-
-                    console.log("success", res.data)
-                  },
-                  fail(error) {
-                    console.log('request fail', error);
-                  }
-                })
-              },
-              fail:res=>{
-                this.globalData.openid = 'invalid'
-
-              }
-
-            })
-
-
-
+          success: res => {
+            if (res.data.err == 0){
+              this.globalData.openid = res.data.result.openid;
+            }
+            else{
+              wx.showToast({ title: 'server error' })
+            }
+          },
+          fail: function () {
+            wx.showToast({ title: 'network error' })
           }
         });
-
-
-
-      
       },
       fail: res => {
-        this.globalData.openid = 'invalid'
-
+        wx.showToast({ title: '微信服务器错误' })
       }
-
-      
-
     })
-      
   },
-
-
-
+  //! set the initial openid of anonymous user
+  onLaunch: function () {
+    if(this.globalData.openid != null){
+      return;
+    }
+    this.get_openid_of_anonymous_user();      
+  },
   globalData: {
-    userInfo: null,
+    nickname: null,
     openid: null
   }
-
-
 
 })
