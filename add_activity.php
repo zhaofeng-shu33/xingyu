@@ -41,7 +41,7 @@ if($name == '流动'){
     exitJson(4, 'cannot add activity for flow group');
 }
 // check the name actually exits
-$sql_check = 'select id from '.getTablePrefix()."_group where name='$name'";
+$sql_check = 'select id from '.getTablePrefix()."_group where name='$name' and semester_id = '$semester_id'";
 $res = mysqli_query($db, $sql_check) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
 if($row['id'] == null){
