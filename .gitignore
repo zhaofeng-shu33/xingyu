@@ -5,3 +5,4 @@ data.sql
 .DS_Store
 /.vs
 submit/
+build/
