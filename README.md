@@ -25,7 +25,7 @@
 
 ## 团队组成与分工
 
-星语志愿项目微信小程序主要由[赵丰](https://github.com/zhaofeng-shu33) 进行开发，[熊倩](https://github.com/Prisicilla) 也贡献了部分代码；此外，部分小组长和志愿项目负责人提出了一些新的功能需求。
+星语志愿项目微信小程序主要由 [赵丰](https://github.com/zhaofeng-shu33) 进行开发，[熊倩](https://github.com/Prisicilla) 也贡献了部分代码；此外，部分小组长和志愿项目负责人提出了一些新的功能需求。
 
 ## 前端配置
 出于安全性考虑本项目使用了 appsecret 及微信登录的功能，只有授权的志愿者（小组长）才能发起 POST 请求成功，GET 请求则不受此限制。
@@ -40,12 +40,12 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 下载 GitHub 仓库子目录
 
 ## 后端配置
-可使用本地的后端进行开发，数据库文件初始化可以下载 [dump.sql](https://www.leidenschaft.cn/xingyu/mysql_dump.sql)。
+可使用本地的后端进行开发，数据库初始化文件可以下载 [dump.sql](https://www.leidenschaft.cn/xingyu/mysql_dump.sql)。
 
 将 `mysql-sample.php` 改为 `mysql.php`，并相应地配置里面的信息。
 
 ## 接口文档
-见 [doc](doc.md)
+见 [doc](doc.md)。
 
 # CHANGELOG
 版本以小程序的线上版本为准

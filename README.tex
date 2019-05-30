@@ -1,17 +1,20 @@
 \documentclass[]{ctexart}
 \usepackage{hyperref}
+\usepackage{longtable,booktabs}
 \usepackage{graphicx}
 \usepackage{listings}
-\date{}
-
+\title{星语志愿项目微信小程序说明文档}
+\author{赵丰}
+\lstset{breaklines=true}
 \begin{document}
-
+\maketitle
+\tableofcontents
 \section{介绍}\label{ux4ecbux7ecd}
 \begin{figure}
 \centering
 \includegraphics[width=4cm]{qr_code.jpg}
 \end{figure}
-星语志愿项目是大学生关爱自闭症儿童的志愿服务项目，希望通过小程序更方便组织人员统计志愿者的信息。更具体地说，是深圳市距离较近的五所高校团委下属的志愿组织（义工联）相互合作，统一志愿者招募和管理等方面的信息化工具。相关推送可参考：
+星语志愿项目微信小程序源于一个大学生关爱自闭症儿童的志愿服务项目希望通过小程序更方便组织人员统计志愿者的信息的需求。更具体地说，星语志愿项目微信小程序是深圳市距离较近的五所高校团委下属的志愿组织（义工联）相互合作，统一志愿者招募和管理等方面的信息化工具。有关星语志愿项目相关推送可参考：
 
 \begin{itemize}
 \item
@@ -49,7 +52,12 @@ mysql 数据库进行持久化存储。
 
 星语志愿项目微信小程序主要由\href{https://github.com/zhaofeng-shu33}{赵丰}
 进行开发，\href{https://github.com/Prisicilla}{熊倩}
-也贡献了部分代码；此外，部分小组长和志愿项目负责人提出了一些新的功能需求。
+也贡献了部分代码，遵循 Apache 2.0 开源协议；此外，部分小组长和志愿项目负责人提出了一些新的功能需求，不断推进项目的迭代。
+
+\subsection{未来展望}
+在功能层面，后面会继续完善学期切换、支持普通志愿者登录与报名活动等功能。
+
+在数据层面，希望能够提供一种公益数据实时可视化与公益数据共享的模式。在可视化方面，目前仅通过一个统计总表实时展示各校参与的总人数与总人次，未来会直接在小程序中以图形化的方式展示；在共享方面，目前的数据均为每周活动结束各小组长录入的志愿者姓名和学校，通过小程序端所有人均可以进行检索；或者通过Web API 或直接下载数据库 sql 文件的方式进行挖掘，未来希望能够将星语志愿项目的小程序模式做得更加通用化，针对其他类似的志愿项目管理可由其他有需要的组织根据源码自行部署，或者有办法与其他相关的数据平台实现连接，更多维度地展示与自闭症志愿项目或者高校志愿者相关的信息。
 
 \subsection{前端配置}\label{ux524dux7aefux914dux7f6e}
 
@@ -74,139 +82,294 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 \subsection{后端配置}\label{ux540eux7aefux914dux7f6e}
 
-可使用本地的后端进行开发，数据库文件初始化可以下载
+可使用本地的后端进行开发，数据库初始化文件可以下载
 \href{https://www.leidenschaft.cn/xingyu/mysql_dump.sql}{dump.sql}。
 
 将 \texttt{mysql-sample.php} 改为
 \texttt{mysql.php}，并相应地配置里面的信息。
 
-\subsection{接口文档}\label{ux63a5ux53e3ux6587ux6863}
+\section{用户指南}
+本指南根据线上微信小程序制作。
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=8cm]{pages.eps}
+\caption{页面跳转关系示意图}\label{jump}
+\end{figure}
+\subsection{基本概念}
+\begin{description}
+\item[活动]  分为常规活动和拓展活动（原名称为特色活动，根据4月20日会议修改），常规活动一次活动指某个下午前往机构的探访，拓展活动指节日或周末不定期由机构组织的活动。
+\item[组别]  便于管理和服务志愿者进行的分组，有流动组、固定组，固定组中有周二下午小组，周四下午童伴时光小组等。
+\item[志愿者和组别] 一个志愿者有1个或2个组别，有如下三种情况：A同学属于流动组，指他不定期参加活动；A同学属于某个固定的小组，指他每隔1周或2周参加某个下午的活动；A同学属于某个固定的小组和流动组，指他除了参与固定小组的活动外，还不定期地参加其他时间段的常规活动和拓展活动。
+\end{description}
+\subsection{页面概况}
+目前小程序共有7个页面，其中"首页"、"添加流动志愿者"、"查询" 三个主页面位于底部菜单栏，可直接访问，要访问其他4个页面需要从主页面进行跳转，跳转关系如图 \ref{jump} 所示。
 
-返回值格式是JSON \{err:0, msg:'', result:
-Object\}，0为没有错误，非0有msg详细信息。
+下面是各页面功能介绍：
+
+\subsubsection{首页}
+小组长录入一次活动的信息，步骤是：
+\begin{enumerate}
+\item 点击选择小组的按钮
+\item 勾选参与本次活动的固定志愿者
+\item 使用搜索框查找参与本次活动的流动志愿者，如果没查到，使用"添加流动志愿者"页面进行添加
+\item 勾选参与本次活动的流动志愿者
+\item 填写第几周的信息
+\item 点击添加活动的按钮
+\end{enumerate}
+如果有遗漏的志愿者，第6步改为“点击补录学生”的按钮（注意，补录时至少勾选一位固定志愿者，重复添加不影响）;如果有录错的志愿者，第6步改为“点击从活动中删除选定学生按钮”。
+
+\subsubsection{添加流动志愿者}
+小组长添加流动志愿者信息，步骤是：
+\begin{enumerate}
+\item  输入志愿者姓名
+\item 选择志愿者学校
+\item 点击添加按钮
+\end{enumerate}
+如果有录错学校的志愿者，第3步改为“点击更改学校按钮”；如果有录错名字的志愿者，第3步改为“点击删除按钮”；如果不记得录错志愿者的名字是啥，可根据“首页”搜索框输入姓氏进行查询再删除。如果有固定志愿者参与了其他时间段的活动，需通过“增删组别”页面添加其到流动组再在“首页”录入。
+
+\subsubsection{增删组别}
+小组长改变志愿者组别信息，步骤是：
+\begin{enumerate}
+\item 输入志愿者姓名
+\item 选择要增删的组别
+\item 点击添加或删除按钮
+\end{enumerate}
+
+\subsubsection{查询}
+小组长查询常规活动的信息，步骤是：
+\begin{enumerate}
+\item 填写第几周的信息
+\item 点击选择小组的按钮
+\item 点击常规活动查询按钮
+\end{enumerate}
+
+\subsubsection{统计数据查看}
+查看自2018年秋季学期以来常规活动和拓展活动各校参与的总人数和总人次。点击学校名称下载2018年春季学期各校参与活动同学相关信息。
+
+\subsubsection{特色活动查询}
+新版会更名为“拓展活动查询”，查看拓展活动列表。
+
+\subsubsection{拓展活动详情}
+点击拓展活动列表中的某个拓展活动可查看该拓展活动参与的志愿者名单。
+
+\section{接口文档}\label{api}
+
+\hypertarget{ux57faux672cux7ea6ux5b9a}{%
+\subsection{基本约定}\label{ux57faux672cux7ea6ux5b9a}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  添加1个学生到2019年春季学期的流动组 POST 方法到
-  /xingyu/add\_student\_flow.php (JSON格式数据）必有参数为
-  student\_name(string),
-  student\_school(enum)，school只能从五个学校的代号里选取。 返回结果 err
-  = 3 时表示该学生已经存在。
+  返回值格式是JSON \{err:0, msg:'', result:
+  Object\}，0为没有错误，操作成功，非0有msg详细信息。 result
+  的键值和具体请求有关，如果 result 有一个 key 是
+  \texttt{student\_list}，那么有：
+\begin{lstlisting}
+result['student_list'] = [[name, school],[name_2, school_2]]
+\end{lstlisting}
+
 \item
-  根据姓名的前几个汉字获取流动组学生列表不分页 GET 方法到
-  /xingyu/get\_student\_list.php?student\_name\_prefix={[}name{]}\&semester=2
-  semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
-  返回结果 ： result{[}`student\_list'{]} = {[}{[}name,
-  school{]},{[}name\_2, school\_2{]}{]}
+  学校名称与代号对照表
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+school & short\_code\tabularnewline
+\midrule
+\endhead
+哈工大 & hit\tabularnewline
+深大 & szu\tabularnewline
+清华 & thu\tabularnewline
+北大 & pku\tabularnewline
+南科大 & sust\tabularnewline
+\bottomrule
+\end{longtable}
+
 \item
-  获取某个活动的固定志愿者 GET 方法到
-  /xingyu/get\_fixed\_student.php?student\_group={[}group\_name{]}\&semester=2
-  semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
-  返回结果 ： result{[}`student\_list'{]} = {[}{[}name,
-  school{]},{[}name\_2, school\_2{]}{]}
+  \texttt{\$root} 表示应用部署的根URL。
 \item
-  批量添加某个活动参与的全部学生 POST 方法到 /xingyu/add\_activity.php
-  (JSON格式数据）必有参数为 深大的周数(week)，int；{[}3-18{]}
-  和小组名称(name)(string)；以及学生名字列表(student\_list:{[}`name\_1',`name\_2'{]})
-  可选参数为semester,
-  semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
+  semester 这个参数为1表示2018年秋季学期，为2表示2019年春季学期，在 GET
+  和 POST 请求中，不提供这个参数默认为2。
+\item
+  小组名称（2019年春季学期）：周一下午、周二下午、周四下午金色年华、周四下午童伴时光、周五下午单周、周四下午双周
 \end{enumerate}
+\subsection{Web API}
+\begin{enumerate}
+\item  添加1个学生到2019年春季学期的流动组
+
+\begin{lstlisting}
+curl -X POST $root/xingyu/add_student_flow.php -H "Content-Type: application/json" -d '{"student_name":"张三","student_school":"hit"}'
+\end{lstlisting}
+
+必有参数为 student\_name(string),
+student\_school(enum)，school只能从五个学校的代号里选取。 返回结果 err =
+3 时表示该学生已经存在。
+
+\item
+  根据姓名的前几个汉字获取流动组学生列表不分页
+
+\begin{lstlisting}
+curl -X GET "$root/xingyu/get_student_list.php?student_name_prefix=张&semester=2"
+\end{lstlisting}
+
+返回结果为
+\texttt{result{[}\textquotesingle{}student\_list\textquotesingle{}{]}}
+
+\item
+  获取某个活动的固定志愿者
+
+\begin{lstlisting}
+curl -X GET $root/xingyu/get_fixed_student.php?student_group=[group_name]&semester=2
+\end{lstlisting}
+
+返回结果为
+\texttt{result{[}\textquotesingle{}student\_list\textquotesingle{}{]}}
+
+\item
+  批量添加某个活动参与的全部学生
+\begin{lstlisting}
+curl -X POST $root/xingyu/add_activity.php -H "Content-Type: application/json" -d '{"week":3,"name":"周二下午", "student_list":["张三"]}'
+\end{lstlisting}
+
+必有参数为 深大的周数(week)，int；{[}3-18{]}
+和小组名称(name)(string)；以及学生名字列表(student\_list:{[}`name\_1',`name\_2'{]})
 
 返回结果 err = 5 时表示该活动已经存在。
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{4}
 \item
-  获取小组列表 GET 方法到 /xingyu/get\_group\_list.php\&semester=2
-  semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
-  返回结果 ： result{[}`group\_list'{]} =
-  {[}{[}group\_name\_1{]},{[}group\_name\_2{]}{]}
+  获取某学期小组列表
+\begin{lstlisting}
+curl -X GET $root/xingyu/get_group_list.php&semester=2
+\end{lstlisting}
+
+返回结果为
+\texttt{result{[}\textquotesingle{}group\_list\textquotesingle{}{]}\ =\ {[}{[}group\_name\_1{]},{[}group\_name\_2{]}{]}}
+
 \item
-  获取某个活动的全部志愿者（用于提交成功后查看结果） GET 方法到
-  /xingyu/get\_all\_student.php?student\_group={[}group\_name{]}\&week={[}week\_num{]}
-  如果student\_group 和 week参数不提供，需提供 name, location 和time
-  三个参数，用于查询特色活动，name 和 location 都是字符串，其中 time
-  的格式是 '2019-03-05'这种。 返回结果 ： result{[}`student\_list'{]} =
-  {[}{[}name, school{]},{[}name\_2, school\_2{]}{]}
+  获取某个活动的全部志愿者（用于提交成功后查看结果）
+\begin{lstlisting}
+curl -X GET "$root/xingyu/get_all_student.php?student_group=周二下午&week=4" # 常规活动请求格式
+curl -X GET "$root/xingyu/get_all_student.php?name=前期体验活动&location=金色年华&time=2019-03-05" # 常规和扩展活动请求格式
+\end{lstlisting}
+
+返回结果为
+\texttt{result{[}\textquotesingle{}student\_list\textquotesingle{}{]}}
+
 \item
-  补录某个活动参与的学生 POST 方法到 /xingyu/append\_activity.php
-  (JSON格式数据）必有参数为 深大的周数(week)，int；{[}3-18{]}
-  和小组名称(name)(string)；以及学生名字列表(student\_list:{[}`name\_1',`name\_2'{]})，其中学生名字的列表为要
-  补录的同学，允许同学之前已经存在。 可选参数为semester,
-  semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
-\end{enumerate}
+  补录某个活动参与的学生
+
+\begin{lstlisting}
+curl -X POST $root/xingyu/append_activity.php -H "Content-Type: application/json" -d '{"week":4,"name":"周二下午",student_list":["张三"]}'
+\end{lstlisting}
+
+必有参数为 深大的周数(week)，int；{[}3-18{]}
+和小组名称(name)(string)；以及学生名字列表(student\_list:{[}`name\_1',`name\_2'{]})，其中学生名字的列表为要
+补录的同学，允许同学之前已经存在。
 
 返回结果 err = 5 时表示该活动不存在。
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{7}
 \item
-  更改1个流动组学生的学校信息 POST 方法到
-  /xingyu/modify\_student\_flow.php (JSON格式数据）必有参数为
-  student\_name(string),
-  student\_school(enum)，school只能从五个学校的代号里选取。
-\item
-  获取所有的特色活动的信息 GET 方法到 /xingyu/get\_special\_activity.php
-  没有参数 返回的结果 result{[}`special\_activity\_list'{]} 是一个array,
-  每个array的 item 长度为3,依次为 name, location, time。
-\item
-  删除某个活动的学生 POST 方法到 /xingyu/remote\_activity\_student.php
-  (JSON格式数据）必有参数为 深大的周数(week)，int；{[}3-18{]}
-  和小组名称(name)(string)；以及学生名字列表(student\_list:{[}`name\_1',`name\_2'{]})，其中学生名字的列表为要
-  删除的同学，允许同学之前没参加过该活动，此时也不会报错。 返回结果 err
-  = 5 时表示该活动不存在。
+  更改1个流动组学生的学校信息
+\begin{lstlisting}
+curl -X POST $root/xingyu/modify_student_flow.php -H "Content-Type: application/json" -d '{"student_name":"张三","student_school":"hit"}'
+\end{lstlisting}
 
-\item 更改志愿者的组别信息 POST 方法到
-/xingyu/modify\_student\_group.php?action=add 如果action=add
-是添加一个新的组别，如果action=delete 是删除这个组别（目前没有约束）。
-(JSON格式数据）必有参数为 student\_name(string),
-group\_id(int)，group\_id \textgreater{} 0.
+必有参数为 student\_name(string), student\_school(enum)，school
+只能从五个学校的代号里选取。
 
-\item 获取五校统计信息 GET 方法到 /xingyu/get\_statistics.php 返回
-JSON格式数据
+\item
+  获取所有的特色活动的信息
+\begin{lstlisting}
+curl -X GET $root/xingyu/get_special_activity.php
+\end{lstlisting}
+
+返回的结果 result{[}`special\_activity\_list'{]} 是一个 array, 每个
+array 的 item 长度为3, 依次为 name, location, time。
+
+\item
+  删除某个活动的学生
+\begin{lstlisting}
+curl -X POST $root/xingyu/remote_activity_student.php -H "Content-Type: application/json" -d '{"week":4,"name":"周二下午",student_list":["张三"]}'
+\end{lstlisting}
+
+必有参数为 深大的周数(week)，int；{[}3-18{]}
+和小组名称(name)(string)；以及学生名字列表(student\_list:{[}`name\_1',`name\_2'{]})，其中学生名字的列表为要
+删除的同学，允许同学之前没参加过该活动，此时也不会报错。 返回结果 err =
+5 时表示该活动不存在。
+
+\item
+  更改志愿者的组别信息
+
+\begin{lstlisting}
+curl -X POST $root/xingyu/modify_student_group.php?action=add -H "Content-Type: application/json" -d '{"student_name":"张三","group_id":2}'
+\end{lstlisting}
+
+如果 \texttt{action=add} 是添加一个新的组别，如果 \texttt{action=delete}
+是删除这个组别（目前没有约束）。 必有参数为 student\_name(string),
+group\_id(int)，要求 group\_id \textgreater{} 0.
+\texttt{action=delete}情况下，返回结果 err = 5 时表示该学生不属于 id
+为传递的 group\_id 的组。
+
+\item
+  获取五校统计信息
+
+\begin{lstlisting}
+curl -X GET $root/xingyu/get_statistics.php
+\end{lstlisting}
+
+返回 JSON格式数据
 {[}\{`school':`hit',`total\_student':23,`total\_count':45\}, \ldots{}{]}
 其中 total\_student 表示该校人数信息， total\_count 表示该校人次信息。
 
-\item 删除流动志愿者 POST 方法到 /xingyu/delete\_student\_flow.php
-(JSON格式数据）必有参数为 student\_name(string),
-student\_school(enum)，school只能从五个学校的代号里选取。
+\item
+  删除流动志愿者
+\begin{lstlisting}
+curl -X POST $root/xingyu/delete_student_flow.php -H "Content-Type: application/json" -d '{"student_name":"张三","student_school":"hit"}'
+\end{lstlisting}
+
+必有参数为 student\_name(string),
+student\_school(enum)，school只能从五个学校的代号里选取。 返回结果 err =
+4 时表示该学生参与过活动，无法删除。
 注意：如果这个志愿者有参加过活动，则必须先通过其他的接口取消他参加的活动才能删除。
 
-\item 获取各校志愿者本学期的统计信息 GET 方法到
-/xingyu/download\_summary.php?student\_school,
-school只能从五个学校的代号里选取 返回 excel
-格式数据，如果学校未识别，返回的 body 为空。
+\item
+  获取各校志愿者本学期的统计信息
+\begin{lstlisting}
+curl -X GET $root/xingyu/download_summary.php?student_school=hit
+\end{lstlisting}
+
+返回 excel 格式数据，如果学校不在代号列表里面，返回的 body 为空。
 \end{enumerate}
-
-
 
 \hypertarget{ux767bux5f55ux76f8ux5173}{%
-\subsubsection{登录相关}\label{ux767bux5f55ux76f8ux5173}}
+\subsection{登录相关}\label{ux767bux5f55ux76f8ux5173}}
 
 登录相关：第一次登录需同时完成1和2两步，假如只完成一步也算第一次登录失败。后面登录只需完成第1步。
-1. 凭证校验 GET 方法到 /xingyu/openid.php?code=abc 其中 code
-是从微信开发者服务器上获得的； 返回 JSON 格式的数据，有
-\{``err'':1,``msg'':``invalid code'',``result'':"``\} 或者
-\{''err``:0,''msg``:''``,''result``:\{''openid``:''id``,''session\_key``:''key"\}\}
-。
-
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\item
-  关联志愿者信息与openid。POST 方法到 /xingyu/openid.php
-  提交JSON格式的数据 \{``openid'':``id'', ``nickname'':``nickname''\}
-  返回 JSON 格式的数据，\{``err'':0,``msg'':"``,''result``:''"\}，其中
-  err 为 0 表示操作成功。
+\item 凭证校验
+
+\begin{lstlisting}
+curl -X GET $root/xingyu/openid.php?code=abc
+\end{lstlisting}
+
+其中 code 是通过 \texttt{wx.login} 从微信开发者服务器上获得的； 返回
+JSON 格式的数据： 如果自有服务器请求微信开发者服务器失败，返回
+\{``err'':1,``msg'':``invalid code'',``result'':"``\}；
+如果请求成功，返回
+\{''err``:0,''msg``:''``,''result``:\{''openid``:''id``,''session\_key``:''key"\}\}
+
+
+\item 关联志愿者信息与openid。
+\begin{lstlisting}
+curl -X POST $root/xingyu/openid.php -H "Content-Type: application/json" -d '{"openid":"abc","nickname":"张小三"}'
+\end{lstlisting}
+
+返回 JSON 格式的数据，\{``err'':0,``msg'':"``,''result``:''"\}，其中 err
+为 0 表示操作成功。
 \end{enumerate}
-
 \hypertarget{ux6743ux9650ux76f8ux5173}{%
-\subsubsection{权限相关}\label{ux6743ux9650ux76f8ux5173}}
+\subsection{权限相关}\label{ux6743ux9650ux76f8ux5173}}
 
-数据库中 student 表 里面 openid 非空者为管理员，有相应POST接口的权限。
+数据库中 student 表 里面 openid 非空者为管理员，有相应 POST 接口的权限。
 所有 POST 请求 openid
 是必有参数，可以置空或不填，但这种情况下肯定无法进行数据库的写操作。
 如果在POST请求中返回的错误码 err =
@@ -216,30 +379,21 @@ school只能从五个学校的代号里选取 返回 excel
 \section{CHANGELOG}\label{changelog}}
 
 版本以小程序的线上版本为准
+\begin{description}
+ \item[v0.3 (3月26日)]
 
-\subsection{v0.3 (3月26日)}\label{v0.3-3ux670826ux65e5}
+线上第一版，实现了小组长选择所在的小组，添加流动志愿者录入信息，查看录入的结果三大功能。对应第 \ref{api}节接口文档的前6个后端api。
 
-线上第一版，实现了小组长选择所在的小组，添加流动志愿者录入信息，查看录入的结果三大功能。对应
-\href{doc.md}{doc} 的前6个后端api（后面有完善）。
-
-\hypertarget{v0.5-3ux670827ux65e5}{%
-\subsection{v0.5 (3月27日)}\label{v0.5-3ux670827ux65e5}}
-
+\item[v0.5 (3月27日)]
 针对有的小组长对于某个录入志愿者有遗漏的问题，增加补录志愿者的功能
 
-\hypertarget{v0.6-3ux670829ux65e5}{%
-\subsection{v0.6 (3月29日)}\label{v0.6-3ux670829ux65e5}}
-
+\item[v0.6 (3月29日)]
 增加特色活动的列表和详情的展示页面
 
-\hypertarget{v0.7-3ux670829ux65e5}{%
-\subsection{v0.7 (3月29日)}\label{v0.7-3ux670829ux65e5}}
-
+\item[v0.7 (3月29日)]
 针对有的小组长录错志愿者的问题，增加从活动中删除选定学生的功能
 
-\hypertarget{v0.8-4ux67081ux65e5}{%
-\subsection{v0.8 (4月1日)}\label{v0.8-4ux67081ux65e5}}
-
+\item[v0.8 (4月1日)]
 \begin{itemize}
 \item
   数据库支持2018秋季学期志愿者录入
@@ -249,28 +403,18 @@ school只能从五个学校的代号里选取 返回 excel
   因为2019春季学期有的固定志愿者调整了固定服务时间，前端增加改变固定志愿者的组别的功能
 \end{itemize}
 
-\hypertarget{v0.9-4ux67082ux65e5}{%
-\subsection{v0.9 (4月2日)}\label{v0.9-4ux67082ux65e5}}
-
+\item[v0.9 (4月2日)]
 增加动态统计各校志愿者的功能
-\hypertarget{v1.0-4ux670815ux65e5}{%
-\subsection{v1.0 (4月15日)}\label{v1.0-4ux670815ux65e5}}
-
+\item[v1.0 (4月15日)]
 针对小组长录错流动志愿者姓名的问题增加删除流动志愿者的功能
 
-\hypertarget{v1.1-4ux670816ux65e5}{%
-\subsection{v1.1 (4月16日)}\label{v1.1-4ux670816ux65e5}}
-
+\item[v1.1 (4月16日)]
 针对有的固定志愿者会报名其他时间的流动岗位的问题完善调整志愿者组别的功能，原来是可以把一个固定志愿者由一个组改为另一个组，现在取消了这个功能(v0.8增加)，设置成为对于增加志愿者的组和删除志愿者的组两个功能。
 
-\hypertarget{v1.2-5ux670815ux65e5}{%
-\subsection{v1.2 (5月15日)}\label{v1.2-5ux670815ux65e5}}
-
+\item[v1.2 (5月15日)]
 增加导出本学期某学校志愿信息的功能。
 
-\hypertarget{v1.3.4-5ux670826ux65e5}{%
-\subsection{v1.3.4 (5月26日）}\label{v1.3.4-5ux670826ux65e5}}
-
+\item[v1.3.4 (5月26日)]
 增加权限功能，只有小组长可以录入数据，普通用户可以查看结果。
-
+\end{description}
 \end{document}
