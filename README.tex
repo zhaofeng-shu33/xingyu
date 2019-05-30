@@ -158,28 +158,30 @@ Object\}，0为没有错误，非0有msg详细信息。
   和小组名称(name)(string)；以及学生名字列表(student\_list:{[}`name\_1',`name\_2'{]})，其中学生名字的列表为要
   删除的同学，允许同学之前没参加过该活动，此时也不会报错。 返回结果 err
   = 5 时表示该活动不存在。
-\end{enumerate}
 
-11 更改志愿者的组别信息 POST 方法到
+\item 更改志愿者的组别信息 POST 方法到
 /xingyu/modify\_student\_group.php?action=add 如果action=add
 是添加一个新的组别，如果action=delete 是删除这个组别（目前没有约束）。
 (JSON格式数据）必有参数为 student\_name(string),
 group\_id(int)，group\_id \textgreater{} 0.
 
-12 获取五校统计信息 GET 方法到 /xingyu/get\_statistics.php 返回
+\item 获取五校统计信息 GET 方法到 /xingyu/get\_statistics.php 返回
 JSON格式数据
 {[}\{`school':`hit',`total\_student':23,`total\_count':45\}, \ldots{}{]}
 其中 total\_student 表示该校人数信息， total\_count 表示该校人次信息。
 
-13 删除流动志愿者 POST 方法到 /xingyu/delete\_student\_flow.php
+\item 删除流动志愿者 POST 方法到 /xingyu/delete\_student\_flow.php
 (JSON格式数据）必有参数为 student\_name(string),
 student\_school(enum)，school只能从五个学校的代号里选取。
 注意：如果这个志愿者有参加过活动，则必须先通过其他的接口取消他参加的活动才能删除。
 
-14 获取各校志愿者本学期的统计信息 GET 方法到
+\item 获取各校志愿者本学期的统计信息 GET 方法到
 /xingyu/download\_summary.php?student\_school,
 school只能从五个学校的代号里选取 返回 excel
 格式数据，如果学校未识别，返回的 body 为空。
+\end{enumerate}
+
+
 
 \hypertarget{ux767bux5f55ux76f8ux5173}{%
 \subsubsection{登录相关}\label{ux767bux5f55ux76f8ux5173}}

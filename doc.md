@@ -1,24 +1,52 @@
 # 接口文档
-返回值格式是JSON {err:0, msg:'', result: Object}，0为没有错误，非0有msg详细信息。
 
+## 基本约定
+
+1. 返回值格式是JSON {err:0, msg:'', result: Object}，0为没有错误，操作成功，非0有msg详细信息。
+result 的键值和具体请求有关，如果 result 有一个 key 是 `student_list`，那么有：
+```JavaScript
+result['student_list'] = [[name, school],[name_2, school_2]]
+```
+2. 学校名称与代号对照表
+
+| school | short_code |
+|--------|------------|
+| 哈工大 | hit        |
+| 深大   | szu        |
+| 清华   | thu        |
+| 北大   | pku        |
+| 南科大 | sust       |
+
+3. `$root` 表示应用部署的根URL。
+
+4. semester 这个参数为1表示2018年秋季学期，为2表示2019年春季学期，在 GET 和 POST 请求中，不提供这个参数默认为2。
+
+5. 小组名称
+## Web API
 1. 添加1个学生到2019年春季学期的流动组
-POST 方法到 /xingyu/add_student_flow.php
-(JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
+```shell
+curl -X POST $root/xingyu/add_student_flow.php -H "Content-Type: application/json" -d '{"student_name":"张三","student_school":"hit"}'
+```
+必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
 返回结果 err = 3 时表示该学生已经存在。
 
 2. 根据姓名的前几个汉字获取流动组学生列表不分页
-GET 方法到 /xingyu/get_student_list.php?student_name_prefix=[name]&semester=2
-semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
-返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
+```shell
+curl -X GET $root/xingyu/get_student_list.php?student_name_prefix=张&semester=2
+```
+返回结果为 `result['student_list']`
 
 3. 获取某个活动的固定志愿者
-GET 方法到 /xingyu/get_fixed_student.php?student_group=[group_name]&semester=2
-semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
-返回结果 ： result['student_list'] = [[name, school],[name_2, school_2]]
+```shell
+curl -X GET $root/xingyu/get_fixed_student.php?student_group=[group_name]&semester=2
+```
+返回结果为 `result['student_list']`
 
 4. 批量添加某个活动参与的全部学生
-POST 方法到 /xingyu/add_activity.php
-(JSON格式数据）必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
+```shell
+curl -X POST $root/xingyu/add_activity.php -H "Content-Type: application/json" -d '{"week":3,"name":"周二下午", "student_list":["张三"]}'
+```
+必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
 可选参数为semester, semester=1表示2018年秋季学期，=2表示2019年春季学期，不提供这个参数默认为2。
 
 返回结果 err = 5 时表示该活动已经存在。
@@ -57,22 +85,22 @@ POST 方法到 /xingyu/remote_activity_student.php
 删除的同学，允许同学之前没参加过该活动，此时也不会报错。
 返回结果 err = 5 时表示该活动不存在。
 
-11 更改志愿者的组别信息
+11. 更改志愿者的组别信息
 POST 方法到 /xingyu/modify_student_group.php?action=add
 如果action=add 是添加一个新的组别，如果action=delete 是删除这个组别（目前没有约束）。
 (JSON格式数据）必有参数为 student_name(string), group_id(int)，group_id > 0.
 
-12 获取五校统计信息
+12. 获取五校统计信息
 GET 方法到 /xingyu/get_statistics.php
 返回 JSON格式数据 [{'school':'hit','total_student':23,'total_count':45}, ...]
 其中 total_student 表示该校人数信息， total_count 表示该校人次信息。
 
-13 删除流动志愿者
+13. 删除流动志愿者
 POST 方法到 /xingyu/delete_student_flow.php
 (JSON格式数据）必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
 注意：如果这个志愿者有参加过活动，则必须先通过其他的接口取消他参加的活动才能删除。
 
-14 获取各校志愿者本学期的统计信息
+14. 获取各校志愿者本学期的统计信息
 GET 方法到 /xingyu/download_summary.php?student_school, school只能从五个学校的代号里选取
 返回 excel 格式数据，如果学校未识别，返回的 body 为空。
 
