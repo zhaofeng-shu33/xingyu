@@ -25,6 +25,7 @@ create table xingyu_activity(
     id int primary key auto_increment,
     name varchar(20),
     location varchar(10) not null,
+    institution varchar(4),
     time date not null,
 	special boolean default false
 );
