@@ -50,3 +50,6 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 ## v1.2 (5月15日)
 增加导出本学期某学校志愿信息的功能。
+
+## v1.3.4 (5月26日）
+增加权限功能，只有小组长可以录入数据，普通用户可以查看结果。
