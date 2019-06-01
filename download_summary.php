@@ -24,7 +24,7 @@ if($school == '童伴时光'){
 		->setCellValue('D1', '活动时间')
 		->setCellValue('E1', '活动地点');
 	$school_map = array('thu' => '清华', 'pku' => '北大', 'hit' => '哈工大', 'sust' => '南科大', 'szu' => '深大');
-	$sql = "SELECT s.name, s.school, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and s.school = '" . $school . "' and a.institution = '童伴时光'";
+	$sql = "SELECT s.name, s.school, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and a.institution = '童伴时光'";
 	$res=mysqli_query($db, $sql) or die(mysqli_error($db));
 	$rows = mysqli_fetch_all($res);
 	for($i=0; $i<count($rows); $i++){
