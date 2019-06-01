@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 JpGraph\JpGraph::load();
 JpGraph\JpGraph::module('bar');
-
+JpGraph\JpGraph::module('line');
 include_once 'mysql.php';
 
 $plot_type = $_GET['type'];
@@ -12,14 +12,15 @@ if($plot_type != 'bar' && $plot_type != 'line'){
 }
 $graph = new Graph(400, 250);
 $graph->SetScale('textlin');
-$graph->xaxis->SetTickLabels(array('1', '2', '3', '4', '5', '6', '7', '8-9', '10-14', '15+'));
 $db = getDb();
+$graph->title->SetFont(FF_CHINESE, FS_NORMAL, 16);
+$graph->xaxis->title->SetFont(FF_CHINESE, FS_NORMAL, 10);
+$graph->yaxis->title->SetFont(FF_CHINESE, FS_NORMAL, 10);
+          
 if($plot_type == 'bar'){
-	$graph->title->SetFont(FF_CHINESE, FS_NORMAL, 16);
+    $graph->xaxis->SetTickLabels(array('1', '2', '3', '4', '5', '6', '7', '8-9', '10-14', '15+'));
     $graph->title->Set('星语志愿者参与活动次数统计图');
-	$graph->xaxis->title->SetFont(FF_CHINESE, FS_NORMAL, 10);
     $graph->xaxis->title->Set('次');
-	$graph->yaxis->title->SetFont(FF_CHINESE, FS_NORMAL, 10);
     $graph->yaxis->title->Set('人');
 	$sql = 'select times, count(times) from (select s.name, count(s.id) as times from '.getTablePrefix().'_student as s, '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where s.id = sa.student_id and a.id = sa.activity_id group by s.name order by count(s.id) desc) as old group by times';
 	$res = mysqli_query($db, $sql) or die(mysqli_error($db));
@@ -47,6 +48,15 @@ if($plot_type == 'bar'){
     
 	$barplot = new BarPlot($data);
 	$graph->Add($barplot);
+}
+else{
+    $graph->title->Set('星语志愿者参与活动人数变化图');
+    $graph->xaxis->title->Set('周');
+    $graph->yaxis->title->Set('人');
+    $sql = '';
+    $data = array();
+    $lineplot->Add($data);
+    $graph->Add($lineplot);	
 }
 $graph->Stroke();
 ?>
