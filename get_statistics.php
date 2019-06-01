@@ -25,6 +25,6 @@ $row = mysqli_fetch_assoc($res);
 $institution['total_student'] = $row['c'];
 
 // special treatment, don't use exit_json function
-echo json_encode(array('err'=>$err, 'msg'=>$msg , 'result'=>$result, 'institution'=>$institution));
+echo json_encode(array('err'=>0, 'msg'=>'' , 'result'=>$data, 'institution'=>$institution));
 exit();
 ?>
