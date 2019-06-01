@@ -1,33 +1,40 @@
 <!--结果展示页面-->
-<view class="container">
-      <navigator url="/pages/result/statistics">
-        <button class="weui-btn" type="secondary">统计数据查看</button>
-      </navigator>
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">第</view>
-        </view>
-      <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="深大校历周数" value="{{week}}" bindinput="setweek"/>          
+<view class="page">
+    <view class="weui-flex xingyu-select">
+      <view class="weui-flex__item">
+        <navigator url="/pages/result/statistics">
+          <button class="weui-btn" type="secondary">统计数据查看</button>
+        </navigator>
       </view>
-      <view class="weui-cell__ft"> <view class="weui-label">周</view></view>
+      <view class="weui-flex__item">
+        <navigator url="/pages/result/special_activity">
+          <button class="weui-btn" type="secondary">拓展活动查询</button>
+        </navigator>
       </view>
+    </view>  
 
-  <view>
+  <view class="weui-flex">
+    <view class="weui-flex__item">
+      <view class="placeholder">
             <picker bindchange="bindPickerChange" value="{{groupIndex}}" range="{{group_list}}">
                 <button type="default">{{group_name}}</button>                
             </picker>
+      </view>
+    </view>
+    <view class="weui-flex__item">
+      <view class="weui-cell weui-cell_input xingyu-week">
+        <view>第</view>
+        <input class="weui-input placeholder" placeholder="深大校历" value="{{week}}" bindinput="setweek"/>          
+        <view>周</view>
+      </view>    
+    </view>
   </view>
-    <view class="weui-btn-area weui-flex">
+
+
         <button class="weui-btn" type="primary" bindtap="search">常规活动查询</button>
-        <navigator url="/pages/result/special_activity">
-          <button class="weui-btn" type="secondary">特色活动查询</button>
-        </navigator>
-    </view>  
 
 
    <!--列表展示全部志愿者 -->
-   全部志愿者
   <view class="weui-cells weui-cells_after-title">
     <view wx:for="{{group_data}}" wx:key="value">
     <label  class="weui-cell weui-check__label">

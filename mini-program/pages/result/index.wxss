@@ -1,1 +1,13 @@
 /* pages/result/index.wxss */
+.xingyu-week{
+  font-size:18px;
+  background-color: #F8F8F8;
+  border-radius:5px;
+  border: 1px solid #DEDEDE;
+}
+.placeholder{
+  text-align: center;
+}
+.xingyu-select{
+  margin-bottom: 10px;
+}

@@ -1,10 +1,23 @@
 <!--index.wxml-->
-<view class="container">
-  <view>
+<view class="page">
+  <view class="weui-flex xingyu-select">
+    <view class="weui-flex__item">
+      <view class="placeholder">
             <picker bindchange="bindPickerChange" value="{{groupIndex}}" range="{{group_list}}">
                 <button type="default">{{group_name}}</button>                
             </picker>
+      </view>
+    </view>
+    <view class="weui-flex__item">
+      <view class="weui-cell weui-cell_input xingyu-week">
+        <view>第</view>
+        <input class="weui-input placeholder" placeholder="深大校历" value="{{week}}" bindinput="setweek"/>          
+        <view>周</view>
+      </view>    
+    </view>
   </view>
+
+
   <!--列表展示固定志愿者 -->
   <view class="weui-cells weui-cells_after-title">
     <checkbox-group bindchange="checkboxChange">
@@ -44,7 +57,7 @@
                 </label>
             </view>
             <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
-            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="addNew">录入流动志愿者</view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="addNew">添加流动志愿者</view>
         </view>
   <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell" wx:for="{{search_student_list}}" wx:key="name">
@@ -53,21 +66,13 @@
           <view class="weui-cell__ft">{{item.school}}</view>
       </view>
   </view>
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">第</view>
-        </view>
-      <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="深大校历周数" value="{{week}}" bindinput="setweek"/>          
-      </view>
-      <view class="weui-cell__ft"> <view class="weui-label">周</view></view>
-      </view>
+
     <view class="weui-btn-area">
         <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="submit_wrapper">添加活动</button>
         <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="append_wrapper">补录学生</button>
+    <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="delete_wrapper">从活动中删除选定学生   </button>
     </view>  
     
 
 
-    <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="delete_wrapper">从活动中删除选定学生</button>
 </view>
