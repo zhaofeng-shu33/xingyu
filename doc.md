@@ -100,7 +100,7 @@ curl -X POST $root/xingyu/modify_student_group.php?action=add -H "Content-Type: 
 必有参数为 student_name(string), group_id(int)，要求 group_id > 0.
 `action=delete`情况下，返回结果 err = 5 时表示该学生不属于 id 为传递的 group_id 的组。
 
-12. 获取五校统计信息
+12. 获取五校（或者参加童伴时光机构）统计信息
 ```shell
 curl -X GET $root/xingyu/get_statistics.php
 ```
@@ -115,7 +115,7 @@ curl -X POST $root/xingyu/delete_student_flow.php -H "Content-Type: application/
 返回结果 err = 4 时表示该学生参与过活动，无法删除。
 注意：如果这个志愿者有参加过活动，则必须先通过其他的接口取消他参加的活动才能删除。
 
-14. 获取各校志愿者本学期的统计信息
+14. 获取各校志愿者本学期的统计信息或者参加童伴时光机构志愿活动的志愿者统计信息
 ```shell
 curl -X GET $root/xingyu/download_summary.php?student_school=hit
 ```
