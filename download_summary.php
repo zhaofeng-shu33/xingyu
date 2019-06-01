@@ -32,7 +32,7 @@ if($school == '童伴时光'){
 		->setCellValue('A' . strval($i+2), $rows[$i][0])
 		->setCellValue('B' . strval($i+2), $school_map[$rows[$i][1]])
 		->setCellValue('C' . strval($i+2), $rows[$i][2])
-		->setCellValue('D' . strval($i+2), $rows[$i][3]);
+		->setCellValue('D' . strval($i+2), $rows[$i][3])
 		->setCellValue('E' . strval($i+2), $rows[$i][4]);
 	}
 
