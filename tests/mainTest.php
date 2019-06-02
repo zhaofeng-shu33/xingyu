@@ -10,9 +10,10 @@ class mainTest extends TestCase
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->root . 'add_student_flow.php');
         curl_setopt($ch, CURLOPT_POST, 1);   
-        $payload = json_encode( array( 'student_name'=> '张三', 'student_school'=>'hit' ) );
+        $payload = json_encode( array( 'student_name'=> '张三', 'student_school'=>'hit', 'openid'=>'abc' ) );
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
         $server_output = curl_exec($ch);
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out['err'], 0);

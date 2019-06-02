@@ -1,0 +1,1 @@
+insert into xingyu_student (name, school, wechat_openid) values ('赵丰', 'thu', 'abc');

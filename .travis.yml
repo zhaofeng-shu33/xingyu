@@ -17,6 +17,7 @@ before_script:
     - sudo cp -f travis-ci-apache.conf /etc/apache2/sites-available/000-default.conf
     - sudo service apache2 restart
     - mysql < db.sql
+    - mysql xingyu < tests/db_init.sql
 install:
     - cp backend/mysql-sample.php backend/mysql.php
 script:
