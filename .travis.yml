@@ -7,11 +7,17 @@ services:
     - mysql
 before_script:
     - sudo apt-get install apache2 php-fpm
-    - curl -i http://localhost
-    - echo "<?php>phpinfo();<?>" > info.php
+    - curl -i http://localhost    
+    - echo "<?php\nphpinfo();\n?>" > info.php
+    - cat info.php
+    - ls -l | grep info.php
     - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place travis-ci-apache.conf
+    - cat travis-ci-apache.conf
+    - cat /etc/apache2/sites-available/000-default.conf
     - sudo cp -f travis-ci-apache.conf /etc/apache2/sites-available/000-default.conf
     - sudo service apache2 restart
     - cat /etc/apache2/sites-available/000-default.conf
     - curl -i http://localhost/xingyu/info.php
+    - sudo cp info.php /var/www/html/
+    - curl -i http://localhost/info.php
     - mysql < db.sql
