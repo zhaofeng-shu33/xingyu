@@ -1,11 +1,17 @@
+language: php
 os: linux
 sudo: required
 dist: xenial
 services:
     - mysql
 before_script:
-    - sudo apt-get install apache2 php7.0-fpm libapache2-mod-fastcgi php7.0
-    - sudo a2enmod actions fastcgi alias
+    - sudo apt-get install apache2 libapache2-mod-fastcgi
+    - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+    - sudo a2enmod rewrite actions fastcgi alias
+    - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - sudo sed -i -e "s,www-data,travis,g" /etc/apache2/envvars
+    - sudo chown -R travis:travis /var/lib/apache2/fastcgi
+    - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
     - curl -i http://localhost    
     - printf "<?php\nphpinfo();\n?>" > info.php
     - cat info.php
@@ -23,4 +29,5 @@ before_script:
     - curl -i http://localhost/xingyu/info.php
     - sudo cp info.php /var/www/html/
     - curl -i http://localhost/info.php
+    - sudo cat /var/log/apache2/error.log
     - mysql < db.sql
