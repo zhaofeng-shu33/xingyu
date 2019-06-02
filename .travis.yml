@@ -1,0 +1,7 @@
+language: php
+os: linux
+sudo: required
+dist: xenial
+before_script:
+    - sudo apt-get install apache2 libapache2-mod-fastcgi
+

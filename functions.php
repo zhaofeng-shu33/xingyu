@@ -14,4 +14,8 @@ function is_admin($db, $openid)
     $row_p = mysqli_fetch_assoc($res_p);
     return ($row_p['id'] != null);
 }
+
+function get_current_semester($db){
+	return 2;
+}
 ?>

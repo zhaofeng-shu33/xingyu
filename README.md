@@ -82,3 +82,7 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 ## v1.3.4 (5月26日）
 增加权限功能，只有小组长可以录入数据，普通用户可以查看结果。
+
+## v1.4 （6月1日）
+* 增加机构统计信息、下载excel的功能；
+* 界面布局调整
