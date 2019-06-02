@@ -3,24 +3,60 @@
 require 'vendor/autoload.php';
 JpGraph\JpGraph::load();
 JpGraph\JpGraph::module('bar');
+JpGraph\JpGraph::module('line');
+include_once 'mysql.php';
+
 $plot_type = $_GET['type'];
 if($plot_type != 'bar' && $plot_type != 'line'){
     exit();
 }
 $graph = new Graph(400, 250);
 $graph->SetScale('textlin');
-$graph->xaxis->SetTickLabels(array('1', '2', '3', '4', '5', '6', '7', '8-9', '10-14', '15+'));
+$db = getDb();
+$graph->title->SetFont(FF_CHINESE, FS_NORMAL, 16);
+$graph->xaxis->title->SetFont(FF_CHINESE, FS_NORMAL, 10);
+$graph->yaxis->title->SetFont(FF_CHINESE, FS_NORMAL, 10);
+          
 if($plot_type == 'bar'){
-	$graph->title->SetFont(FF_DV_SANSSERIF, FS_NORMAL, 16);
+    $graph->xaxis->SetTickLabels(array('1', '2', '3', '4', '5', '6', '7', '8-9', '10-14', '15+'));
     $graph->title->Set('星语志愿者参与活动次数统计图');
-	$graph->xaxis->SetFont(FF_DV_SANSSERIF, FS_NORMAL, 12);
     $graph->xaxis->title->Set('次');
-	$graph->yaxis->SetFont(FF_DV_SANSSERIF, FS_NORMAL, 12);
     $graph->yaxis->title->Set('人');
-	$sql = 'select times, count(times) from (select s.name, count(s.id) as times from xingyu_student as s, xingyu_activity as a, xingyu_student_activity as sa where s.id = sa.student_id and a.id = sa.activity_id group by s.name order by count(s.id) desc) as old group by times';
-	$data = array(92, 31, 16, 10, 8, 13, 6, 6, 5, 4);
+	$sql = 'select times, count(times) from (select s.name, count(s.id) as times from '.getTablePrefix().'_student as s, '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where s.id = sa.student_id and a.id = sa.activity_id group by s.name order by count(s.id) desc) as old group by times';
+	$res = mysqli_query($db, $sql) or die(mysqli_error($db));
+    $rows = mysqli_fetch_all($res);
+    $data = array();
+    for($i=0; $i<7;$i++){
+        array_push($data, intval($rows[$i][1]));
+    }
+    array_push($data, intval($rows[7][1]) + intval($rows[8][1])); // 8-9
+    $cnt = 0;
+    $offset = 14;
+    for($i=9; $i<14; $i++){
+        if($rows[$i][0]>14){
+            $offset = $i;
+            break;
+        }
+        $cnt += intval($rows[$i][1]);
+    }
+    array_push($data, $cnt); // 10-14
+    $cnt = 0;
+    for($i=$offset; $i<count($rows); $i++){
+        $cnt += intval($rows[$i][1]);
+    }
+    array_push($data, $cnt); // 15+
+    
 	$barplot = new BarPlot($data);
 	$graph->Add($barplot);
+}
+else{
+    $graph->title->Set('星语志愿者参与活动人数变化图');
+    $graph->xaxis->title->Set('周');
+    $graph->yaxis->title->Set('人');
+    $sql = '';
+    $data = array();
+    $lineplot->Add($data);
+    $graph->Add($lineplot);	
 }
 $graph->Stroke();
 ?>
