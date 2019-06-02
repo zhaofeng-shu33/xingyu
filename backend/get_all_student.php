@@ -3,6 +3,8 @@ include_once 'mysql.php';
 include_once 'functions.php';
 $name = $_GET['student_group'];
 $week = $_GET['week'];
+$db = getDb();
+
 if($name == null && $week == null){
     // general activity query
     $activity_name = $_GET['name'];
@@ -23,7 +25,7 @@ if($name == null && $week == null){
 else{
 	$semester = $_GET['semester'];
 	if($semester == null || $semester == ''){
-		$semester = get_current_semester();
+		$semester = get_current_semester($db);
 	}
 	else{
 		$semester =  intval($semester);
@@ -55,7 +57,6 @@ else{
     $date_str = date_format($date, 'Y-m-d');
     $sql = 'select id from '.getTablePrefix()."_activity where location = '$location' and time = '$date_str' and name= '$name'";
 }
-$db = getDb();
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
 if($row['id'] == null){

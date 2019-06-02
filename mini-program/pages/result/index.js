@@ -6,11 +6,14 @@ Page({
    * Page initial data
    */
   data: {
-    group_list: ['1', '2'],
-    groupIndex: 0,
+    group_list: [['1', '2'],['1','2']],
+    groupIndex: [0, 0],
     group_name: '未选择小组',
     group_data: [],
-    week:''
+    semester_dic: [],
+    week:'',
+    semester_id: 1,
+    semester_name_to_id: {}
   },
   setweek: function (e) {
     if (parseInt(e.detail.value) == NaN)
@@ -39,7 +42,7 @@ Page({
     var that = this;
     wx.request({
       url: app.ServerUrl + '/get_all_student.php',
-      data: { week: that.data.week, student_group: that.data.group_name },
+      data: { week: that.data.week, student_group: that.data.group_name, semester: that.data.semester_id },
       success(res) {
         if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
@@ -62,31 +65,58 @@ Page({
     })
   },
   bindPickerChange: function (e) {
+    var group_index = e.detail.value;
+    var semester_name = this.data.group_list[0][group_index[0]];
     this.setData({
-      groupIndex: e.detail.value,
-      group_name: this.data.group_list[e.detail.value][0]
+      groupIndex: group_index,
+      group_name: this.data.group_list[1][group_index[1]],
+      semester_id: this.data.semester_name_to_id[semester_name]
     })
-    var group_name = this.data.group_list[e.detail.value][0]
-
   },    
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
-    if(app.group_list){
-      this.setData({group_list: app.group_list})
-      return
+  bindMultiPickerColumnChange: function(e){
+    var data = {
+      group_list: this.data.group_list,
+      groupIndex: this.data.groupIndex
     }
+    data.groupIndex[e.detail.column] = e.detail.value;
+    var semester_list = this.data.group_list[0];
+    if(e.detail.column == 0){
+      var semester_name = semester_list[e.detail.value];
+      var semester_group_list = this.data.semester_dic[semester_name];
+      data.group_list = [semester_list, semester_group_list];
+      data.groupIndex[1] = 0;
+    }
+    this.setData(data);
+  },
+  onLoad: function (options) {
     var that = this;
     // request group name list
     wx.request({
-      url: app.ServerUrl + '/get_group_list.php',
+      url: app.ServerUrl + '/get_group_list.php?all=1',
       success(res) {
         if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else {
-          that.setData({ group_list: res.data.result.group_list })
-          app.group_list = res.data.result.group_list
+          var semester_dic = {};
+          var semester_name_to_id = {};
+          var group_list_data = res.data.result.group_list;
+          for(var i=0; i<group_list_data.length; i++){
+            var semester_name = group_list_data[i][2];
+            if(semester_dic[semester_name] == undefined){
+              semester_dic[semester_name] = [];
+              semester_name_to_id[semester_name] = group_list_data[i][3];
+            }
+            var group_name = group_list_data[i][1];
+            if (group_name == '流动')
+              continue;
+            semester_dic[semester_name].push(group_name);
+          }
+          var semester_list = [];
+          for(var i in semester_dic){
+            semester_list.push(i);
+          }
+          var first_semester_group_list = semester_dic[semester_list[0]];
+          that.setData({ group_list: [semester_list, first_semester_group_list], semester_dic, semester_name_to_id })
         }
       },
       fail(res) {
@@ -95,52 +125,4 @@ Page({
     })
   },
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
 })
