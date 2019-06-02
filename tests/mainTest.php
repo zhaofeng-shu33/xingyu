@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class mainTest extends TestCase
 {
-    private $root = 'http://localhost/xingyu/'
+    private $root = 'http://localhost/xingyu/';
     public function test_add_student_flow()
     {
         $ch = curl_init();
