@@ -52,9 +52,10 @@ curl -X POST $root/xingyu/add_activity.php -H "Content-Type: application/json" -
 
 5. 获取某学期小组列表
 ```shell
-curl -X GET $root/xingyu/get_group_list.php&semester=2
+curl -X GET $root/xingyu/get_group_list.php&semester=2&all=0
 ```
-返回结果为 `result['group_list'] = [[group_name_1],[group_name_2]]`
+如果all=1，忽略semester参数，返回结果为 `result['group_list'] = [[id_1, group_name_1, semester_1],[id_2, group_name_2, semester_2]]`
+否则，根据semester参数，返回结果为 `result['group_list'] = [[group_name_1],[group_name_2]]`
 
 6. 获取某个活动的全部志愿者（用于提交成功后查看结果）
 ```shell
