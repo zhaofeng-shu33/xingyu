@@ -41,7 +41,7 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 下载 GitHub 仓库子目录
 
 ## 后端配置
-可使用本地的后端进行开发，数据库初始化文件可以下载 [dump.sql](https://www.leidenschaft.cn/xingyu/mysql_dump.sql)。
+可使用本地的后端进行开发。
 
 将 `mysql-sample.php` 改为 `mysql.php`，并相应地配置里面的信息。
 
