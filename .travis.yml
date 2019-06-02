@@ -1,14 +1,13 @@
-language: php
-php: 7.0
 os: linux
 sudo: required
 dist: xenial
 services:
     - mysql
 before_script:
-    - sudo apt-get install apache2 php-fpm
+    - sudo apt-get install apache2 php7.0-fpm libapache2-mod-fastcgi php7.0
+    - sudo a2enmod actions fastcgi alias
     - curl -i http://localhost    
-    - echo "<?php\nphpinfo();\n?>" > info.php
+    - printf "<?php\nphpinfo();\n?>" > info.php
     - cat info.php
     - ls -l | grep info.php
     - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place travis-ci-apache.conf
