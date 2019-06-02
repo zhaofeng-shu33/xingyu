@@ -1,5 +1,5 @@
 backend/mysql.php
-vendor/
+backend/vendor
 data.sql
 /mini-program/style
 .DS_Store
