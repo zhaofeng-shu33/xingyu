@@ -39,12 +39,6 @@ else{
     }
     if($name == '流动')
         exitJson(0, 'no result for flow',[]);
-    if(strpos($name, '金色') == FALSE && $name != '周二下午'){
-        $location = '童伴时光';
-    }
-    else{
-        $location = '金色年华';
-    }
     
     // convert szu calendar to 阳历
     $sql_get_start_time = 'select start_time from '.getTablePrefix()."_semester where id = $semester";
@@ -55,7 +49,7 @@ else{
     $interval_int = 7 * (intval($week) - 1);
     date_add($date, date_interval_create_from_date_string($interval_int." days"));
     $date_str = date_format($date, 'Y-m-d');
-    $sql = 'select id from '.getTablePrefix()."_activity where location = '$location' and time = '$date_str' and name= '$name'";
+    $sql = 'select id from '.getTablePrefix()."_activity where time = '$date_str' and name= '$name'";
 }
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);

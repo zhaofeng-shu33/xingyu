@@ -17,7 +17,10 @@
     <view class="weui-flex__item">
       <view class="placeholder">     
             <picker mode="multiSelector" bindchange="bindPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{groupIndex}}" range="{{group_list}}">
-                <button type="default">{{group_name}}</button>                
+                <button type="default" class="font16" wx:if="{{group_name.length == 8}}">                 
+                {{group_name}}</button>                
+                <button type="default" wx:else>
+                {{group_name}}</button>                
             </picker>
       </view>
     </view>
