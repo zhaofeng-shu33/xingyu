@@ -47,6 +47,7 @@ $row = mysqli_fetch_assoc($res);
 if($row['id'] == null){
     exitJson(9, 'group not exists');
 }
+$group_id = $row['id'];
 if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
@@ -79,7 +80,7 @@ $row = mysqli_fetch_assoc($res);
 if($row['id'] != null){
     exitJson(5, 'activity already exists');
 }
-$sql = 'insert into '.getTablePrefix()."_activity (name, location, time, institution) values ('$name', '$location', '$date_str', '$location')";
+$sql = 'insert into '.getTablePrefix()."_activity (name, location, time, institution, group_id) values ('$name', '$location', '$date_str', '$location', $group_id)";
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $activity_id = mysqli_insert_id($db);
 foreach($list as $student){

@@ -6,7 +6,8 @@ flush privileges;
 use xingyu;
 create table xingyu_semester(
     id int primary key auto_increment,
-    name varchar(10)
+    name varchar(10),
+	start_time date not null
 );
 create table xingyu_group(
     id int primary key auto_increment,
@@ -18,7 +19,7 @@ create table xingyu_student(
     id int primary key auto_increment,
     name varchar(5) not null,
 	wechat_nickname varchar(20),
-	wechat_openid varchar(30)
+	wechat_openid varchar(30),
     school enum('thu', 'pku','hit','sust','szu') not null
 );
 create table xingyu_activity(
@@ -27,7 +28,9 @@ create table xingyu_activity(
     location varchar(10) not null,
     institution varchar(4),
     time date not null,
-	special boolean default false
+	special boolean default false,
+	group_id int default 1,
+	constraint group_constraint foreign key(group_id) REFERENCES xingyu_group (id) on delete cascade
 );
 create table xingyu_student_activity(
     id int primary key auto_increment,

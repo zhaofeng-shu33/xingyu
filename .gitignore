@@ -1,4 +1,4 @@
-mysql.php
+backend/mysql.php
 vendor/
 data.sql
 /mini-program/style

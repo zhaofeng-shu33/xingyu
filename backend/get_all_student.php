@@ -21,6 +21,14 @@ if($name == null && $week == null){
     $sql = 'select id from '.getTablePrefix()."_activity where location = '$activity_location' and time = '$activity_time' and name= '$activity_name'";
 }
 else{
+	$semester = $_GET['semester'];
+	if($semester == null || $semester == ''){
+		$semester = get_current_semester();
+	}
+	else{
+		$semester =  intval($semester);
+	}
+
     if($name == null || $name == ''){
         exitJson(1, 'null group');
     }
@@ -37,8 +45,11 @@ else{
     }
     
     // convert szu calendar to 阳历
-    // 2019-3-4 ~ week 1
-    $date=date_create("2019-3-4");
+    $sql_get_start_time = 'select start_time from '.getTablePrefix()."_semester where id = $semester";
+	$res = mysqli_query($db, $sql_get_start_time) or die(mysqli_error($db));
+	$row = mysqli_fetch_assoc($res);
+
+    $date=date_create($row['start_time']);
     $interval_int = 7 * (intval($week) - 1);
     date_add($date, date_interval_create_from_date_string($interval_int." days"));
     $date_str = date_format($date, 'Y-m-d');

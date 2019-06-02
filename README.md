@@ -1,6 +1,7 @@
+[![Travis Build](https://travis-ci.com/zhaofeng-shu33/xingyu.svg?branch=master)](https://travis-ci.com/zhaofeng-shu33/xingyu)
 # 介绍
-![demo](./demo.gif)
-![qr_code](qr_code.jpg)
+![demo](assets/demo.gif)
+![qr_code](assets/qr_code.jpg)
 ## 开发背景
 星语志愿项目是大学生关爱自闭症儿童的志愿服务项目，希望通过小程序更方便组织人员统计志愿者的信息。更具体地说，是深圳市距离较近的五所高校团委下属的志愿组织（义工联）相互合作，统一志愿者招募和管理等方面的信息化工具。相关推送可参考：
 
@@ -45,13 +46,13 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 将 `mysql-sample.php` 改为 `mysql.php`，并相应地配置里面的信息。
 
 ## 接口文档
-见 [doc](doc.md)。
+见 [doc](doc/doc.md)。
 
 # CHANGELOG
 版本以小程序的线上版本为准
 
 ## v0.3 (3月26日)
-线上第一版，实现了小组长选择所在的小组，添加流动志愿者录入信息，查看录入的结果三大功能。对应 [doc](doc.md) 的前6个后端api（后面有完善）。
+线上第一版，实现了小组长选择所在的小组，添加流动志愿者录入信息，查看录入的结果三大功能。对应 [doc](doc/doc.md) 的前6个后端api（后面有完善）。
 
 ## v0.5 (3月27日)
 针对有的小组长对于某个录入志愿者有遗漏的问题，增加补录志愿者的功能
@@ -69,7 +70,7 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 ## v0.9 (4月2日)
 增加动态统计各校志愿者的功能，下图是4月14日的结果：
-![各校志愿者](volunteer_statistics.jpg)
+![各校志愿者](assets/volunteer_statistics.jpg)
 
 ## v1.0 (4月15日)
 针对小组长录错流动志愿者姓名的问题增加删除流动志愿者的功能
@@ -82,3 +83,7 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 ## v1.3.4 (5月26日）
 增加权限功能，只有小组长可以录入数据，普通用户可以查看结果。
+
+## v1.4 （6月1日）
+* 增加机构统计信息、下载excel的功能；
+* 界面布局调整

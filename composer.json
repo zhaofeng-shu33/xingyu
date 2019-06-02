@@ -1,5 +1,6 @@
 {
 "require":{
-    "phpoffice/phpspreadsheet": "1.*.*"
+    "phpoffice/phpspreadsheet": "1.*.*",
+        "jpgraph/jpgraph": "^4.0"
 }
 }
