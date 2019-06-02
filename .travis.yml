@@ -12,22 +12,11 @@ before_script:
     - sudo sed -i -e "s,www-data,travis,g" /etc/apache2/envvars
     - sudo chown -R travis:travis /var/lib/apache2/fastcgi
     - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-    - curl -i http://localhost    
-    - printf "<?php\nphpinfo();\n?>" > info.php
-    - cat info.php
-    - ls -l | grep info.php
-    - cat travis-ci-apache.conf
-    - wc -l travis-ci-apache.conf
-    - cat travis-ci-apache.conf | grep "</VirtualHost>"
     - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place travis-ci-apache.conf
-    - cat travis-ci-apache.conf
-    - cat /etc/apache2/sites-available/000-default.conf
     - sudo cp -f travis-ci-apache.conf /etc/apache2/sites-available/000-default.conf
-    - sudo apachectl configtest
     - sudo service apache2 restart
-    - cat /etc/apache2/sites-available/000-default.conf
-    - curl -i http://localhost/xingyu/info.php
-    - sudo cp info.php /var/www/html/
-    - curl -i http://localhost/info.php
-    - sudo cat /var/log/apache2/error.log
     - mysql < db.sql
+install:
+    - cp mysql-sample.php mysql.php
+script:
+    - echo "done"
