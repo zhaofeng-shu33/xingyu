@@ -58,7 +58,7 @@ curl -X GET $root/xingyu/get_group_list.php&semester=2
 
 6. 获取某个活动的全部志愿者（用于提交成功后查看结果）
 ```shell
-curl -X GET "$root/xingyu/get_all_student.php?student_group=周二下午&week=4" # 常规活动请求格式
+curl -X GET "$root/xingyu/get_all_student.php?student_group=周二下午&week=4&semester=2" # 常规活动请求格式
 curl -X GET "$root/xingyu/get_all_student.php?name=前期体验活动&location=金色年华&time=2019-03-05" # 常规和扩展活动请求格式
 ```
 返回结果为 `result['student_list']`
