@@ -35,9 +35,9 @@ function getTablePrefix(){
 }
 
 function getAppId(){
-	return '微信小程序appid';
+	return 'miniprogram appid';
 }
 
 function getAppSecret(){
-	return '微信小程序appsecret';
+	return 'miniprogram appsecret';
 }
