@@ -29,7 +29,7 @@ class mainTest extends TestCase
 		$this->assertEquals($httpcode, 200);
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out->err, 0);	
-		$group_list = $json_out->group_list;
+		$group_list = $json_out->result->group_list;
 		$this->assertEquals(count($group_list), 4);
 	}
 }
