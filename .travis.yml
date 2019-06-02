@@ -1,4 +1,5 @@
 language: php
+php: 7.2
 os: linux
 sudo: required
 dist: xenial
@@ -18,4 +19,5 @@ before_script:
     - mysql < db.sql
 install:
     - cp mysql-sample.php mysql.php
-    
+script:
+    - phpunit tests
