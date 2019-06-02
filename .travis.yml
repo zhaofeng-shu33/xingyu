@@ -1,11 +1,16 @@
 language: php
+php: 7.0
 os: linux
 sudo: required
 dist: xenial
+services:
+    - mysql
 before_script:
     - sudo apt-get install apache2 php-fpm
     - curl -i http://localhost
     - echo "<?php>phpinfo();<?>" > info.php
     - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place travis-ci-apache.conf
     - sudo cp -f travis-ci-apache.conf /etc/apache2/sites-available/000-default.conf
+    - cat /etc/apache2/sites-available/000-default.conf
     - curl -i http://localhost/xingyu/info.php
+    - mysql < db.sql
