@@ -18,6 +18,6 @@ before_script:
     - sudo service apache2 restart
     - mysql < db.sql
 install:
-    - cp mysql-sample.php mysql.php
+    - cp backend/mysql-sample.php backend/mysql.php
 script:
     - phpunit tests

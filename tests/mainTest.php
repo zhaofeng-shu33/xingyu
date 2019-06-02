@@ -8,7 +8,7 @@ class mainTest extends TestCase
     public function test_add_student_flow()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $root . 'add_student_flow.php');
+        curl_setopt($ch, CURLOPT_URL, $this->root . 'add_student_flow.php');
         curl_setopt($ch, CURLOPT_POST, 1);   
         $payload = json_encode( array( 'student_name'=> '张三', 'student_school'=>'hit' ) );
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
