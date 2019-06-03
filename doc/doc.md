@@ -122,6 +122,13 @@ curl -X GET $root/xingyu/download_summary.php?student_school=hit
 ```
 返回 excel 格式数据，如果学校不在代号列表里面，返回的 body 为空。
 
+15. 数据可视化接口
+```shell
+curl -X GET $root/xingyu/plot.php?type=bar
+curl -X GET $root/xingyu/plot.php?type=line&semester=2
+```
+bar plot 绘制所有学期的次数-人数统计图， line plot 绘制某学期人数随周数变化图。 返回 png 格式的图片。
+
 ## 登录相关
 
 登录相关：第一次登录需同时完成1和2两步，假如只完成一步也算第一次登录失败。后面登录只需完成第1步。
