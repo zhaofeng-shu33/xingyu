@@ -87,3 +87,6 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 ## v1.4 （6月1日）
 * 增加机构统计信息、下载excel的功能；
 * 界面布局调整
+
+## v1.5 （6月3日）
+增加常规活动跨学期查询的功能
