@@ -6,7 +6,8 @@
     "pages/result/special_activity",
     "pages/result/activity_detail",
     "pages/create/group_change",
-    "pages/result/statistics"
+    "pages/result/statistics",
+    "pages/result/visualization"
   ],
   "window": {
     "backgroundTextStyle": "light",

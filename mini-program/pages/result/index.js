@@ -10,10 +10,8 @@ Page({
     groupIndex: [0, 0],
     group_name: '未选择小组',
     group_data: [],
-    semester_dic: [],
     week:'',
-    semester_id: 1,
-    semester_name_to_id: {}
+    semester_id: 1
   },
   setweek: function (e) {
     if (parseInt(e.detail.value) == NaN)
@@ -70,7 +68,7 @@ Page({
     this.setData({
       groupIndex: group_index,
       group_name: this.data.group_list[1][group_index[1]],
-      semester_id: this.data.semester_name_to_id[semester_name]
+      semester_id: app.semester_name_to_id[semester_name]
     })
   },    
   bindMultiPickerColumnChange: function(e){
@@ -82,7 +80,7 @@ Page({
     var semester_list = this.data.group_list[0];
     if(e.detail.column == 0){
       var semester_name = semester_list[e.detail.value];
-      var semester_group_list = this.data.semester_dic[semester_name];
+      var semester_group_list = app.semester_dic[semester_name];
       data.group_list = [semester_list, semester_group_list];
       data.groupIndex[1] = 0;
     }
@@ -97,26 +95,16 @@ Page({
         if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else {
-          var semester_dic = {};
-          var semester_name_to_id = {};
-          var group_list_data = res.data.result.group_list;
-          for(var i=0; i<group_list_data.length; i++){
-            var semester_name = group_list_data[i][2];
-            if(semester_dic[semester_name] == undefined){
-              semester_dic[semester_name] = [];
-              semester_name_to_id[semester_name] = group_list_data[i][3];
-            }
-            var group_name = group_list_data[i][1];
-            if (group_name == '流动')
-              continue;
-            semester_dic[semester_name].push(group_name);
+          if(app.semester_dic == undefined){
+            var group_list_data = res.data.result.group_list;
+            app.set_semester_info(group_list_data);
           }
           var semester_list = [];
-          for(var i in semester_dic){
+          for(var i in app.semester_dic){
             semester_list.push(i);
           }
-          var first_semester_group_list = semester_dic[semester_list[0]];
-          that.setData({ group_list: [semester_list, first_semester_group_list], semester_dic, semester_name_to_id })
+          var first_semester_group_list = app.semester_dic[semester_list[0]];
+          that.setData({ group_list: [semester_list, first_semester_group_list]})
         }
       },
       fail(res) {

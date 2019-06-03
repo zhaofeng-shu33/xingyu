@@ -2,6 +2,9 @@
 <view class="page">
   <view class="page__hd">
     <view class="page__title">统计</view>
+        <navigator url="/pages/result/visualization" class="xingyu-vis">
+          <button class="weui-btn" type="secondary">可视化</button>
+        </navigator>    
   </view>
 
   <view class="weui-cells weui-cells_after-title" style="width:100%;">

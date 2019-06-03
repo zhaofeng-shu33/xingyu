@@ -1,0 +1,14 @@
+<!--pages/result/visualization.wxml-->
+<view class="page">
+<image src="{{bar_img_src}}">
+</image>
+
+<image src="{{line_img_src}}">
+</image>
+
+<view>
+      <picker bindchange="bindPickerChange" value="{{semesterIndex}}" range="{{semester_list}}">
+          <button type="default">{{semester_name}}</button>                
+      </picker>
+</view>
+</view>

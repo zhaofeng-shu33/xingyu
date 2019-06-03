@@ -7,7 +7,17 @@
   text-align:center;
   font-weight:bold;
   font-size:20px;
+  flex: 1 1 auto;
 }
 .xingyu-institution{
   font-size:16px; 
+}
+.page__hd{
+  display: flex;
+}
+.xingyu-vis{
+  flex: 0 1 auto;  
+}
+.xingyu-vis > button{
+  font-size:16px;
 }
