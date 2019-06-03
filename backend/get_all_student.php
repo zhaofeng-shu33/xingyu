@@ -41,11 +41,9 @@ else{
         exitJson(0, 'no result for flow',[]);
     
     // convert szu calendar to 阳历
-    $sql_get_start_time = 'select start_time from '.getTablePrefix()."_semester where id = $semester";
-	$res = mysqli_query($db, $sql_get_start_time) or die(mysqli_error($db));
-	$row = mysqli_fetch_assoc($res);
+    $start_time = get_semester_start_time($db, $semester);
 
-    $date=date_create($row['start_time']);
+    $date=date_create($start_time);
     $interval_int = 7 * (intval($week) - 1);
     date_add($date, date_interval_create_from_date_string($interval_int." days"));
     $date_str = date_format($date, 'Y-m-d');
