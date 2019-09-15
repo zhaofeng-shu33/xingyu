@@ -15,7 +15,7 @@ function is_admin($db, $openid)
     return ($row_p['id'] != null);
 }
 
-function get_current_semester($db){
+function get_current_semester($db=null){
 	return 2;
 }
 
