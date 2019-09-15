@@ -5,6 +5,12 @@ use PHPUnit\Framework\TestCase;
 class mainTest extends TestCase
 {
     private $root = 'http://localhost/xingyu/';
+    public function __construct()
+    {
+        if(getenv('XINGYU_ROOT')){
+            $root = getenv('XINGYU_ROOT');
+        }
+    }
     public function test_add_student_flow()
     {
         $ch = curl_init();
