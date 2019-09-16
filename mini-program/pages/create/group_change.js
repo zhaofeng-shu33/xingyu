@@ -116,6 +116,9 @@ Page({
     if (this.data.student_name == '') {
       error_msg = '请填写姓名'
     }
+    else if (this.data.group_name == '未选择小组') {
+      error_msg = '请选择小组'
+    }    
     if (error_msg != '') {
       wx.showToast({
         title: error_msg,
@@ -129,7 +132,7 @@ Page({
       method: 'POST',
       data: {
         student_name: that.data.student_name,
-        group_id: parseInt(that.data.groupIndex) + 1,
+        group_name: this.data.group_name,
         openid :openid
       },
       success(res) {
