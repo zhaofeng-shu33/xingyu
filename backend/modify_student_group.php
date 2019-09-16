@@ -5,8 +5,8 @@ $postdata=file_get_contents("php://input");
 
 $jsondata=json_decode($postdata);
 
-$group_id=$jsondata->group_id;
-$name=$jsondata->student_name;
+$group_id = isset($jsondata->group_id) ? $jsondata->group_id : null;
+$name = $jsondata->student_name;
 $openid = $jsondata->openid;
 $semester_id = isset($jsondata->semester) ? $jsondata->semester : null;
 $group_name = isset($jsondata->group_name) ? $jsondata->group_name : null;
