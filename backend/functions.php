@@ -26,4 +26,12 @@ function get_semester_start_time($db, $semester){
 
     return $row['start_time'];
 }
+
+function get_current_semester_group_id($db, $group_name){
+	$semester_id = get_current_semester();
+    $sql = 'select id from '.getTablePrefix()."_group where name = '$group_name' and semester_id = $semester_id";
+    $res=mysqli_query($db, $sql) or die(mysqli_error($db));    
+    $res = mysqli_fetch_assoc($res);
+	return $res['id'];
+}
 ?>

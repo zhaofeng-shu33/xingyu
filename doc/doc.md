@@ -28,7 +28,8 @@ result['student_list'] = [[name, school],[name_2, school_2]]
 curl -X POST $root/xingyu/add_student_flow.php -H "Content-Type: application/json" -d '{"student_name":"张三","student_school":"hit"}'
 ```
 必有参数为 student_name(string), student_school(enum)，school只能从五个学校的代号里选取。
-返回结果 err = 3 时表示该学生已经存在。
+如果学生不存在，自动创建该学生。
+返回结果 err = 3 时表示该学生已经有一个组，无法添加。
 
 2. 根据姓名的前几个汉字获取流动组学生列表不分页
 ```shell

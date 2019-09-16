@@ -1,3 +1,8 @@
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 insert into xingyu_student (name, school, wechat_openid) values ('赵丰', 'thu', 'abc');
 insert into xingyu_student (name, school, wechat_openid) values ('林粤', 'szu', '');
 
