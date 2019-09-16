@@ -109,6 +109,8 @@ curl -X POST $root/xingyu/modify_student_group.php?action=add -H "Content-Type: 
 必有参数为 student_name(string), group_name(string)，可选参数为semester(int)
 `action=delete`情况下，返回结果 err = 5 时表示该学生不属于 semester + group_name 对应的组。
 
+目前新旧 API 均可使用。
+
 12. 获取五校（或者参加童伴时光机构）统计信息
 ```shell
 curl -X GET $root/xingyu/get_statistics.php

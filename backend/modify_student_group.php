@@ -8,7 +8,20 @@ $jsondata=json_decode($postdata);
 $group_id=$jsondata->group_id;
 $name=$jsondata->student_name;
 $openid = $jsondata->openid;
+$semester_id = isset($jsondata->semester) ? $jsondata->semester : null;
+$group_name = isset($jsondata->group_name) ? $jsondata->group_name : null;
 $db = getDb();
+if($semester_id == null){
+    $semester_id = get_current_semester($db);
+}
+elseif(gettype($semester_id) != 'integer'){
+    exitJson(7, 'invalid semester');    
+}
+if($group_name != null){
+	$group_id = get_group_id($db, $group_name, $semester_id);
+	if($group_id != null)
+		$group_id = intval($group_id);
+}
 if($openid != null && $openid != ''){
     $not_admin = !is_admin($db, $openid);
 }
