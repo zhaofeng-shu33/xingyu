@@ -69,7 +69,17 @@ foreach($list as $student){
         continue;
     }    
     $sql_r = 'delete from '.getTablePrefix()."_student_activity where student_id = $student_id and activity_id = $activity_id";
-    $res_r=mysqli_query($db, $sql_r) or die(mysqli_error($db));
+    $res_r = mysqli_query($db, $sql_r) or die(mysqli_error($db));
 }
+// if the activity has no students, delete it
+    $sql = 'select count(id) as a from '.getTablePrefix()."_student_activity where activity_id = $activity_id";
+    $res = mysqli_query($db, $sql) or die(mysqli_error($db));
+    $row = mysqli_fetch_assoc($res);
+    if(intval($row['a']) == 0){
+        // delete the activity
+		$sql_d = 'delete from '.getTablePrefix()."_activity where id = $activity_id";
+		$res = mysqli_query($db, $sql_d) or die(mysqli_error($db));
+    }    
+
 exitJson(0, '');
 ?>
