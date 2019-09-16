@@ -28,6 +28,14 @@ class functionTest extends TestCase
 		$this->assertEquals($date_string_1, '2018-09-03');
 		$date_string_2 = get_current_semester_date(self::$db, 2);
 		$this->assertEquals($date_string_2, '2019-03-04');
+		$date_string_3 = get_current_semester_date(self::$db, 3);
+		$this->assertEquals($date_string_3, '2019-09-07');
+	}
+
+	public function test_get_current_semester()
+	{
+		$semester_id = get_current_semester(self::$db);
+		$this->assertEquals($semester_id, 3);
 	}
 }
 ?>

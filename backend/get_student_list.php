@@ -6,8 +6,9 @@ if($name_prefix == null || $name_prefix == ''){
     exitJson(1, 'null name prefix');
 }
 $semester_id = isset($_GET['semester']) ? $_GET['semester'] : null;
+$db = getDb();
 if($semester_id == null){
-    $semester_id = get_current_semester();
+    $semester_id = get_current_semester($db);
 }
 else{
     if(intval($semester_id) == 0){
@@ -17,7 +18,7 @@ else{
         $semester_id = intval($semester_id);
     }
 }
-$db = getDb();
+
 
 $sql_s = 'select id from '.getTablePrefix()."_group where name = '流动' and semester_id = $semester_id";
 $res_s = mysqli_query($db, $sql_s) or die(mysqli_error($db));

@@ -15,12 +15,15 @@ function is_admin($db, $openid)
     return ($row_p['id'] != null);
 }
 
-function get_current_semester($db=null){
-	return 2;
+function get_current_semester($db){
+    $sql = 'select id from '.getTablePrefix()."_semester order by start_time desc limit 1";
+    $res=mysqli_query($db, $sql) or die(mysqli_error($db));    
+    $res = mysqli_fetch_assoc($res);
+	return $res['id'];
 }
 
 function get_current_semester_group_id($db, $group_name){
-	$semester_id = get_current_semester();
+	$semester_id = get_current_semester($db);
     $sql = 'select id from '.getTablePrefix()."_group where name = '$group_name' and semester_id = $semester_id";
     $res=mysqli_query($db, $sql) or die(mysqli_error($db));    
     $res = mysqli_fetch_assoc($res);

@@ -34,7 +34,7 @@ if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
 if($semester_id == null){
-    $semester_id = get_current_semester();
+    $semester_id = get_current_semester($db);
 }
 elseif(gettype($semester_id) != 'integer'){
     exitJson(6, 'invalid semester');    

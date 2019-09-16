@@ -9,8 +9,9 @@ if($group == null || $group == ''){
 if($group == '流动'){
     exitJson(0, 'result for flow is not allowed', array('student_list'=>[]));
 }
+$db = getDb();
 if($semester_id == null){
-    $semester_id = get_current_semester();
+    $semester_id = get_current_semester($db);
 }
 elseif(intval($semester_id) == 0){
     exitJson(2, 'invalid semester');
@@ -18,7 +19,7 @@ elseif(intval($semester_id) == 0){
 else{
     $semester_id = intval($semester_id);
 }
-$db = getDb();
+
 $sql = 'select s.name, s.school from '.getTablePrefix().'_student as s, '.getTablePrefix().'_group as g, '.getTablePrefix().  "_student_group as sg where g.name = '$group' and g.id = sg.group_id and sg.student_id = s.id and g.semester_id = $semester_id";
 $res=mysqli_query($db, $sql) or die(mysqli_error($db));
 $row = mysqli_fetch_all($res);
