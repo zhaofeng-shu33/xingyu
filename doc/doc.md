@@ -102,8 +102,12 @@ curl -X POST $root/xingyu/remove_activity_student.php -H "Content-Type: applicat
 curl -X POST $root/xingyu/modify_student_group.php?action=add -H "Content-Type: application/json" -d '{"student_name":"张三","group_id":2}'
 ```
 如果 `action=add` 是添加一个新的组别，如果 `action=delete` 是删除这个组别（目前没有约束）。
+旧 API：
 必有参数为 student_name(string), group_id(int)，要求 group_id > 0.
 `action=delete`情况下，返回结果 err = 5 时表示该学生不属于 id 为传递的 group_id 的组。
+新 API:
+必有参数为 student_name(string), group_name(string)，可选参数为semester(int)
+`action=delete`情况下，返回结果 err = 5 时表示该学生不属于 semester + group_name 对应的组。
 
 12. 获取五校（或者参加童伴时光机构）统计信息
 ```shell

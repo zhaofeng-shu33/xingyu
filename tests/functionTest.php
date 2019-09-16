@@ -37,5 +37,17 @@ class functionTest extends TestCase
 		$semester_id = get_current_semester(self::$db);
 		$this->assertEquals($semester_id, 3);
 	}
+
+	public function test_get_group_id()
+	{
+		$group_id = get_group_id(self::$db, "周二下午", 3);
+		$this->assertEquals($group_id, 3);
+		$group_id = get_group_id(self::$db, "流动", 3);
+		$this->assertEquals($group_id, 1);
+		$group_id = get_group_id(self::$db, "周二下午", 1);
+		$this->assertEquals($group_id, 4);
+		$group_id = get_group_id(self::$db, "周二下午", 2);
+		$this->assertEquals($group_id, null);
+	}
 }
 ?>

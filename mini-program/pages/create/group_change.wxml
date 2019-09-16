@@ -15,8 +15,8 @@
             <view class="weui-label">组别</view>
         </view>
         <view class="weui-cell__bd">
-        <picker bindchange="bindPickerChange" value="{{groupIndex}}" range="{{group_list}}">
-          <button type="default">{{group_list[groupIndex]}}</button>                
+        <picker mode="multiSelector" bindchange="bindPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{groupIndex}}" range="{{group_list}}">
+          <button type="default">{{group_name}}</button>                
         </picker>
         </view>
     </view>            
