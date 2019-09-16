@@ -74,15 +74,26 @@ class mainTest extends TestCase
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, self::$root . 'add_activity.php');
         curl_setopt($ch, CURLOPT_POST, 1);   
-		$student_list = array('赵丰', '张三');
-        $payload = json_encode( array( 'week'=> 12, 'name'=>'周一下午', 'openid'=>'abc', 'student_list' =>  $student_list) );
+		$student_list = array('赵丰', '张三');		
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        $payload = json_encode( array( 'week'=> 12, 'name'=>'周一下午', 'openid'=>'abc', 'student_list' =>  $student_list) );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
         $server_output = curl_exec($ch);
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out->err, 0);
+
+		$student_append_list = array('林粤');
+        curl_setopt($ch, CURLOPT_URL, self::$root . 'append_activity.php');
+        $payload = json_encode( array( 'week'=> 12, 'name'=>'周一下午', 'openid'=>'abc', 'student_list' =>  $student_append_list) );
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        $server_output = curl_exec($ch);
+        $json_out = json_decode($server_output);
+        $this->assertEquals($json_out->err, 0);	
+
         curl_setopt($ch, CURLOPT_URL, self::$root . 'remove_activity_student.php');
+        $payload = json_encode( array( 'week'=> 12, 'name'=>'周一下午', 'openid'=>'abc', 'student_list' =>  array_merge($student_list, $student_append_list)) );
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         $server_output = curl_exec($ch);
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out->err, 0);	
