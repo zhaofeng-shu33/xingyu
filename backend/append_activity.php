@@ -8,7 +8,7 @@ $jsondata=json_decode($postdata);
 $week=$jsondata->week;
 $name=$jsondata->name;
 $list=$jsondata->student_list;
-$semester_id = $jsondata->semester;
+$semester_id = isset($jsondata->semester) ? $jsondata->semester : null;
 $openid = $jsondata->openid;
 $db = getDb();
 if($openid != null && $openid != ''){
