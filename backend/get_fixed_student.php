@@ -10,7 +10,7 @@ if($group == '流动'){
     exitJson(0, 'result for flow is not allowed', array('student_list'=>[]));
 }
 if($semester_id == null){
-    $semester_id = 2;
+    $semester_id = get_current_semester();
 }
 elseif(intval($semester_id) == 0){
     exitJson(2, 'invalid semester');

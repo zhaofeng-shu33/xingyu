@@ -21,7 +21,7 @@ if($not_admin){
     exitJson(44, 'you do not have the privilege');
 }
 if($semester_id == null){
-    $semester_id = 2;
+    $semester_id = get_current_semester();
 }
 elseif(gettype($semester_id) != 'integer'){
     exitJson(6, 'invalid semester');    
