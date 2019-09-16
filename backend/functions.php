@@ -19,19 +19,19 @@ function get_current_semester($db=null){
 	return 2;
 }
 
-function get_semester_start_time($db, $semester){
-    $sql_get_start_time = 'select start_time from '.getTablePrefix()."_semester where id = $semester";
-	$res = mysqli_query($db, $sql_get_start_time) or die(mysqli_error($db));
-	$row = mysqli_fetch_assoc($res);
-
-    return $row['start_time'];
-}
-
 function get_current_semester_group_id($db, $group_name){
 	$semester_id = get_current_semester();
     $sql = 'select id from '.getTablePrefix()."_group where name = '$group_name' and semester_id = $semester_id";
     $res=mysqli_query($db, $sql) or die(mysqli_error($db));    
     $res = mysqli_fetch_assoc($res);
 	return $res['id'];
+}
+
+// return string date-obj
+function get_current_semester_date($db, $semester_id){
+    $sql = 'select start_time from '.getTablePrefix()."_semester where id = $semester_id";
+    $res=mysqli_query($db, $sql) or die(mysqli_error($db));    
+    $res = mysqli_fetch_assoc($res);
+	return $res['start_time'];	
 }
 ?>

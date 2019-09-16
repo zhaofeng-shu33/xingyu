@@ -41,7 +41,7 @@ else{
         exitJson(0, 'no result for flow',[]);
     
     // convert szu calendar to 阳历
-    $start_time = get_semester_start_time($db, $semester);
+    $start_time = get_current_semester_date($db, $semester);
 
     $date=date_create($start_time);
     $interval_int = 7 * (intval($week) - 1);

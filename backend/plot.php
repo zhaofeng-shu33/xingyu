@@ -64,7 +64,7 @@ else{
        $symbol = '<';
     }
     // select start_time to offset
-    $start_time = get_semester_start_time($db, $semester);
+    $start_time = get_current_semester_date($db, $semester);
     $start_time_obj = date_create($start_time);
     $sql = 'SELECT count(sa.id), a.time FROM '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where sa.activity_id = a.id and a.special = 0 and a.time '. $symbol. "'2019-01-01' group by a.time";
     $res = mysqli_query($db, $sql) or die(mysqli_error($db));

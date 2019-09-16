@@ -61,15 +61,12 @@ else{
 }
 // convert szu calendar to 阳历
 // 2019-3-4 ~ week 1
-if($semester_id == 2){
-    $date=date_create("2019-3-4");
+$date_str = get_current_semester_date($db, $semester_id);
+if($date_str == null){
+	exitJson(8, 'not support semester_id provided');
 }
-elseif($semester_id == 1){
-    $date=date_create("2018-9-3");
-}
-else{
-    exitJson(8, 'not support semester_id larger than 3');
-}
+$date = date_create($date_str);
+
 $interval_int = 7 * ($week - 1);
 date_add($date, date_interval_create_from_date_string($interval_int." days"));
 $date_str = date_format($date, 'Y-m-d');
