@@ -8,6 +8,7 @@ $jsondata=json_decode($postdata);
 $week=$jsondata->week;
 $name=$jsondata->name;
 $list=$jsondata->student_list;
+$semester_id = isset($jsondata->semester) ? $jsondata->semester : null;
 $openid = $jsondata->openid;
 $db = getDb();
 if($openid != null && $openid != ''){
@@ -32,6 +33,12 @@ if($name == null || $name == ''){
 if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
+if($semester_id == null){
+    $semester_id = get_current_semester();
+}
+elseif(gettype($semester_id) != 'integer'){
+    exitJson(6, 'invalid semester');    
+}
 // create the activity
 if(strpos($name, '金色') == FALSE && $name != '周二下午'){
     $location = '童伴时光';
@@ -39,9 +46,11 @@ if(strpos($name, '金色') == FALSE && $name != '周二下午'){
 else{
     $location = '金色年华';
 }
-// convert szu calendar to 阳历
-// 2019-3-4 ~ week 1
-$date=date_create("2019-3-4");
+$date_str = get_current_semester_date($db, $semester_id);
+if($date_str == null){
+	exitJson(8, 'not support semester_id provided');
+}
+$date = date_create($date_str);
 $interval_int = 7 * ($week - 1);
 date_add($date, date_interval_create_from_date_string($interval_int." days"));
 $date_str = date_format($date, 'Y-m-d');

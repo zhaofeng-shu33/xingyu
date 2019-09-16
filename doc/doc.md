@@ -94,7 +94,7 @@ curl -X GET $root/xingyu/get_special_activity.php
 curl -X POST $root/xingyu/remove_activity_student.php -H "Content-Type: application/json" -d '{"week":4,"name":"周二下午",student_list":["张三"]}'
 ```
 必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])，其中学生名字的列表为要
-删除的同学，允许同学之前没参加过该活动，此时也不会报错。如果该活动没有学生参加，该活动也被删除。
+删除的同学，允许同学之前没参加过该活动，此时也不会报错。可选参数为 semester。如果该活动没有学生参加，该活动也被删除。
 返回结果 err = 5 时表示该活动不存在。
 
 11. 更改志愿者的组别信息

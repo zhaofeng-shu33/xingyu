@@ -59,8 +59,7 @@ if(strpos($name, '金色') == FALSE && $name != '周二下午' && $semester_id >
 else{
     $location = '金色年华';
 }
-// convert szu calendar to 阳历
-// 2019-3-4 ~ week 1
+
 $date_str = get_current_semester_date($db, $semester_id);
 if($date_str == null){
 	exitJson(8, 'not support semester_id provided');
