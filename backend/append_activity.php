@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'mysql.php';
 include_once 'functions.php';
 $postdata=file_get_contents("php://input");
