@@ -46,6 +46,7 @@ class mainTest extends TestCase
         $server_output = curl_exec($ch);
 		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$this->assertEquals($httpcode, 200);
+        echo $server_output . "\n";
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out->err, 0);	
         $student_list = $json_out->result->student_list;
