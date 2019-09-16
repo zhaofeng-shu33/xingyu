@@ -22,3 +22,6 @@ install:
     - cp backend/mysql-sample.php backend/mysql.php
 script:
     - phpunit tests
+# check apache log
+after_failure:
+    - sudo cat /var/log/apache2/error.log
