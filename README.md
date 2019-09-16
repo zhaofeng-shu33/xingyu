@@ -49,7 +49,7 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 见 [doc](doc/doc.md)。
 
 # CHANGELOG
-版本以小程序的线上版本为准
+版本以小程序的线上版本为准，即为审核通过后发布的时间。
 
 ## v0.3 (3月26日)
 线上第一版，实现了小组长选择所在的小组，添加流动志愿者录入信息，查看录入的结果三大功能。对应 [doc](doc/doc.md) 的前6个后端api（后面有完善）。
@@ -90,3 +90,10 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 
 ## v1.5 （6月3日）
 增加常规活动跨学期查询的功能
+
+## v1.6 （6月4日）
+增加简单的数据可视化的功能
+
+## v1.7
+* 增加对小组长跨学期操作的支持
+* 调整修改志愿者组别的 API 接口
