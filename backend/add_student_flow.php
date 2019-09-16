@@ -40,7 +40,11 @@ if($is_admin_result){
             exitJson(3, 'student already has a group');
         }
     }
-    $sql_ig = 'insert into '.getTablePrefix()."_student_group (group_id, student_id) values (1, $student_id)";
+	$group_id = get_current_semester_group_id($db, '流动');
+	if($group_id == null){
+		exitJson(4, 'null group id');
+	}
+    $sql_ig = 'insert into '.getTablePrefix()."_student_group (group_id, student_id) values ($group_id, $student_id)";
     $res_ig=mysqli_query($db, $sql_ig) or die(mysqli_error($db));    
 }
 else{
