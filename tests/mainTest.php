@@ -16,7 +16,7 @@ class mainTest extends TestCase
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, self::$root . 'add_student_flow.php');
         curl_setopt($ch, CURLOPT_POST, 1);   
-        $payload = json_encode( array( 'student_name'=> '张三', 'student_school'=>'hit', 'openid'=>'abc' ) );
+        $payload = json_encode( array( 'student_name'=> '张六六', 'student_school'=>'hit', 'openid'=>'abc' ) );
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
@@ -46,6 +46,20 @@ class mainTest extends TestCase
         $ch = curl_init();
         $group_name = '周一下午';
         curl_setopt($ch, CURLOPT_URL, self::$root . 'get_fixed_student.php?student_group=' . urlencode($group_name));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $server_output = curl_exec($ch);
+		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$this->assertEquals($httpcode, 200);
+        $json_out = json_decode($server_output);
+        $this->assertEquals($json_out->err, 0);	
+        $student_list = $json_out->result->student_list;
+        $this->assertEquals(count($student_list), 2);
+    }
+    public function test_get_student_list()
+    {
+        $ch = curl_init();
+        $student_name_prefix = '张';
+        curl_setopt($ch, CURLOPT_URL, self::$root . 'get_student_list.php?student_name_prefix=' . urlencode($student_name_prefix));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec($ch);
 		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

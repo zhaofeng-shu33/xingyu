@@ -5,9 +5,9 @@ $name_prefix = $_GET['student_name_prefix'];
 if($name_prefix == null || $name_prefix == ''){
     exitJson(1, 'null name prefix');
 }
-$semester_id = $_GET['semester'];
+$semester_id = isset($_GET['semester']) ? $_GET['semester'] : null;
 if($semester_id == null){
-    $semester_id = 2;
+    $semester_id = get_current_semester();
 }
 else{
     if(intval($semester_id) == 0){
