@@ -14,7 +14,9 @@ insert into xingyu_group (name, semester_id) values ('周一下午', 2);
 insert into xingyu_group (name, semester_id) values ('周二下午', 2);
 insert into xingyu_group (name, semester_id) values ('周二下午', 1);
 
+-- 赵丰在2019春季学期周一下午组
 insert into xingyu_student_group (student_id, group_id) values (1, 2);
+-- 林粤在2019春季学期周一下午组
 insert into xingyu_student_group (student_id, group_id) values (2, 2);
 
 

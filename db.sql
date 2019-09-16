@@ -1,6 +1,6 @@
 -- mysql
 create database if not exists xingyu charset utf8mb4;
-create user 'xingyu'@'localhost' identified by 'xingyu';
+create user if not exists 'xingyu'@'localhost' identified by 'xingyu';
 grant all privileges on xingyu.* to 'xingyu'@'localhost';
 flush privileges;
 use xingyu;
