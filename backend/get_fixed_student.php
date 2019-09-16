@@ -2,7 +2,7 @@
 include_once 'mysql.php';
 include_once 'functions.php';
 $group = $_GET['student_group'];
-$semester_id = $_GET['semester'];
+$semester_id = isset($_GET['semester']) ? $_GET['semester'] : null;
 if($group == null || $group == ''){
     exitJson(1, 'null group');
 }

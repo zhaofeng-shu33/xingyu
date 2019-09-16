@@ -11,7 +11,7 @@ class mainTest extends TestCase
             self::$root = getenv('XINGYU_ROOT');
         }
     }
-    public function test_add_student_flow()
+    public function test_add_delete_student_flow()
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, self::$root . 'add_student_flow.php');
@@ -20,6 +20,10 @@ class mainTest extends TestCase
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        $server_output = curl_exec($ch);
+        $json_out = json_decode($server_output);
+        $this->assertEquals($json_out->err, 0);
+        curl_setopt($ch, CURLOPT_URL, self::$root . 'delete_student_flow.php');
         $server_output = curl_exec($ch);
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out->err, 0);
@@ -46,7 +50,6 @@ class mainTest extends TestCase
         $server_output = curl_exec($ch);
 		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$this->assertEquals($httpcode, 200);
-        echo $server_output . "\n";
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out->err, 0);	
         $student_list = $json_out->result->student_list;
