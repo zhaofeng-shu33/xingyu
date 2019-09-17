@@ -48,6 +48,9 @@ svn checkout https://github.com/Tencent/weui-wxss/trunk/dist/style style
 ## 接口文档
 见 [doc](doc/doc.md)。
 
+## 贡献指南 (Contributing Guild)
+See [contributing](doc/contributing.md)
+
 # CHANGELOG
 版本以小程序的线上版本为准，即为审核通过后发布的时间。
 
