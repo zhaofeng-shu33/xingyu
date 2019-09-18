@@ -9,7 +9,6 @@ Page({
     semester_name_to_id: {},
     semester_id: 1,
     group_name: '未选择小组',
-    groupName: '流动',
     openid:''
   },
   inputTyping: function (e) {
@@ -132,7 +131,7 @@ Page({
       method: 'POST',
       data: {
         student_name: that.data.student_name,
-        group_name: this.data.group_name,
+        group_name: that.data.group_name,
         openid :openid
       },
       success(res) {
@@ -143,16 +142,16 @@ Page({
           wx.showToast({ icon: 'none', title: '无权限' })
         }  
         else if(res.data.err == 5){
-          wx.showToast({ icon: 'none', title: that.data.student_name + '不属于' + that.data.groupName + '小组'})
+          wx.showToast({ icon: 'none', title: that.data.student_name + '不属于' + that.data.group_name + '小组'})
         }
         else if (res.data.err != 0)
           wx.showToast({ icon: 'none', title: 'server error' })
         else {
           if (action == 'add'){
-            wx.showToast({ title: '添加' + that.data.student_name + '到' + that.data.groupName + '小组' +'成功' })
+            wx.showToast({ title: '添加' + that.data.student_name + '到' + that.data.group_name + '小组' +'成功' })
           }
           else{ //delete
-            wx.showToast({ title: '从' + that.data.groupName + '小组' + '删除' + that.data.student_name + ' 成功' })
+            wx.showToast({ title: '从' + that.data.group_name + '小组' + '删除' + that.data.student_name + ' 成功' })
           }
           that.setData({ student_name: '' })
         }
