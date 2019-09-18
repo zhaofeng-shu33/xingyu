@@ -3,7 +3,7 @@ include_once 'mysql.php';
 include_once 'functions.php';
 $db = getDb();
 if($_GET['all'] == '1'){
-	$sql = 'select g.id, g.name, s.name, s.id from '.getTablePrefix().'_group as g, '.getTablePrefix().'_semester as s where s.id = g.semester_id';
+	$sql = 'select g.id, g.name, s.name, s.id from '.getTablePrefix().'_group as g, '.getTablePrefix().'_semester as s where s.id = g.semester_id order by s.id desc';
 	$res=mysqli_query($db, $sql) or die(mysqli_error($db));
 	$row = mysqli_fetch_all($res);
 	exitJson(0, '',array('group_list'=>$row));
