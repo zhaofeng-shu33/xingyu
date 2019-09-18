@@ -85,6 +85,7 @@ Page({
       })
       return
     }    
+    var that = this;
     wx.request({
       url: app.ServerUrl + '/add_activity.php',
       method: 'POST',
@@ -108,7 +109,7 @@ Page({
           wx.showToast({
             title: '提交成功',
           })
-          this.setData({flow_student:[]})
+          that.setData({flow_student:[]})
         }
       },
       fail(res) {
@@ -143,7 +144,7 @@ Page({
       })
       return
     }
-
+    var that = this;
     wx.request({
       url: app.ServerUrl + '/append_activity.php',
       method: 'POST',
@@ -167,7 +168,7 @@ Page({
           wx.showToast({
             title: '补录成功',
           })
-          this.setData({ flow_student: [] })
+          that.setData({ flow_student: [] })
         }
       },
       fail(res) {
@@ -202,7 +203,7 @@ Page({
       })
       return
     }
-
+    var that = this;
     wx.request({
       url: app.ServerUrl + '/remove_activity_student.php',
       method: 'POST',
@@ -225,7 +226,7 @@ Page({
           wx.showToast({
             title: '移除成功',
           })
-          this.setData({ flow_student: [] })
+          that.setData({ flow_student: [] })
         }
       },
       fail(res) {
