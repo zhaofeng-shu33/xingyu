@@ -92,7 +92,7 @@ Page({
         week: parseInt(this.data.week),
         name: this.data.group_name,
         student_list: submit_student,
-        semester: this.data.semester_id,
+        semester: parseInt(this.data.semester_id),
         openid:openid
       },
       success(res) {
@@ -150,7 +150,7 @@ Page({
       data: {
         week: parseInt(this.data.week),
         name: this.data.group_name,
-        semester: this.data.semester_id,
+        semester: parseInt(this.data.semester_id),
         student_list: submit_student,
         openid:openid
       },

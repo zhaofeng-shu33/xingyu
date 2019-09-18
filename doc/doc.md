@@ -51,7 +51,7 @@ curl -X GET $root/xingyu/get_fixed_student.php?student_group=[group_name]&semest
 curl -X POST $root/xingyu/add_activity.php -H "Content-Type: application/json" -d '{"week":3,"name":"周二下午", "student_list":["张三"]}'
 ```
 必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
-可选参数为 semester.
+可选参数为 semester（int 类型）.
 返回结果 err = 5 时表示该活动已经存在。
 
 5. 获取某学期小组列表
