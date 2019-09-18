@@ -38,8 +38,6 @@ Page({
         semester_name_to_id[semester_name] = group_list_data[i][3];
       }
       var group_name = group_list_data[i][1];
-      if (group_name == '流动')
-        continue;
       semester_dic[semester_name].push(group_name);
     }
     var semester_list = [];

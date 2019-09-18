@@ -37,6 +37,7 @@ curl -X POST $root/xingyu/add_student_flow.php -H "Content-Type: application/jso
 ```shell
 curl -X GET "$root/xingyu/get_student_list.php?student_name_prefix=张&semester=2"
 ```
+semester为可选参数，不提供默认为当前学期。
 返回结果为 `result['student_list']`
 
 3. 获取某个活动的固定志愿者
