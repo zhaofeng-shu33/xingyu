@@ -100,3 +100,9 @@ See [contributing](doc/contributing.md)
 ## v1.7 (9月18日）
 * 增加对小组长跨学期操作的支持
 * 调整修改志愿者组别的 API 接口
+
+## v1.8
+* 修复清空流动组学生的 bug
+* 修复 提交 的 semester_id 类型必须是int 的bug
+* 增删组别允许流动组
+* 修复更改组别提示信息姓名显示有误
