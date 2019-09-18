@@ -369,7 +369,7 @@ Page({
           }
           var first_semester_group_list = semester_dic[semester_list[0]];
           that.setData({ group_list: [semester_list, first_semester_group_list], semester_dic, semester_name_to_id })
-          app.group_list = [semester_list, first_semester_group_list]
+          app.group_list = res.data.result.group_list
         }
       },
       fail(res){
