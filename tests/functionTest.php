@@ -53,10 +53,10 @@ class functionTest extends TestCase
     public function test_get_rows_value()
     {
         $rows = array(array(1, 10), array(3, 5));
-        $this->assertEquals(test_get_rows_value($rows, 1), 10);
-        $this->assertEquals(test_get_rows_value($rows, 3), 5);
-        $this->assertEquals(test_get_rows_value($rows, 2), 0);
-        $this->assertEquals(test_get_rows_value($rows, 4), 0);
+        $this->assertEquals(get_rows_value($rows, 1), 10);
+        $this->assertEquals(get_rows_value($rows, 3), 5);
+        $this->assertEquals(get_rows_value($rows, 2), 0);
+        $this->assertEquals(get_rows_value($rows, 4), 0);
     }
 }
 ?>
