@@ -51,30 +51,34 @@ if($plot_type == 'bar'){
 else{
     $semester = $_GET['semester'];
     if($semester == null || intval($semester) == 0){
-        $semester = 2;
-    }
-    $semester = intval($semester);
-    
-    if($semester == 2){
-       $symbol = '>';
+        $semester = get_current_semester($db);
     }
     else{
-       $symbol = '<';
+        $semester = intval($semester);
     }
     // select start_time to offset
     $start_time = get_current_semester_date($db, $semester);
     $start_time_obj = date_create($start_time);
-    $end_time_obj = date_create($start_time)->add(new DateInterval('P5M'));
-    $sql = 'SELECT count(sa.id), a.time FROM '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where sa.activity_id = a.id and a.special = 0 and a.time '. $symbol. "'2019-01-01' group by a.time";
+    $end_time = date_create($start_time)->add(new DateInterval('P5M'))->format('Y-m-d');
+    $sql = 'SELECT a.time, count(sa.id) FROM '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where sa.activity_id = a.id and a.special = 0 and a.time >="'. $start_time . '" and a.time <"' . $end_time . '" group by a.time';
     $res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $rows = mysqli_fetch_all($res);
     $array_x = array();
     $array_y = array();
+    
     for($i = 0; $i < count($rows); $i++){
-      $activity_time = $rows[$i][1];
-      $interval = date_diff(date_create($activity_time), $start_time_obj);
-      array_push($array_x, 1 + intval($interval->format('%a'))/7);
-      array_push($array_y, intval($rows[$i][0]));
+        $activity_time = $rows[$i][0];
+        $interval = date_diff(date_create($activity_time), $start_time_obj);
+        array_push($array_x, 1 + intval($interval->format('%a'))/7);
+        array_push($array_y, intval($rows[$i][1]));
+    }
+    $interval_offset = 1;
+    if(count($array_x) > 0)
+        $interval_offset = 1 + $array_x[count($array_x) - 1];
+
+    for($i = count($rows); $i < 8; $i++){
+          array_push($array_x, $interval_offset + $i - count($rows));
+          array_push($array_y, 0);        
     }
     $graph->xaxis->SetTickLabels($array_x);
 

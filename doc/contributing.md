@@ -11,7 +11,7 @@ It has been tested on the following Machines
 For lower version of mysql, there may exist authentication issues. In such cases, you can try to use `db_maria.sql` to initialize the database. The difference lies at `set old_passwords=0`.
 
 The developing step is simple. First you initialize the database using `db.sql` and `db_init.sql`. Then you start the php developing
-server `php -S localhost:8080`. Next open another console and use the repository root as your working directory. Set environment variable `XINGYU_ROOT=http://localhost:8080/`. Finally, run `phpunit tests` to run all tests.
+server `php -S localhost:8080` at `backend` directory. Next open another console and use the repository root as your working directory. Set environment variable `XINGYU_ROOT=http://localhost:8080/`. Finally, run `phpunit tests` to run all tests.
 ## Install dependencies
 
 ```shell
