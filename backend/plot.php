@@ -28,12 +28,12 @@ if($plot_type == 'bar'){
 	$res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $rows = mysqli_fetch_all($res);
     $data = array();
-    for($i = 0; $i < 7; $i++){
+    for($i = 1; $i <= 7; $i++){
         array_push($data, get_rows_value($rows, $i));
     }
-    array_push($data, get_rows_value($rows, $i) + get_rows_value($rows, $i)); // 8-9
+    array_push($data, get_rows_value($rows, 8) + get_rows_value($rows, 9)); // 8-9
     $cnt = 0;
-    for($i = 9; $i < 14; $i++){
+    for($i = 10; $i <= 14; $i++){
         $cnt += get_rows_value($rows, $i);
     }
     array_push($data, $cnt); // 10-14

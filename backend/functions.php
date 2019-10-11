@@ -51,7 +51,7 @@ function get_rows_value($rows, $index)
 {
     for($i = 0; $i < count($rows); $i++){
         if($rows[$i][0] == $index)
-            return intval($rows[$index][1]);
+            return intval($rows[$i][1]);
         else if($rows[$i][0] > $index)
             break;
     }
