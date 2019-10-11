@@ -44,4 +44,17 @@ function get_group_id($db, $group_name, $semester_id){
     $res = mysqli_fetch_assoc($res);
 	return $res['id'];	
 }
+
+//! each element of $rows is (times, count) pair, and $rows are sorted based on times
+//! this function get the count corresponding to $index = times
+function get_rows_value($rows, $index)
+{
+    for($i = 0; $i < count($rows); $i++){
+        if($rows[$i][0] == $index)
+            return intval($rows[$index][1]);
+        else if($rows[$i][0] > $index)
+            break;
+    }
+    return 0;
+}
 ?>

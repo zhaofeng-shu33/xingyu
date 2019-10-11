@@ -7,6 +7,7 @@ JpGraph\JpGraph::module('line');
 include_once 'mysql.php';
 include_once 'functions.php';
 
+
 $plot_type = $_GET['type'];
 if($plot_type != 'bar' && $plot_type != 'line'){
     exit();
@@ -27,23 +28,20 @@ if($plot_type == 'bar'){
 	$res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $rows = mysqli_fetch_all($res);
     $data = array();
-    for($i=0; $i<7;$i++){
-        array_push($data, intval($rows[$i][1]));
+    for($i = 0; $i < 7; $i++){
+        array_push($data, get_rows_value($rows, $i));
     }
-    array_push($data, intval($rows[7][1]) + intval($rows[8][1])); // 8-9
+    array_push($data, get_rows_value($rows, $i) + get_rows_value($rows, $i)); // 8-9
     $cnt = 0;
-    $offset = 14;
-    for($i=9; $i<14; $i++){
-        if($rows[$i][0]>14){
-            $offset = $i;
-            break;
-        }
-        $cnt += intval($rows[$i][1]);
+    for($i = 9; $i < 14; $i++){
+        $cnt += get_rows_value($rows, $i);
     }
     array_push($data, $cnt); // 10-14
     $cnt = 0;
-    for($i=$offset; $i<count($rows); $i++){
-        $cnt += intval($rows[$i][1]);
+    if(count($rows) > 0){
+        for($i = 15; $i < $rows[count($rows)-1][0]; $i++){
+            $cnt += get_rows_value($rows, $i);
+        }
     }
     array_push($data, $cnt); // 15+
     
@@ -66,12 +64,13 @@ else{
     // select start_time to offset
     $start_time = get_current_semester_date($db, $semester);
     $start_time_obj = date_create($start_time);
+    $end_time_obj = date_create($start_time)->add(new DateInterval('P5M'));
     $sql = 'SELECT count(sa.id), a.time FROM '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where sa.activity_id = a.id and a.special = 0 and a.time '. $symbol. "'2019-01-01' group by a.time";
     $res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $rows = mysqli_fetch_all($res);
     $array_x = array();
     $array_y = array();
-    for($i=0; $i<count($rows); $i++){
+    for($i = 0; $i < count($rows); $i++){
       $activity_time = $rows[$i][1];
       $interval = date_diff(date_create($activity_time), $start_time_obj);
       array_push($array_x, 1 + intval($interval->format('%a'))/7);

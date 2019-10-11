@@ -49,5 +49,14 @@ class functionTest extends TestCase
 		$group_id = get_group_id(self::$db, "周二下午", 2);
 		$this->assertEquals($group_id, null);
 	}
+    
+    public function test_get_rows_value()
+    {
+        $rows = array(array(1, 10), array(3, 5));
+        $this->assertEquals(test_get_rows_value($rows, 1), 10);
+        $this->assertEquals(test_get_rows_value($rows, 3), 5);
+        $this->assertEquals(test_get_rows_value($rows, 2), 0);
+        $this->assertEquals(test_get_rows_value($rows, 4), 0);
+    }
 }
 ?>
