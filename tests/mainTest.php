@@ -115,4 +115,14 @@ class mainTest extends TestCase
         $json_out = json_decode($server_output);
         $this->assertEquals($json_out->err, 0);	
 	}
+	public function test_plot_api()
+	{
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, self::$root . 'plot.php?type=bar');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $server_output = curl_exec($ch);
+        $this->assertFalse(curl_errno($ch));
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $this->assertEqual($status_code, 200);
+	}
 }
