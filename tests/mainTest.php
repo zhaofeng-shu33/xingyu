@@ -121,8 +121,8 @@ class mainTest extends TestCase
         curl_setopt($ch, CURLOPT_URL, self::$root . 'plot.php?type=bar');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec($ch);
-        $this->assertFalse(curl_errno($ch));
+        $this->assertEquals(curl_errno($ch), 0);
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $this->assertEqual($status_code, 200);
+        $this->assertEquals($status_code, 200);
 	}
 }
