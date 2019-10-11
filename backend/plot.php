@@ -24,7 +24,7 @@ if($plot_type == 'bar'){
     $graph->title->Set('星语志愿者参与活动次数统计图');
     $graph->xaxis->title->Set('次');
     $graph->yaxis->title->Set('人');
-	$sql = 'select times, count(times) from (select s.name, count(s.id) as times from '.getTablePrefix().'_student as s, '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where s.id = sa.student_id and a.id = sa.activity_id group by s.name order by count(s.id) desc) as old group by times';
+	$sql = 'select times, count(times) from (select s.name, count(s.id) as times from '.getTablePrefix().'_student as s, '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where s.id = sa.student_id and a.id = sa.activity_id group by s.name order by count(s.id) desc) as old group by times asc';
 	$res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $rows = mysqli_fetch_all($res);
     $data = array();

@@ -50,9 +50,10 @@ function get_group_id($db, $group_name, $semester_id){
 function get_rows_value($rows, $index)
 {
     for($i = 0; $i < count($rows); $i++){
-        if($rows[$i][0] == $index)
-            return intval($rows[$i][1]);
-        else if($rows[$i][0] > $index)
+        $current = array(intval($rows[$i][0]), intval($rows[$i][1]));
+        if($current[0] == $index)
+            return $current[1];
+        else if($current[0] > $index)
             break;
     }
     return 0;
