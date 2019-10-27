@@ -46,7 +46,7 @@ if(strpos($name, '金色') == FALSE && $name != '周二下午'){
 else{
     $location = '金色年华';
 }
-$date_str = get_current_semester_date($db, $semester_id);
+$date_str = get_semester_start_date($db, $semester_id);
 if($date_str == null){
 	exitJson(8, 'not support semester_id provided');
 }

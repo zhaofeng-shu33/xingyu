@@ -31,7 +31,7 @@ function get_current_semester_group_id($db, $group_name){
 }
 
 // return string date-obj
-function get_current_semester_date($db, $semester_id){
+function get_semester_start_date($db, $semester_id){
     $sql = 'select start_time from '.getTablePrefix()."_semester where id = $semester_id";
     $res=mysqli_query($db, $sql) or die(mysqli_error($db));    
     $res = mysqli_fetch_assoc($res);

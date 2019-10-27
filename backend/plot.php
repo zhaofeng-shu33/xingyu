@@ -57,7 +57,7 @@ else{
         $semester = intval($semester);
     }
     // select start_time to offset
-    $start_time = get_current_semester_date($db, $semester);
+    $start_time = get_semester_start_date($db, $semester);
     $start_time_obj = date_create($start_time);
     $end_time = date_create($start_time)->add(new DateInterval('P5M'))->format('Y-m-d');
     $sql = 'SELECT a.time, count(sa.id) FROM '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where sa.activity_id = a.id and a.special = 0 and a.time >="'. $start_time . '" and a.time <"' . $end_time . '" group by a.time';
