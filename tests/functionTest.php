@@ -22,13 +22,13 @@ class functionTest extends TestCase
 		$id_1 = get_current_semester_group_id(self::$db, "周三下午");
 		$this->assertEquals($id_1, null);
 	}
-	public function test_get_current_semester_date()
+	public function test_get_semester_start_date()
 	{
-		$date_string_1 = get_current_semester_date(self::$db, 1);
+		$date_string_1 = get_semester_start_date(self::$db, 1);
 		$this->assertEquals($date_string_1, '2018-09-03');
-		$date_string_2 = get_current_semester_date(self::$db, 2);
+		$date_string_2 = get_semester_start_date(self::$db, 2);
 		$this->assertEquals($date_string_2, '2019-03-04');
-		$date_string_3 = get_current_semester_date(self::$db, 3);
+		$date_string_3 = get_semester_start_date(self::$db, 3);
 		$this->assertEquals($date_string_3, '2019-09-07');
 	}
 
