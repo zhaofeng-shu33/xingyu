@@ -9,6 +9,7 @@ $school=$_GET['student_school'];
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 $valid_school_list = array('thu', 'pku', 'hit', 'sust', 'szu', '童伴时光');
 if($school == null || array_search($school, $valid_school_list) === false){
+	http_response_code(400);
 	exit();
 }
 $date_str = date('Y-m-d-');
