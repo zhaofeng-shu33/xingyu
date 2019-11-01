@@ -1,7 +1,7 @@
 //app.js
 let config = require('./config');
 App({
-  ServerUrl: 'https://www.leidenschaft.cn/xingyu',
+  ServerUrl: config.service.host,
   SchoolMapping: { '深大':'szu', '南科大':'sust', '哈工大':'hit', '北大':'pku', '清华':'thu'},
   SchoolReverseMapping: { 'szu':'深大', 'sust':'南科大', 'hit':'哈工大', 'pku':'北大', 'thu':'清华' },
   get_user_info_from_res: function(user_info_auth_result){
