@@ -22,4 +22,13 @@ composer install # at backend directory
 Currently, I use Apache on Ubuntu Server to deploy the backend codes.
 
 # Frontend development
-Wechat developer tool is essential. This platform is restrictive and I am considering abandon this frontend in the future.
+You need wechat developer tool as prerequisite.
+* Change the `host` variable in `miniprogram/config.js` to your localhost url.
+* Change the `appid` and `appsecret` in `backend/mysql.php` to your test appid and appsecret.
+* Change the `appid` in `miniprogram/project.config.json` to your test appid.
+
+For how to obtain test account, see
+* [official guide](https://developers.weixin.qq.com/miniprogram/dev/devtools/sandbox.html)
+* [solve blank account](https://developers.weixin.qq.com/community/develop/doc/000886459dc1b8be37a8c677b51000)
+
+I think this platform is restrictive and I am considering abandon this frontend in the future.
