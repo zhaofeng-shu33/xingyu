@@ -1,6 +1,8 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $postdata=file_get_contents("php://input");
 
 $jsondata=json_decode($postdata);
@@ -37,7 +39,7 @@ if($week == null || gettype($week)!='integer'){
 if($name == null || $name == ''){
     exitJson(2, 'null name');
 }
-if($name == '流动'){
+if($name == $temp_group_name){
     exitJson(4, 'cannot add activity for flow group');
 }
 // check the name actually exits

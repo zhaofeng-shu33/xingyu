@@ -1,6 +1,8 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $postdata=file_get_contents("php://input");
 
 $jsondata=json_decode($postdata);
@@ -40,7 +42,7 @@ if($is_admin_result){
             exitJson(3, 'student already has a group');
         }
     }
-	$group_id = get_current_semester_group_id($db, '流动');
+	$group_id = get_current_semester_group_id($db, $temp_group_name);
 	if($group_id == null){
 		exitJson(4, 'null group id');
 	}
