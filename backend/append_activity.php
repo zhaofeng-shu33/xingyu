@@ -2,6 +2,7 @@
 include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $postdata=file_get_contents("php://input");
 
 $jsondata=json_decode($postdata);
@@ -42,13 +43,7 @@ if($list == null || gettype($list)!='array'){
 }
 
 // set the location of the activity
-$location = '';
-foreach($target_organization_list as $val){
-    if(strpos($name, $val) != FALSE){
-        $location = $val;
-        break;
-    }
-}
+$location = get_location($name);
 if($location == ''){
     exitJson(10, 'group name does not contain location information');
 }

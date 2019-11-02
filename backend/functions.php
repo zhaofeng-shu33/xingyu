@@ -1,5 +1,7 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
+
 function exitJson($err, $msg , $result='')
 {
 	echo json_encode(array('err'=>$err, 'msg'=>$msg , 'result'=>$result));
@@ -57,5 +59,17 @@ function get_rows_value($rows, $index)
             break;
     }
     return 0;
+}
+
+function get_location($group_name){
+    global $target_organization_list;
+    $location = '';
+    foreach($target_organization_list as $val){
+        if(strpos($group_name, $val) != FALSE){
+            $location = $val;
+            break;
+        }
+    }
+    return $location;    
 }
 ?>

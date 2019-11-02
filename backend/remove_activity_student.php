@@ -43,13 +43,7 @@ elseif(gettype($semester_id) != 'integer'){
 }
 
 // set the location of the activity
-$location = '';
-foreach($target_organization_list as $val){
-    if(strpos($name, $val) != FALSE){
-        $location = $val;
-        break;
-    }
-}
+$location = get_location($name);
 if($location == ''){
     exitJson(10, 'group name does not contain location information');
 }
