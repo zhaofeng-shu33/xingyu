@@ -21,10 +21,14 @@ server `php -S localhost:8080` at `backend` directory. Next open another console
 composer install # at backend directory
 ```
 
-# Deployment machine
+## Deployment machine
 Currently, I use Apache on Ubuntu Server to deploy the backend codes.
 
-# Frontend development
+## Group Naming Convention
+Each group should contains the target organization name. For example, if your volunteer organization is to serve old people in Sunset House every Friday. 
+Then your group name should be called 'Friday Sunset House'.
+
+## Frontend development
 You need wechat developer tool as prerequisite and of course you need a wechat account.
 Make sure Backend settings are finished.
 
@@ -40,3 +44,4 @@ For how to obtain test account, see
 * [solve blank account](https://developers.weixin.qq.com/community/develop/doc/000886459dc1b8be37a8c677b51000)
 
 I think this platform is restrictive and I am considering abandon this frontend in the future.
+
