@@ -54,12 +54,16 @@ if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
 
-// create the activity
-if(strpos($name, '金色') == FALSE && $name != '周二下午' && $semester_id > 1){
-    $location = '童伴时光';
+// set the location of the activity
+$location = '';
+foreach($target_organization_list as $val){
+    if(strpos($name, $val) != FALSE){
+        $location = $val;
+        break;
+    }
 }
-else{
-    $location = '金色年华';
+if($locatition == ''){
+    exitJson(10, 'group name does not contain location information');
 }
 
 $date_str = get_semester_start_date($db, $semester_id);

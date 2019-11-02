@@ -17,11 +17,11 @@ class functionTest extends TestCase
 		global $temp_group_name;
 		$id_1 = get_current_semester_group_id(self::$db, $temp_group_name);
 		$this->assertEquals($id_1, 1);
-		$id_1 = get_current_semester_group_id(self::$db, "周一下午");
+		$id_1 = get_current_semester_group_id(self::$db, '周一下午金色年华');
 		$this->assertEquals($id_1, 2);
-		$id_1 = get_current_semester_group_id(self::$db, "周二下午");
+		$id_1 = get_current_semester_group_id(self::$db, '周一下午童伴时光');
 		$this->assertEquals($id_1, 3);
-		$id_1 = get_current_semester_group_id(self::$db, "周三下午");
+		$id_1 = get_current_semester_group_id(self::$db, "周三下午童伴时光");
 		$this->assertEquals($id_1, null);
 	}
 	public function test_get_semester_start_date()
@@ -43,13 +43,13 @@ class functionTest extends TestCase
 	public function test_get_group_id()
 	{
 		global $temp_group_name;
-		$group_id = get_group_id(self::$db, "周二下午", 3);
-		$this->assertEquals($group_id, 3);
+		$group_id = get_group_id(self::$db, '周一下午金色年华', 3);
+		$this->assertEquals($group_id, 2);
 		$group_id = get_group_id(self::$db, $temp_group_name, 3);
 		$this->assertEquals($group_id, 1);
-		$group_id = get_group_id(self::$db, "周二下午", 1);
+		$group_id = get_group_id(self::$db, '周二下午金色年华', 1);
 		$this->assertEquals($group_id, 4);
-		$group_id = get_group_id(self::$db, "周二下午", 2);
+		$group_id = get_group_id(self::$db, '周二下午金色年华', 2);
 		$this->assertEquals($group_id, null);
 	}
     
