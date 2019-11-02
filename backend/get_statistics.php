@@ -1,8 +1,15 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $db = getDb();
-$data = [array('school'=>'hit'), array('school'=>'sust'), array('school'=>'thu'), array('school'=>'pku'), array('school'=>'szu')];
+
+$data = array();
+foreach($organization_list as $key => $val){
+    array_push($data, array('school' => $key));
+}
+
 foreach($data as &$info){
     $school = $info['school'];
     $sql_s = 'select count(s.id) as c from '.getTablePrefix().'_student as s, '.getTablePrefix()."_student_activity as sa where s.id = sa.student_id and s.school = '$school'";
