@@ -42,7 +42,7 @@ else{
     if($name == $temp_group_name)
         exitJson(0, 'no result for flow',[]);
     
-    // convert szu calendar to 阳历
+    // convert szu calendar to solar calendar
     $start_time = get_semester_start_date($db, $semester);
 
     $date=date_create($start_time);
