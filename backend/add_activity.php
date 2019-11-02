@@ -62,7 +62,7 @@ foreach($target_organization_list as $val){
         break;
     }
 }
-if($locatition == ''){
+if($location == ''){
     exitJson(10, 'group name does not contain location information');
 }
 
