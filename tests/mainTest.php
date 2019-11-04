@@ -141,5 +141,21 @@ class mainTest extends TestCase
         $this->assertEquals(curl_errno($ch), 0);
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $this->assertEquals($status_code, 200);
-	}
+    }
+    
+    public function test_get_statistics()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, self::$root . 'get_statistics.php');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $server_output = curl_exec($ch);
+		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$this->assertEquals($httpcode, 200);
+        $json_out = json_decode($server_output);
+        $this->assertEquals($json_out->err, 0);	
+        $school_list = $json_out->result;
+        $this->assertEquals(count($school_list), 5);
+        $org_list = $json_out->orgs;
+        $this->assertEquals(count($org_list), 2);
+    }
 }
