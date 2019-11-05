@@ -1,6 +1,8 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $postdata=file_get_contents("php://input");
 
 $jsondata=json_decode($postdata);
@@ -39,13 +41,13 @@ if($semester_id == null){
 elseif(gettype($semester_id) != 'integer'){
     exitJson(6, 'invalid semester');    
 }
-// create the activity
-if(strpos($name, '金色') == FALSE && $name != '周二下午'){
-    $location = '童伴时光';
+
+// set the location of the activity
+$location = get_location($name);
+if($location == ''){
+    exitJson(10, 'group name does not contain location information');
 }
-else{
-    $location = '金色年华';
-}
+
 $date_str = get_semester_start_date($db, $semester_id);
 if($date_str == null){
 	exitJson(8, 'not support semester_id provided');

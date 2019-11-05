@@ -112,11 +112,11 @@ curl -X POST $root/xingyu/modify_student_group.php?action=add -H "Content-Type: 
 
 目前新旧 API 均可使用。
 
-12. 获取五校（或者参加童伴时光机构）统计信息
+12. 获取各组织和服务机构统计信息
 ```shell
 curl -X GET $root/xingyu/get_statistics.php
 ```
-返回 JSON格式数据 [{'school':'hit','total_student':23,'total_count':45}, ...]
+返回 JSON格式数据 {'result': [{'school':'hit','total_student':23,'total_count':45}, ...], 'orgs': [{'name':'childhood', 'total_student': 12, 'total_count': 22},...]}
 其中 total_student 表示该校人数信息， total_count 表示该校人次信息。
 
 13. 删除流动志愿者

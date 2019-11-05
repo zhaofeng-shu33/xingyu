@@ -1,6 +1,8 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $postdata=file_get_contents("php://input");
 
 $jsondata=json_decode($postdata);
@@ -37,7 +39,7 @@ if($week == null || gettype($week)!='integer'){
 if($name == null || $name == ''){
     exitJson(2, 'null name');
 }
-if($name == '流动'){
+if($name == $temp_group_name){
     exitJson(4, 'cannot add activity for flow group');
 }
 // check the name actually exits
@@ -52,12 +54,10 @@ if($list == null || gettype($list)!='array'){
     exitJson(3, 'invalid student_list');
 }
 
-// create the activity
-if(strpos($name, '金色') == FALSE && $name != '周二下午' && $semester_id > 1){
-    $location = '童伴时光';
-}
-else{
-    $location = '金色年华';
+// set the location of the activity
+$location = get_location($name);
+if($location == ''){
+    exitJson(10, 'group name does not contain location information');
 }
 
 $date_str = get_semester_start_date($db, $semester_id);

@@ -4,12 +4,19 @@ require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
 
 $school=$_GET['student_school'];
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-$valid_school_list = array('thu', 'pku', 'hit', 'sust', 'szu', '童伴时光');
+
+$valid_school_list = array();
+foreach($organization_list as $key => $val){
+	array_push($valid_school_list, $key);
+}
+array_push($valid_school_list, '童伴时光');
+
 if($school == null || array_search($school, $valid_school_list) === false){
 	http_response_code(400);
 	exit();
@@ -26,7 +33,7 @@ if($school == '童伴时光'){
 		->setCellValue('C1', '活动名称')
 		->setCellValue('D1', '活动时间')
 		->setCellValue('E1', '活动地点');
-	$school_map = array('thu' => '清华', 'pku' => '北大', 'hit' => '哈工大', 'sust' => '南科大', 'szu' => '深大');
+	$school_map = $organization_list;
 	$sql = "SELECT s.name, s.school, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and a.institution = '童伴时光'";
 	$res=mysqli_query($db, $sql) or die(mysqli_error($db));
 	$rows = mysqli_fetch_all($res);
