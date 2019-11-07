@@ -59,19 +59,23 @@ Page({
             total_student += parseInt(statistic_list[i]['total_student']); 
             total_cnt += parseInt(statistic_list[i]['total_count']);      
           }
-          for (var i = 0; i < statistic_list.length; i++) {
-            var stu_num_percent = parseInt(statistic_list[i]['total_student'])/total_student;
-            statistic_list[i]['total_student'] += '(' + Math.round(stu_num_percent * 100).toString() + '%)'
-            var stu_cnt_percent = parseInt(statistic_list[i]['total_count']) / total_cnt;
-            statistic_list[i]['total_count'] += '(' + Math.round(stu_cnt_percent * 100).toString() + '%)'
+          if (total_cnt > 0){
+            for (var i = 0; i < statistic_list.length; i++) {
+              var stu_num_percent = parseInt(statistic_list[i]['total_student'])/total_student;
+              statistic_list[i]['total_student'] += '(' + Math.round(stu_num_percent * 100).toString() + '%)'
+              var stu_cnt_percent = parseInt(statistic_list[i]['total_count']) / total_cnt;
+              statistic_list[i]['total_count'] += '(' + Math.round(stu_cnt_percent * 100).toString() + '%)'
+            }
           }
           var institution = res.data.institution;
           var institution_student_int = parseInt(institution['total_student']);
           var institution_student = institution['total_student'];
-          institution_student += '(' + Math.round(institution_student_int/total_student * 100).toString() + '%)'
           var institution_student_cnt = parseInt(institution['total_count']);
           var institution_cnt = institution['total_count'];
-          institution_cnt += '(' + Math.round(institution_student_cnt / total_cnt * 100).toString() + '%)'
+          if (total_cnt > 0){
+            institution_student += '(' + Math.round(institution_student_int / total_student * 100).toString() + '%)'
+            institution_cnt += '(' + Math.round(institution_student_cnt / total_cnt * 100).toString() + '%)'
+          }
           statistic_list.push({ 'school': '童伴时光', 'total_student': institution_student, 'total_count': institution_cnt })
           statistic_list.push({'school':'总计', 'total_student': total_student, 'total_count': total_cnt})
           that.setData({ statistics: statistic_list })

@@ -4,6 +4,8 @@ require 'vendor/autoload.php';
 JpGraph\JpGraph::load();
 JpGraph\JpGraph::module('bar');
 JpGraph\JpGraph::module('line');
+
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
 
@@ -21,9 +23,9 @@ $graph->yaxis->title->SetFont(FF_CHINESE, FS_NORMAL, 10);
           
 if($plot_type == 'bar'){
     $graph->xaxis->SetTickLabels(array('1', '2', '3', '4', '5', '6', '7', '8-9', '10-14', '15+'));
-    $graph->title->Set('星语志愿者参与活动次数统计图');
-    $graph->xaxis->title->Set('次');
-    $graph->yaxis->title->Set('人');
+    $graph->title->Set($bar_plot_name);
+    $graph->xaxis->title->Set($number_of_time_chinese);
+    $graph->yaxis->title->Set($people);
 	$sql = 'select times, count(times) from (select s.name, count(s.id) as times from '.getTablePrefix().'_student as s, '.getTablePrefix().'_activity as a, '.getTablePrefix().'_student_activity as sa where s.id = sa.student_id and a.id = sa.activity_id group by s.name order by count(s.id) desc) as old group by times asc';
 	$res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $rows = mysqli_fetch_all($res);
@@ -82,9 +84,9 @@ else{
     }
     $graph->xaxis->SetTickLabels($array_x);
 
-    $graph->title->Set('星语志愿者参与活动人数变化图');
-    $graph->xaxis->title->Set('周');
-    $graph->yaxis->SetTitle('人', 'high');
+    $graph->title->Set($line_plot_name);
+    $graph->xaxis->title->Set($week_chinese);
+    $graph->yaxis->SetTitle($people, 'high');
     $lineplot = new LinePlot($array_y);
     $graph->Add($lineplot);	
 }

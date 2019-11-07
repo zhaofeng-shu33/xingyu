@@ -1,6 +1,8 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $name = $_GET['student_group'];
 $week = $_GET['week'];
 $db = getDb();
@@ -37,10 +39,10 @@ else{
     if($week == null || intval($week) == 0){
         exitJson(2, 'invalid week');
     }
-    if($name == '流动')
+    if($name == $temp_group_name)
         exitJson(0, 'no result for flow',[]);
     
-    // convert szu calendar to 阳历
+    // convert szu calendar to solar calendar
     $start_time = get_semester_start_date($db, $semester);
 
     $date=date_create($start_time);

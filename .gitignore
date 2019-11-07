@@ -6,3 +6,4 @@ data.sql
 /.vs
 submit/
 build/
+tests/production.sql

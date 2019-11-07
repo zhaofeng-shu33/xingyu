@@ -1,6 +1,8 @@
 <?php
+include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+
 $name_prefix = $_GET['student_name_prefix'];
 if($name_prefix == null || $name_prefix == ''){
     exitJson(1, 'null name prefix');
@@ -20,7 +22,7 @@ else{
 }
 
 
-$sql_s = 'select id from '.getTablePrefix()."_group where name = '流动' and semester_id = $semester_id";
+$sql_s = 'select id from '.getTablePrefix()."_group where name = '$temp_group_name' and semester_id = $semester_id";
 $res_s = mysqli_query($db, $sql_s) or die(mysqli_error($db));
 $row_s = mysqli_fetch_assoc($res_s);
 if($row_s['id'] == null){

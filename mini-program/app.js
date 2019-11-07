@@ -82,7 +82,7 @@ App({
               this.globalData.openid = res.data.result.openid;
             }
             else{
-              wx.showToast({ title: 'server error' })
+              wx.showToast({ title: 'config error' })
             }
           },
           fail: function () {
