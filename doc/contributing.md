@@ -20,6 +20,8 @@ server `php -S localhost:8080` at `backend` directory. Next open another console
 ```shell
 composer install # at backend directory
 ```
+For Chinese users, configure the mirror first.
+See [aliyun](https://mirrors.aliyun.com/composer/).
 
 ## Deployment machine
 Currently, I use Apache on Ubuntu Server to deploy the backend codes.
