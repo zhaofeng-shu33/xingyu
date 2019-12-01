@@ -14,7 +14,9 @@ $plot_type = $_GET['type'];
 if($plot_type != 'bar' && $plot_type != 'line'){
     exit();
 }
-$graph = new Graph(400, 250);
+$pic_width = 400;
+$pic_height = 250;
+$graph = new Graph($pic_width, $pic_height);
 $graph->SetScale('textlin');
 $db = getDb();
 $graph->title->SetFont(FF_CHINESE, FS_NORMAL, 16);
