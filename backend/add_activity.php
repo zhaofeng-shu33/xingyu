@@ -79,6 +79,7 @@ if($row['id'] != null){
 $sql = 'insert into '.getTablePrefix()."_activity (name, location, time, institution, group_id) values ('$name', '$location', '$date_str', '$location', $group_id)";
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $activity_id = mysqli_insert_id($db);
+$list = array_unique($list);
 foreach($list as $student){
     // first get student id
     $sql_s = 'select id from '.getTablePrefix()."_student where name = '$student'";
