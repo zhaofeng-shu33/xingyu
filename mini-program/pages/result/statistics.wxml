@@ -10,8 +10,8 @@
   <view class="weui-cells weui-cells_after-title" style="width:100%;">
             <view class="weui-cell">
                 <view class="statistic-cell">
-                  学校/机构
-                  </view>
+                  <button bindtap="change_current_show">{{current_show}}</button>                  
+                </view>
                   <view class="statistic-cell">总人数</view>
                   <view class="statistic-cell">总人次</view>
             </view>
@@ -19,14 +19,14 @@
                     <view class="statistic-cell" wx:if="{{item.school == '总计'}}">
                       {{item.school}}
                     </view>
-                    <view class="statistic-cell" wx:elif="{{item.school == '童伴时光'}}"> 
+                    <view class="statistic-cell" wx:elif="{{item.school.length >= 4}}"> 
                       <button bindtap="get_excel" data-school="{{item.school}}" class="xingyu-institution">{{item.school}}</button>
-                    </view>                    
+                    </view>
                     <view class="statistic-cell" wx:else>
                       <button bindtap="get_excel" data-school="{{item.school}}">{{item.school}}</button>
                     </view>
                     <view class="statistic-cell">{{item.total_student}}</view>
                     <view class="statistic-cell">{{item.total_count}}</view>                 
-            </view>        
+            </view>
   </view>
 </view>
