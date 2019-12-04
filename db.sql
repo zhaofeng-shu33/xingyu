@@ -7,7 +7,7 @@ use xingyu;
 create table xingyu_semester(
     id int primary key auto_increment,
     name varchar(10),
-	start_time date not null
+    start_time date not null
 );
 create table xingyu_group(
     id int primary key auto_increment,

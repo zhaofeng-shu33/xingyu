@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -14,7 +14,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
-	"appid": "wxd0bc65d07e3eb540",
+	"appid": "wx8649fd7dd26a3f89",
 	"projectname": "xingyu-mini-program-frontend",
 	"cloudfunctionTemplateRoot": "",
 	"debugOptions": {

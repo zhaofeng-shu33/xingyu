@@ -40,7 +40,9 @@ Make sure Backend settings are finished.
 * (Optional) Add the group privilege to one test student. For example:
    ```shell
     mysql -uxingyu -pxingyu -Dxingyu -e "update xingyu_student set wechat_nickname='your_wechat_displayname' where name='张三';" # 
+    # Note: nickname != wechat_unique_id
    ```
+   
 For how to obtain test account, see
 * [official guide](https://developers.weixin.qq.com/miniprogram/dev/devtools/sandbox.html)
 * [solve blank account](https://developers.weixin.qq.com/community/develop/doc/000886459dc1b8be37a8c677b51000)
