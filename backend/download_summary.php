@@ -15,7 +15,9 @@ $valid_school_list = array();
 foreach($organization_list as $key => $val){
 	array_push($valid_school_list, $key);
 }
-array_push($valid_school_list, '童伴时光');
+foreach($institution_list as $val){
+    array_push($valid_school_list, $val);
+}
 
 if($school == null || array_search($school, $valid_school_list) === false){
 	http_response_code(400);
