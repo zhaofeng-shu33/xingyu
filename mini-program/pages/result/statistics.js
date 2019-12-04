@@ -20,7 +20,7 @@ Page({
   get_excel: function(event){
   	var school_chinese_name = event.currentTarget.dataset.school;
     var school_name;
-    if (school_chinese_name == '童伴时光')
+    if (this.data.current_show = '机构')
       school_name = school_chinese_name;
     else{
       school_name = app.SchoolMapping[school_chinese_name];
