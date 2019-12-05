@@ -27,16 +27,22 @@ if($nickname == null || $nickname == ''){
     exitJson(3, 'null nickname');
 }
 
-//save the openid to the database, where nickname matches database nickname
+// save the openid to the database, where nickname matches database nickname
 $db = getDb();
-$sql = 'select id from ' . getTablePrefix() . "_student where wechat_nickname = '$nickname'";	
+$sql = 'select id, wechat_openid from ' . getTablePrefix() . "_student where wechat_nickname = '$nickname'";	
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
-if($row['id'] == null){
+if($row['id'] == null) {
 	exitJson(5, 'student not exists');
 }
-$id = $row['id'];
-$sql_u = 'update '. getTablePrefix() . "_student set wechat_openid = '$openid' where id = $id";
-mysqli_query($db, $sql_u) or die(mysqli_error($db));
+if($row['wechat_openid'] != null) {
+    if($row['id'] != $openid)
+        exitJson(6, 'incorrect openid');    
+}
+else {
+    $id = $row['id'];
+    $sql_u = 'update '. getTablePrefix() . "_student set wechat_openid = '$openid' where id = $id";
+    mysqli_query($db, $sql_u) or die(mysqli_error($db));
+}
 exitJson(0, 'succ');
 ?>

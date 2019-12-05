@@ -52,7 +52,10 @@ Make sure backend settings are finished before you start front end development.
    ```
    
 
+After changing the default value in `config.json`, run `php generate-config.php` within the same directory to generate `project.config.json` and `config.js`.
+
 For how to obtain test account, see
+
 * [official guide](https://developers.weixin.qq.com/miniprogram/dev/devtools/sandbox.html)
 * [solve blank account](https://developers.weixin.qq.com/community/develop/doc/000886459dc1b8be37a8c677b51000)
 
