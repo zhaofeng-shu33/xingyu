@@ -4,6 +4,7 @@ data.sql
 /mini-program/style
 /mini-program/project.config.json
 /mini-program/config.js
+/mini-program/config.json
 .DS_Store
 /.vs
 submit/
