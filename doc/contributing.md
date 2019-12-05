@@ -16,6 +16,9 @@ To automate this process we provide the script `tests/reinit_database.sh` (`test
 Then you start the php developing
 server `php -S localhost:8080` at `backend` directory. Next open another console and use the repository root as your working directory. Set environment variable `XINGYU_ROOT=http://localhost:8080/`. Finally, run `phpunit tests` to run all tests.
 
+
+You can join the [slack](https://lab2c.slack.com/join/shared_invite/enQtODQyMTY4OTcyNTMwLWRkOTlkYmM2MWI3NGYzOWMwYTRkYzEzMTBjNjcxMWMxNTMxZjg2N2U1YzE5ZjI4YTE3ZTQ2ZWU2YzEyODNmMmU) channel `xingyu` to communicate.
+
 ## Install dependencies
 
 ```shell

@@ -10,3 +10,4 @@ data.sql
 submit/
 build/
 tests/production.sql
+phpcs.phar

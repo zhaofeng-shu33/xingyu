@@ -78,7 +78,7 @@ foreach($list as $student){
     $row_s_a = mysqli_fetch_assoc($res_s_a);
     if($row_s_a['id'] == null){ // student has already joined this activity
         continue;
-    }    
+    }
     $sql_r = 'delete from '.getTablePrefix()."_student_activity where student_id = $student_id and activity_id = $activity_id";
     $res_r = mysqli_query($db, $sql_r) or die(mysqli_error($db));
 }

@@ -36,7 +36,7 @@ if($row['id'] == null) {
 	exitJson(5, 'student not exists');
 }
 if($row['wechat_openid'] != null) {
-    if($row['id'] != $openid)
+    if($row['wechat_openid'] != $openid)
         exitJson(6, 'incorrect openid');    
 }
 else {
