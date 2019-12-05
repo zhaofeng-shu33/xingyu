@@ -15,6 +15,7 @@ To automate this process we provide the script `tests/reinit_database.sh` (`test
 
 Then you start the php developing
 server `php -S localhost:8080` at `backend` directory. Next open another console and use the repository root as your working directory. Set environment variable `XINGYU_ROOT=http://localhost:8080/`. Finally, run `phpunit tests` to run all tests.
+
 ## Install dependencies
 
 ```shell
@@ -30,22 +31,30 @@ Currently, I use Apache on Ubuntu Server to deploy the backend codes.
 Each group should contains the target organization name. For example, if your volunteer organization is to serve old people in Sunset House every Friday. 
 Then your group name should be called 'Friday Sunset House'.
 
-## Frontend development
-You need wechat developer tool as prerequisite and of course you need a wechat account.
-Make sure Backend settings are finished.
+## Backend with wechat integration
 
-* Change the `host` variable in `miniprogram/config.js` to your localhost url.
-* Change the `appid` and `appsecret` in `backend/mysql.php` to your test appid and appsecret.
-* Change the `appid` in `miniprogram/project.config.json` to your test appid.
-* (Optional) Add the group privilege to one test student. For example:
+Change the `appid` and `appsecret` in `backend/mysql.php` to your test appid and appsecret. This step is required if you need frontend login.
+
+## Front end development
+You need wechat developer tool as prerequisite and of course you need a wechat account.
+Make sure backend settings are finished before you start front end development.
+
+* Copy `config.json.sample` to `config.json` in the same directory.
+
+* Change the `host` variable in `miniprogram/config.json` to your localhost url.
+
+* (required for login feature) Change the `appid` in `miniprogram/config.json` to your test appid.
+
+* (required for login feature) Add the group privilege to one test student. For example:
    ```shell
     mysql -uxingyu -pxingyu -Dxingyu -e "update xingyu_student set wechat_nickname='your_wechat_displayname' where name='张三';" # 
     # Note: nickname != wechat_unique_id
    ```
    
+
 For how to obtain test account, see
 * [official guide](https://developers.weixin.qq.com/miniprogram/dev/devtools/sandbox.html)
 * [solve blank account](https://developers.weixin.qq.com/community/develop/doc/000886459dc1b8be37a8c677b51000)
 
-I think this platform is restrictive and I am considering abandon this frontend in the future.
+I think this platform is restrictive and I am considering abandon this front end in the future.
 
