@@ -106,3 +106,7 @@ See [contributing](doc/contributing.md)
 * 修复 提交 的 semester_id 类型必须是int 的bug
 * 增删组别允许流动组
 * 修复更改组别提示信息姓名显示有误
+
+## v1.9（12月5日）
+* 将机构与学校统计数据分为两个页面显示
+* 增加金色年华详细数据下载链接
