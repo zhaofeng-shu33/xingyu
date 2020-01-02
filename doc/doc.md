@@ -19,8 +19,7 @@ result['student_list'] = [[name, school],[name_2, school_2]]
 
 3. `$root` 表示应用部署的根URL。
 
-4. semester 这个参数为1表示2018年秋季学期，为2表示2019年春季学期，在 GET 和 POST 请求中，不提供这个参数默认为当前
-学期。
+4. semester 这个参数表示学期的id号(int类型)，在 GET 和 POST 请求中，不提供这个参数默认为当前学期。
 
 5. 小组名称（2019年春季学期）：周一下午、周二下午、周四下午金色年华、周四下午童伴时光、周五下午单周、周四下午双周
 
@@ -37,7 +36,7 @@ curl -X POST $root/xingyu/add_student_flow.php -H "Content-Type: application/jso
 ```shell
 curl -X GET "$root/xingyu/get_student_list.php?student_name_prefix=张&semester=2"
 ```
-semester为可选参数，不提供默认为当前学期。
+semester为可选参数
 返回结果为 `result['student_list']`
 
 3. 获取某个活动的固定志愿者
@@ -51,7 +50,7 @@ curl -X GET $root/xingyu/get_fixed_student.php?student_group=[group_name]&semest
 curl -X POST $root/xingyu/add_activity.php -H "Content-Type: application/json" -d '{"week":3,"name":"周二下午", "student_list":["张三"]}'
 ```
 必有参数为 深大的周数(week)，int；[3-18] 和小组名称(name)(string)；以及学生名字列表(student_list:['name_1','name_2'])
-可选参数为 semester（int 类型）.
+可选参数为 semester
 返回结果 err = 5 时表示该活动已经存在。
 
 5. 获取某学期小组列表
