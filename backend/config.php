@@ -11,4 +11,10 @@ $line_plot_name = $project_name . '志愿者参与活动人数变化图';
 $people = '人';
 $week_chinese = '周';
 $number_of_time_chinese = '次';
+
+$volunteer_name = '志愿者姓名';
+$school = '学校';
+$activity_name = '活动名称';
+$activity_time = '活动时间';
+$activity_spot = '活动地点';
 ?>

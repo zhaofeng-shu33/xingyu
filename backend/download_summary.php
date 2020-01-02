@@ -30,11 +30,11 @@ $db = getDb();
 
 if(array_search($school, $institution_list) !== FALSE){
 	$spreadsheet->setActiveSheetIndex(0)
-		->setCellValue('A1', '志愿者姓名')
-		->setCellValue('B1', '所在学校')
-		->setCellValue('C1', '活动名称')
-		->setCellValue('D1', '活动时间')
-		->setCellValue('E1', '活动地点');
+		->setCellValue('A1', $volunteer_name)
+		->setCellValue('B1', $school)
+		->setCellValue('C1', $activity_name)
+		->setCellValue('D1', $activity_time)
+		->setCellValue('E1', $activity_spot);
 	$school_map = $organization_list;
 	$sql = "SELECT s.name, s.school, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and a.institution = '$school'";
 	$res=mysqli_query($db, $sql) or die(mysqli_error($db));
@@ -50,10 +50,10 @@ if(array_search($school, $institution_list) !== FALSE){
 }
 else{
 	$spreadsheet->setActiveSheetIndex(0)
-		->setCellValue('A1', '姓名')
-		->setCellValue('B1', '活动名称')
-		->setCellValue('C1', '活动时间')
-		->setCellValue('D1', '活动地点');
+		->setCellValue('A1', $volunteer_name)
+		->setCellValue('B1', $activity_name)
+		->setCellValue('C1', $activity_time)
+		->setCellValue('D1', $activity_spot);
 	$semester_id = get_current_semester($db);	
     $start_time = get_semester_start_date($db, $semester_id);
 	$sql = "SELECT s.name, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and s.school = '" . $school . "' and a.time > '$start_time'";
