@@ -22,15 +22,7 @@ if($group_name != null){
 	if($group_id != null)
 		$group_id = intval($group_id);
 }
-if($openid != null && $openid != ''){
-    $not_admin = !is_admin($db, $openid);
-}
-else{
-    $not_admin = True;
-}
-if($not_admin){
-    exitJson(44, 'you do not have the privilege');
-}
+ensure_admin($db, $openid);
 if($name == null || $name == ''){
     exitJson(1, 'null name');
 }

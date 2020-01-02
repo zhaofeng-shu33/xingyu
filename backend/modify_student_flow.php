@@ -9,16 +9,7 @@ $school=$jsondata->student_school;
 $name=$jsondata->student_name;
 $openid = $jsondata->openid;
 $db = getDb();
-if($openid != null && $openid != ''){
-    $not_admin = !is_admin($db, $openid);
-}
-else{
-    $not_admin = True;
-}
-if($not_admin){
-    exitJson(44, 'you do not have the privilege');
-}
-
+ensure_admin($db, $openid);
 if($name == null || $name == ''){
     exitJson(1, 'null name');
 }
