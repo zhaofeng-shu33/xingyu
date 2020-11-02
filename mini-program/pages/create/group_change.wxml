@@ -29,5 +29,10 @@
         <button class="weui-btn" type="secondary" open-type="getUserInfo" bindgetuserinfo="delete_wrapper">删除</button>
       </view>
     </view>  
+    <view class="weui-btn-area weui-flex">
+        <navigator url="/pages/create/manage">
+          <button class="weui-btn" type="secondary">管理</button>
+        </navigator>
+    </view>
 </view>
 

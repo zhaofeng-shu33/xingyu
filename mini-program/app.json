@@ -7,7 +7,8 @@
     "pages/result/activity_detail",
     "pages/create/group_change",
     "pages/result/statistics",
-    "pages/result/visualization"
+    "pages/result/visualization",
+    "pages/create/manage"
   ],
   "window": {
     "backgroundTextStyle": "light",

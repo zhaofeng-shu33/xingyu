@@ -10,8 +10,8 @@ include_once 'mysql.php';
 include_once 'functions.php';
 $file_key = 'volunteer';
 $file_obj = $_FILES[$file_key];
-$open_id = $_SERVER["HTTP_OPENID"];
-$semester_time = $_SERVER["HTTP_TIME"];
+$open_id = isset($_POST["openid"]) ? $_POST["openid"]: null;
+$semester_time = isset($_POST["time"]) ? $_POST["time"]: null;
 $db = getDb();
 ensure_admin($db, $open_id);
 if ($semester_time != null) {
