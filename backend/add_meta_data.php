@@ -14,7 +14,17 @@ $open_id = isset($_POST["openid"]) ? $_POST["openid"]: null;
 $semester_time = isset($_POST["time"]) ? $_POST["time"]: null;
 $db = getDb();
 ensure_admin($db, $open_id);
+function check_date($db, $date_str) {
+    // return False if the date is invalid
+    $sql = 'select start_time from '.getTablePrefix()."_semester order by start_time desc limit 1";
+    $res = mysqli_query($db, $sql) or die(mysqli_error($db));
+    $res = mysqli_fetch_assoc($res)["start_time"];
+    return $res < $date_str;
+}
 if ($semester_time != null) {
+    if (check_date($db, $date_str) == False) {
+        exitJson(5, "invalid time");
+    }
     $date = date_create($semester_time);
     $name = $date->format('Y');
     if ($date->format('m') <= '06') {
