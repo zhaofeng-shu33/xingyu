@@ -85,6 +85,16 @@ function add_student_and_group($db, $name, $school, $nickname, $group_id) {
 }
 for ($row = 2; $row <= $highestRow; $row++) {
     $group_name = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+    $group_name_valid = False;
+    foreach($institution_list as $val) {
+        if (strpos($group_name, $val) != FALSE) {
+            $group_name_valid = True;
+            break;            
+        }
+    }
+    if ($group_name_valid == False) {
+        exitJson(5, 'invalid group name at row ' . $row);
+    }
     $sql = "select id from ".getTablePrefix()."_group where name = '" . $group_name . "' and semester_id = " . $semester_id;
     $res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $group_id = mysqli_fetch_assoc($res)["id"];
@@ -97,7 +107,10 @@ for ($row = 2; $row <= $highestRow; $row++) {
     $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
     $student_school = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
     $nickname = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-    $school = $organization_reverse_list[$student_school];
+    $school =  isset($organization_reverse_list[$student_school]) ? $organization_reverse_list[$student_school] : null;
+    if ($school == null) {
+        exitJson(5, 'invalid school name at row ' . $row);
+    }
     add_student_and_group($db, $name, $school, $nickname, $group_id);
 }
 exitJson(0, '');
