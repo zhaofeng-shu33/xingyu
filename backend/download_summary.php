@@ -37,7 +37,7 @@ if(array_search($school, $institution_list) !== FALSE){
 		->setCellValue('E1', $activity_spot);
 	$school_map = $organization_list;
 	$sql = "SELECT s.name, s.school, a.name, a.time, a.location from ".getTablePrefix()."_activity as a, ".getTablePrefix()."_student as s, ".getTablePrefix()."_student_activity as sa where sa.student_id = s.id and sa.activity_id = a.id and a.institution = '$school'";
-	$res=mysqli_query($db, $sql) or die(mysqli_error($db));
+	$res = mysqli_query($db, $sql) or die(mysqli_error($db));
 	$rows = mysqli_fetch_all($res);
 	for($i=0; $i<count($rows); $i++){
 		$spreadsheet->setActiveSheetIndex(0)
