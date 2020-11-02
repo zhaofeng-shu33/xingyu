@@ -3,13 +3,13 @@ include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
 
-$postdata=file_get_contents("php://input");
+$postdata = file_get_contents("php://input");
 
-$jsondata=json_decode($postdata);
+$jsondata = json_decode($postdata);
 
-$week=$jsondata->week;
-$name=$jsondata->name;
-$list=$jsondata->student_list;
+$week = $jsondata->week;
+$name = $jsondata->name;
+$list = $jsondata->student_list;
 $semester_id = isset($jsondata->semester) ? $jsondata->semester : null;
 $openid = $jsondata->openid;
 $db = getDb();
@@ -19,7 +19,7 @@ if($semester_id == null){
     $semester_id = get_current_semester($db);
 }
 elseif(gettype($semester_id) != 'integer'){
-    exitJson(6, 'invalid semester');    
+    exitJson(6, 'invalid semester');
 }
 
 if($week == null || gettype($week)!='integer'){
@@ -48,7 +48,7 @@ if($list == null || gettype($list)!='array'){
 
 // set the location of the activity
 $location = get_location($name);
-if($location == ''){
+if($location == '') {
     exitJson(10, 'group name does not contain location information');
 }
 
@@ -79,7 +79,7 @@ foreach($list as $student){
     $row_s = mysqli_fetch_assoc($res_s);
     if($row_s['id'] == null){
         exitJson(7, 'student '. $student. ' not exists in db');
-    }    
+    }
     $student_id = $row_s['id'];
     $sql_r = 'insert into '.getTablePrefix()."_student_activity (student_id, activity_id) values ($student_id, $activity_id)";
     $res_r=mysqli_query($db, $sql_r) or die(mysqli_error($db));

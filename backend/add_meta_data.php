@@ -7,31 +7,47 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
+$file_key = 'volunteer';
+$file_obj = $_FILES[$file_key];
+
 $organization_reverse_list = array('清华' => 'thu', '北大' => 'pku',
     '哈工大' => 'hit', '南科大' => 'sust',  '深大' => 'szu');
 
 
 $reader = IOFactory::createReader("Xlsx");
-$spreadsheet = $reader->load("meta_data.xlsx");
-$worksheet = $spreadsheet->getActiveSheet();
-$highestRow = $worksheet->getHighestRow(); // e.g. 10
+try {
+    $spreadsheet = $reader->load($file_obj["tmp_name"]);
+    $worksheet = $spreadsheet->getActiveSheet();
+    $highestRow = $worksheet->getHighestRow(); // e.g. 10    
+} catch (Exception $e) {
+    exitJson(5, $e->getMessage());
+}
 $highestColumn = 4;
 
 $db = getDb();
 $semester_id = get_current_semester($db);
 
 
-function add_student_and_group($db, $name, $school, $group_id) {
+function add_student_and_group($db, $name, $school, $nickname, $group_id) {
     $sql_s = 'select id from '.getTablePrefix()."_student where name = '$name'";
     $res = mysqli_query($db, $sql_s) or die(mysqli_error($db));
     $row = mysqli_fetch_assoc($res);
-    if($row['id'] == null) { // student not exist
-        $sql = 'insert into '.getTablePrefix()."_student (name, school) values ('$name', '$school')";
-        $res = mysqli_query($db, $sql) or die(mysqli_error($db));    
+    if ($row['id'] == null) { // student not exist
+        $sql = '';
+        if ($nickname == '') {
+            $sql = 'insert into '.getTablePrefix()."_student (name, school) values ('$name', '$school')";
+        } else {
+            $sql = 'insert into '.getTablePrefix()."_student (name, school, wechat_nickname) values ('$name', '$school', '$nickname')";
+        }
+        $res = mysqli_query($db, $sql) or die(mysqli_error($db));
         $student_id =  mysqli_insert_id($db);
     }
     else {// if student exists, don't trigger any error
         $student_id = $row['id'];
+        if ($nickname != '') {
+            $sql = 'update '.getTablePrefix()."_student set wechat_nickname = '$nickname' where id = $student_id";
+            mysqli_query($db, $sql) or die(mysqli_error($db));
+        }
         $sql_sg = 'select id from '.getTablePrefix()."_student_group where student_id = $student_id and group_id = $group_id";
         $res_sg = mysqli_query($db, $sql_sg) or die(mysqli_error($db));    
         $row_sg = mysqli_fetch_assoc($res_sg);
@@ -56,9 +72,9 @@ for ($row = 2; $row <= $highestRow; $row++) {
     }
     $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
     $student_school = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+    $nickname = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
     $school = $organization_reverse_list[$student_school];
-    add_student_and_group($db, $name, $school, $group_id);
-    // Todo: add group leader nickname if exists
+    add_student_and_group($db, $name, $school, $nickname, $group_id);
 }
-
+exitJson(0, '');
 ?>

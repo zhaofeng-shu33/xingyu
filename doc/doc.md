@@ -135,6 +135,17 @@ curl -X GET $root/xingyu/plot.php?type=line&semester=2
 ```
 bar plot 绘制所有学期的次数-人数统计图， line plot 绘制某学期人数随周数变化图。 返回 png 格式的图片。
 
+16. 批量录入志愿者信息接口
+```
+curl -F 'volunteer=@meta_data.xlsx' $root/add_meta_data.php
+```
+post 传一个 xlsx 文件， name 是 volunteer
+xlsx 文件中共有四列，第一行是表头，从第二行开始，依次填入
+
+组别	姓名	学校	微信昵称（只需填写组长）
+
+返回结果 err = 5 时表示录入失败。
+
 ## 登录相关
 
 登录相关：第一次登录需同时完成1和2两步，假如只完成一步也算第一次登录失败。后面登录只需完成第1步。
