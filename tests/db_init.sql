@@ -10,6 +10,7 @@ insert into xingyu_student (name, school, wechat_openid) values ('张四', 'hit'
 
 insert into xingyu_semester (name, start_time) values ('2018秋季学期', '2018-09-03');
 insert into xingyu_semester (name, start_time) values ('2019春季学期', '2019-03-04');
+insert into xingyu_semester (name, start_time) values ('2019秋季学期', '2019-09-04');
 insert into xingyu_semester (name, start_time) values ('2020秋季学期', '2019-09-14');
 
 insert into xingyu_group (name, semester_id) values ('流动', 3);

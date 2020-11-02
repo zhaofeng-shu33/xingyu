@@ -17,8 +17,9 @@ $worksheet = $spreadsheet->getActiveSheet();
 $highestRow = $worksheet->getHighestRow(); // e.g. 10
 $highestColumn = 4;
 
-$semester_id = 4;
 $db = getDb();
+$semester_id = get_current_semester($db);
+
 
 function add_student_and_group($db, $name, $school, $group_id) {
     $sql_s = 'select id from '.getTablePrefix()."_student where name = '$name'";
@@ -44,13 +45,20 @@ function add_student_and_group($db, $name, $school, $group_id) {
 }
 for ($row = 2; $row <= $highestRow; $row++) {
     $group_name = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-    $sql = "SELECT id from ".getTablePrefix()."_group where name = '" . $group_name . "' and semester_id = " . $semester_id;
+    $sql = "select id from ".getTablePrefix()."_group where name = '" . $group_name . "' and semester_id = " . $semester_id;
     $res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $group_id = mysqli_fetch_assoc($res)["id"];
+    // if group not exist, create the group
+    if ($group_id == null) {
+        $sql = 'insert into '.getTablePrefix()."_group (name, semester_id) values ('$group_name', $semester_id)";        
+        $res = mysqli_query($db, $sql) or die(mysqli_error($db));
+        $group_id =  mysqli_insert_id($db);
+    }
     $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
     $student_school = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
     $school = $organization_reverse_list[$student_school];
     add_student_and_group($db, $name, $school, $group_id);
+    // Todo: add group leader nickname if exists
 }
 
 ?>
