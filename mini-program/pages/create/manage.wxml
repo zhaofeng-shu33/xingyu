@@ -1,0 +1,40 @@
+<!--pages/create/manage.wxml-->
+
+<!--pages/create/group_change.wxml-->
+<view class="container">
+ <text>新学期设置</text>
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">日期</view>
+        </view>
+      <view class="weui-cell__bd">
+         <picker mode="date" bindchange="bindPickerChange"
+         value="{{start_time}}" start="2020-01-01"
+         end="2040-01-01">
+         <button type="default">{{start_time}}</button>  
+         </picker>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">志愿者名单</view>
+        </view>
+        <view class="weui-cell__bd">
+        <button type="default"
+        bindtap="bindSelect"
+        >{{file_name}}</button>  
+        </view>
+    </view>            
+ 
+  </view>
+
+  <view class="weui-btn-area weui-flex">
+    <view>
+      <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="add_wrapper">提交</button>
+    </view>
+  </view>  
+
+</view>
+

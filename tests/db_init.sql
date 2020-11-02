@@ -24,5 +24,3 @@ insert into xingyu_student_group (student_id, group_id) values (2, 2);
 -- 张三、张四在2019秋季学期流动组
 insert into xingyu_student_group (student_id, group_id) values (3, 1);
 insert into xingyu_student_group (student_id, group_id) values (4, 1);
-
-

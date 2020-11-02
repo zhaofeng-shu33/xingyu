@@ -17,4 +17,7 @@ $school = '学校';
 $activity_name = '活动名称';
 $activity_time = '活动时间';
 $activity_spot = '活动地点';
+
+$season_spring = '春季学期';
+$season_autumn = '秋季学期';
 ?>
