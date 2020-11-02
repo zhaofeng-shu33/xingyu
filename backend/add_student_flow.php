@@ -3,12 +3,12 @@ include_once 'config.php';
 include_once 'mysql.php';
 include_once 'functions.php';
 
-$postdata=file_get_contents("php://input");
+$postdata = file_get_contents("php://input");
 
-$jsondata=json_decode($postdata);
+$jsondata = json_decode($postdata);
 
-$school=$jsondata->student_school;
-$name=$jsondata->student_name;
+$school = $jsondata->student_school;
+$name = $jsondata->student_name;
 $openid = $jsondata->openid;
 
 $db = getDb();
@@ -25,7 +25,7 @@ $res = mysqli_query($db, $sql_s) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
 if($row['id'] == null) { // student not exist
     $sql = 'insert into '.getTablePrefix()."_student (name, school) values ('$name', '$school')";
-    $res=mysqli_query($db, $sql) or die(mysqli_error($db));    
+    $res = mysqli_query($db, $sql) or die(mysqli_error($db));    
     $student_id =  mysqli_insert_id($db);
 }
 else {// if student exists, don't trigger any error

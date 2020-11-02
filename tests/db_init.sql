@@ -10,12 +10,14 @@ insert into xingyu_student (name, school, wechat_openid) values ('张四', 'hit'
 
 insert into xingyu_semester (name, start_time) values ('2018秋季学期', '2018-09-03');
 insert into xingyu_semester (name, start_time) values ('2019春季学期', '2019-03-04');
-insert into xingyu_semester (name, start_time) values ('2019秋季学期', '2019-09-07');
+insert into xingyu_semester (name, start_time) values ('2020秋季学期', '2019-09-14');
 
 insert into xingyu_group (name, semester_id) values ('流动', 3);
 insert into xingyu_group (name, semester_id) values ('周一下午金色年华', 3);
-insert into xingyu_group (name, semester_id) values ('周一下午童伴时光', 3);
+insert into xingyu_group (name, semester_id) values ('周一下午童伴时光', 4);
 insert into xingyu_group (name, semester_id) values ('周二下午金色年华', 1);
+
+
 
 -- 赵丰在2019秋季学期周一下午金色年华组
 insert into xingyu_student_group (student_id, group_id) values (1, 2);
