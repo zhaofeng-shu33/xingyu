@@ -1,4 +1,5 @@
 <?php
+// api: https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html
 require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -9,6 +10,29 @@ include_once 'mysql.php';
 include_once 'functions.php';
 $file_key = 'volunteer';
 $file_obj = $_FILES[$file_key];
+$open_id = $_SERVER["HTTP_OPENID"];
+$semester_time = $_SERVER["HTTP_TIME"];
+$db = getDb();
+ensure_admin($db, $open_id);
+if ($semester_time != null) {
+    $date = date_create($semester_time);
+    $name = $date->format('Y');
+    if ($date->format('m') <= '06') {
+        $name = $name . $season_spring;
+    } else {
+        $name = $name . $season_autumn;
+    }
+    $sql_s = 'select id from '.getTablePrefix()."_semester where name = '$name'";
+    $res = mysqli_query($db, $sql_s) or die(mysqli_error($db));
+    $row_id = mysqli_fetch_assoc($res)['id'];
+    if ($row_id == null) { // semester not exist
+        $sql = 'insert into '.getTablePrefix()."_semester (name, start_time) values ('$name', '$semester_time')";
+        $res = mysqli_query($db, $sql) or die(mysqli_error($db)); 
+    } else { // semester exists, update the start time only
+        $sql = 'update '.getTablePrefix()."_semester set start_time = '$semester_time' where id = $row_id";
+        $res = mysqli_query($db, $sql) or die(mysqli_error($db)); 
+    }
+}
 
 $organization_reverse_list = array('清华' => 'thu', '北大' => 'pku',
     '哈工大' => 'hit', '南科大' => 'sust',  '深大' => 'szu');
@@ -24,7 +48,7 @@ try {
 }
 $highestColumn = 4;
 
-$db = getDb();
+
 $semester_id = get_current_semester($db);
 
 
