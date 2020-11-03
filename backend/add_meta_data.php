@@ -19,7 +19,7 @@ function check_date($db, $date_str) {
     $sql = 'select start_time from '.getTablePrefix()."_semester order by start_time desc limit 1";
     $res = mysqli_query($db, $sql) or die(mysqli_error($db));
     $res = mysqli_fetch_assoc($res)["start_time"];
-    return $res < $date_str;
+    return $res <= $date_str;
 }
 if ($semester_time != null) {
     if (check_date($db, $date_str) == False) {
