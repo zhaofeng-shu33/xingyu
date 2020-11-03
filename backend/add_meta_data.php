@@ -22,7 +22,7 @@ function check_date($db, $date_str) {
     return $res <= $date_str;
 }
 if ($semester_time != null) {
-    if (check_date($db, $date_str) == False) {
+    if (check_date($db, $semester_time) == False) {
         exitJson(5, "invalid time");
     }
     $date = date_create($semester_time);

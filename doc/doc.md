@@ -137,7 +137,7 @@ bar plot 绘制所有学期的次数-人数统计图， line plot 绘制某学�
 
 16. 批量录入志愿者信息接口
 ```
-curl -X POST -d 'openid=abc' -F 'volunteer=@meta_data.xlsx' $root/add_meta_data.php
+curl -F 'openid=abc' -F 'volunteer=@meta_data.xlsx' $root/add_meta_data.php
 ```
 请求的 header 中需含有 openid 头，用来校验权限。
 请求的 header 中可以含有 time 头，这个是可选的，格式是 '2020-09-01'，表示本学期深圳大学校历第一周的星期一的日期。
