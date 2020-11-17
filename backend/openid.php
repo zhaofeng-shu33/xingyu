@@ -29,7 +29,15 @@ if($nickname == null || $nickname == ''){
 
 // save the openid to the database, where nickname matches database nickname
 $db = getDb();
-$sql = 'select id, wechat_openid from ' . getTablePrefix() . "_student where wechat_nickname = '$nickname'";	
+// first, check whether the openid already exists
+$sql = 'select id from ' . getTablePrefix() . "_student where wechat_openid = '$openid'";
+$res = mysqli_query($db, $sql) or die(mysqli_error($db));
+$row = mysqli_fetch_assoc($res);
+if ($row['id'] != null) {
+	// openid already exists
+	exitJson(0, 'succ');
+}
+$sql = 'select id, wechat_openid from ' . getTablePrefix() . "_student where wechat_nickname = '$nickname'";
 $res = mysqli_query($db, $sql) or die(mysqli_error($db));
 $row = mysqli_fetch_assoc($res);
 if($row['id'] == null) {
