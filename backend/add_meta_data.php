@@ -102,7 +102,7 @@ for ($row = 2; $row <= $highestRow; $row++) {
             break;            
         }
     }
-    if ($group_name_valid == False) {
+    if ($group_name_valid == False && $group_name != $temp_group_name) {
         exitJson(5, 'invalid group name at row ' . $row);
     }
     $sql = "select id from ".getTablePrefix()."_group where name = '" . $group_name . "' and semester_id = " . $semester_id;
