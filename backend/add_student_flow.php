@@ -38,8 +38,11 @@ else {// if student exists, don't trigger any error
     }
 }
 $group_id = get_current_semester_group_id($db, $temp_group_name);
-if($group_id == null){
-    exitJson(4, 'null group id');
+if ($group_id == null) {
+    $semester_id = get_current_semester($db);
+    $sql = 'insert into '.getTablePrefix()."_group (name, semester_id) values ('$temp_group_name', $semester_id)";        
+    $res = mysqli_query($db, $sql) or die(mysqli_error($db));
+    $group_id =  mysqli_insert_id($db);
 }
 $sql_ig = 'insert into '.getTablePrefix()."_student_group (group_id, student_id) values ($group_id, $student_id)";
 $res_ig = mysqli_query($db, $sql_ig) or die(mysqli_error($db));    
